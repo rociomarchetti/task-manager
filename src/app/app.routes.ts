@@ -1,3 +1,9 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 
-export const appRoutes: Route[] = [];
+export const appRoutes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./core/layout/layout').then((m) => m.Layout),
+    children: [],
+  },
+];
