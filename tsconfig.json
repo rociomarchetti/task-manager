@@ -5,7 +5,10 @@
     "target": "es2022",
     "module": "preserve",
     "lib": ["es2020", "dom"],
-    "paths": {},
+    "baseUrl": "src",
+    "paths": {
+      "@shared/*": ["app/shared/*"],
+    },
     "isolatedModules": true
   },
   "angularCompilerOptions": {
