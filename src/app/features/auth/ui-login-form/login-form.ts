@@ -14,7 +14,7 @@ import { User } from '@shared/user.model';
 import { AuthService } from 'app/core/services/auth-service/auth-service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -25,7 +25,7 @@ import { AuthService } from 'app/core/services/auth-service/auth-service';
   templateUrl: './login-form.html',
   styleUrl: './login-form.scss',
 })
-export class Login {
+export class LoginFormComponent {
   private authService = inject(AuthService);
   private snackBar = inject(MatSnackBar);
 
