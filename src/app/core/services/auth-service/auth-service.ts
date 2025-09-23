@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   register(newUser: User): Observable<boolean> {
-    const exists = this.users.find((u) => u.username === newUser.username);
+    const exists = this.users.find((u) => u.email === newUser.email);
 
     if (exists) {
       return of(false).pipe(delay(500));
@@ -36,14 +36,13 @@ export class AuthService {
   login(currentUser: User): Observable<boolean> {
     const user = this.users.find(
       (u) =>
-        u.username === currentUser.username &&
-        u.password === currentUser.password
+        u.email === currentUser.email && u.password === currentUser.password
     );
 
     if (user) {
       const fakeToken = btoa(
         JSON.stringify({
-          username: currentUser.username,
+          username: currentUser.email,
           exp: Date.now() + 3600000, // expira en 1h
         })
       );

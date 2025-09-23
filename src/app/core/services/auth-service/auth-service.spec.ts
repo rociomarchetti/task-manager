@@ -31,7 +31,7 @@ describe('AuthService', () => {
   });
 
   it('should register a new member', async () => {
-    const user = { username: 'test', password: '1234' };
+    const user = { email: 'test@mail.com', password: '1234' };
 
     const result = await firstValueFrom(service.register(user));
 
@@ -43,7 +43,7 @@ describe('AuthService', () => {
   });
 
   it('should not register if member exists', async () => {
-    const user = { username: 'test', password: '1234' };
+    const user = { email: 'test@mail.com', password: '1234' };
     await firstValueFrom(service.register(user));
 
     const result = await firstValueFrom(service.register(user));
@@ -52,7 +52,7 @@ describe('AuthService', () => {
   });
 
   it('should log in a valid user', async () => {
-    const user = { username: 'test', password: '1234' };
+    const user = { email: 'test@mail.com', password: '1234' };
     await firstValueFrom(service.register(user));
 
     const result = await firstValueFrom(service.login(user));
@@ -66,7 +66,7 @@ describe('AuthService', () => {
 
   it('should not log in an invalid user', async () => {
     const result = await firstValueFrom(
-      service.login({ username: 'x', password: 'y' })
+      service.login({ email: 'x', password: 'y' })
     );
 
     expect(result).toBe(false);
@@ -81,7 +81,7 @@ describe('AuthService', () => {
   });
 
   it('should return loggedIn observable', async () => {
-    const user = { username: 'test', password: '1234' };
+    const user = { email: 'test@mail.com', password: '1234' };
     await firstValueFrom(service.register(user));
     await firstValueFrom(service.login(user));
 
