@@ -6,9 +6,11 @@ export const appRoutes: Routes = [
     loadComponent: () => import('./core/layout/layout').then((m) => m.Layout),
     children: [
       {
-        path: 'login',
+        path: 'auth',
         loadChildren: () =>
-          import('./features/auth/login.routes').then((m) => m.LOGIN_ROUTES),
+          import('./features/auth/feature-auth/auth.routes').then(
+            (m) => m.AUTH_ROUTES
+          ),
       },
     ],
   },
