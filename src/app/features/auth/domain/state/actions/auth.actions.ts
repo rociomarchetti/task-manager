@@ -1,8 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { AuthTab } from '../../entities/auth.model';
+import {
+  AuthTab,
+  LoginRequest,
+  RegisterRequest,
+} from '../../entities/auth.model';
 import { User } from '@shared/user.model';
 
-export const AuthViewActions = createActionGroup({
+/* export const AuthViewActions = createActionGroup({
   source: '[Authentication]  Auth View',
   events: {
     'View Initialised': emptyProps(),
@@ -11,12 +15,14 @@ export const AuthViewActions = createActionGroup({
     }>(),
     'View Destroyed': emptyProps(),
   },
-});
+}); */
 
 export const LoginViewActions = createActionGroup({
   source: '[Authentication]  Login View',
   events: {
-    Login: emptyProps(),
+    Login: props<{
+      loginRequest: LoginRequest;
+    }>(),
 
     'Login success': props<{
       authenticationUser: User;
@@ -28,16 +34,18 @@ export const LoginViewActions = createActionGroup({
   },
 });
 
-export const SignupViewActions = createActionGroup({
-  source: '[Authentication]  Signup View',
+export const RegisterViewActions = createActionGroup({
+  source: '[Authentication]  Register View',
   events: {
-    Signup: emptyProps(),
+    Register: props<{
+      registerRequest: RegisterRequest;
+    }>(),
 
-    'Signup success': props<{
+    'Register success': props<{
       authenticationUser: User;
     }>(),
 
-    'Signup error': emptyProps(),
+    'Register error': emptyProps(),
   },
 });
 
@@ -50,7 +58,7 @@ export const LogoutViewActions = createActionGroup({
   },
 });
 
-export const RequestedPathActions = createActionGroup({
+/* export const RequestedPathActions = createActionGroup({
   source: '[Authentication] Requested Path',
   events: {
     'Set requested path': props<{
@@ -61,4 +69,4 @@ export const RequestedPathActions = createActionGroup({
 
     'Clean requested path': emptyProps(),
   },
-});
+}); */

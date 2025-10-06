@@ -1,7 +1,9 @@
 import { User } from '@shared/user.model';
-import { AuthTab } from './auth.model';
+import { AuthTab } from '../../entities/auth.model';
 
-export interface AuthViewModel {
+export const featureKey = 'Auth_State';
+
+export interface AuthState {
   defaultSelectedTab: AuthTab;
   isLoginChecked: boolean;
   requestedPath: string;
