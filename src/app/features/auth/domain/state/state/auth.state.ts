@@ -5,7 +5,6 @@ export const featureKey = 'Auth_State';
 
 export interface AuthState {
   defaultSelectedTab: AuthTab;
-  isLoginChecked: boolean;
   requestedPath: string;
   user: User;
 }

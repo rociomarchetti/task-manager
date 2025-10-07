@@ -4,7 +4,6 @@ import * as fromActions from '../actions/auth.actions';
 
 export const authInitialState: AuthState = {
   defaultSelectedTab: null,
-  isLoginChecked: false,
   requestedPath: null,
   user: null,
 };
@@ -15,21 +14,18 @@ const authReducer = createReducer(
     return {
       ...state,
       user: action.authenticationUser,
-      isLoginChecked: true,
     };
   }),
   on(fromActions.RegisterViewActions.registerSuccess, (state, action) => {
     return {
       ...state,
       user: action.authenticationUser,
-      isLoginChecked: true,
     };
   }),
   on(fromActions.LogoutViewActions.logoutSuccess, (state) => {
     return {
       ...state,
       user: null,
-      isLoginChecked: false,
     };
   })
 );

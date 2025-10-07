@@ -9,7 +9,6 @@ export const selectAuthViewModel = createSelector(
   selectAuthState,
   (state): AuthViewModel => ({
     defaultSelectedTab: AuthTabsIndex[state?.defaultSelectedTab],
-    isLoginChecked: state?.isLoginChecked,
     requestedPath: state?.requestedPath,
     user: state?.user,
   })
