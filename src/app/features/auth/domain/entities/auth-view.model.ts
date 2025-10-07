@@ -1,8 +1,7 @@
 import { User } from '@shared/user.model';
-import { AuthTab } from './auth.model';
 
 export interface AuthViewModel {
-  defaultSelectedTab: AuthTab;
+  defaultSelectedTab: number;
   isLoginChecked: boolean;
   requestedPath: string;
   user: User;

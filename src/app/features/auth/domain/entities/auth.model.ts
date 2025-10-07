@@ -2,12 +2,12 @@ import { User } from '@shared/user.model';
 
 export enum AuthTab {
   LOGIN = 'LOGIN',
-  SIGN_UP = 'SIGN_UP',
+  REGISTER = 'REGISTER',
 }
 
 export const AuthTabsIndex: Record<AuthTab, number> = {
   [AuthTab.LOGIN]: 0,
-  [AuthTab.SIGN_UP]: 1,
+  [AuthTab.REGISTER]: 1,
 };
 
 export interface LoginRequest {
