@@ -32,6 +32,13 @@ const authReducer = createReducer(
     return {
       ...state,
       user: null,
+      requestedPath: null,
+    };
+  }),
+  on(fromActions.RequestedPathActions.setRequestedPath, (state, action) => {
+    return {
+      ...state,
+      requestedPath: action.requestedPath,
     };
   })
 );

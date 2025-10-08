@@ -3,15 +3,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromActions from '../actions/auth.actions';
 import { AuthService } from 'app/core/services/auth-service/auth-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { catchError, exhaustMap, map, of, switchMap, take } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, take, tap } from 'rxjs';
 import { AuthQueryParams, AuthTab } from '../../entities/auth.model';
+import { Store } from '@ngrx/store';
+import { selectAuthState } from '../selectors/auth.selectors';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class AuthEffects {
   private readonly actions = inject(Actions);
   private readonly authenticationService = inject(AuthService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private store = inject(Store);
 
   viewInitialised$ = createEffect(() =>
     this.actions.pipe(
@@ -76,6 +80,24 @@ export class AuthEffects {
       )
     );
   });
+
+  onAuthSuccess$ = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(
+          fromActions.LoginViewActions.loginSuccess,
+          fromActions.RegisterViewActions.registerSuccess
+        ),
+        concatLatestFrom(() => this.store.select(selectAuthState)),
+        tap(([, state]) => {
+          const path = state?.requestedPath;
+          if (path) {
+            this.router.navigate([`/${path}`]);
+          }
+        })
+      ),
+    { dispatch: false }
+  );
 
   logout$ = createEffect(() => {
     return this.actions.pipe(

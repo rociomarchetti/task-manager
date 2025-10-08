@@ -58,7 +58,7 @@ export const LogoutViewActions = createActionGroup({
   },
 });
 
-/* export const RequestedPathActions = createActionGroup({
+export const RequestedPathActions = createActionGroup({
   source: '[Authentication] Requested Path',
   events: {
     'Set requested path': props<{
@@ -69,4 +69,4 @@ export const LogoutViewActions = createActionGroup({
 
     'Clean requested path': emptyProps(),
   },
-}); */
+});
