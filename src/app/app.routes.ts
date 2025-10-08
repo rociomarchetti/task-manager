@@ -12,6 +12,12 @@ export const appRoutes: Routes = [
             (m) => m.AUTH_ROUTES
           ),
       },
+      /*       {
+        path: 'newRoute',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+         
+      }, */
     ],
   },
 ];
