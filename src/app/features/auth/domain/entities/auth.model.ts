@@ -10,6 +10,11 @@ export const AuthTabsIndex: Record<AuthTab, number> = {
   [AuthTab.REGISTER]: 1,
 };
 
+export enum AuthQueryParams {
+  INVITATION_CODE = 'invitation_code',
+  EMAIL = 'email',
+}
+
 export interface LoginRequest {
   email: string;
   password: string;

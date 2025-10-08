@@ -2,35 +2,40 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromActions from '../actions/auth.actions';
 import { AuthService } from 'app/core/services/auth-service/auth-service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, take } from 'rxjs';
+import { AuthQueryParams, AuthTab } from '../../entities/auth.model';
 
 @Injectable()
 export class AuthEffects {
   private readonly actions = inject(Actions);
   private readonly authenticationService = inject(AuthService);
-  private readonly router = inject(Router);
-  private readonly store = inject(Store);
+  private route = inject(ActivatedRoute);
 
-  /*   viewInitialised$ = createEffect(() =>
+  viewInitialised$ = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.AuthViewActions.viewInitialised),
-      withLatestFrom(this.store.select(getQueryParams)),
-      map(() => {
-        const defaultSelectedTab = AuthTab.LOGIN;
-     if (
-          queryParams?.[AuthQueryParams.INVITATION_CODE] &&
-          queryParams?.[AuthQueryParams.EMAIL]
-        ) {
-          defaultSelectedTab = AuthTab.SIGN_UP;
-        } 
-        return fromActions.AuthViewActions.viewInitialisedSucceeded({
-          defaultSelectedTab,
-        });
-      })
+      switchMap(() =>
+        this.route.queryParams.pipe(
+          take(1),
+          map((queryParams) => {
+            let defaultSelectedTab = AuthTab.LOGIN;
+            if (
+              queryParams?.[AuthQueryParams.INVITATION_CODE] &&
+              queryParams?.[AuthQueryParams.EMAIL]
+            ) {
+              defaultSelectedTab = AuthTab.REGISTER;
+            }
+
+            return fromActions.AuthViewActions.viewInitialisedSucceeded({
+              defaultSelectedTab,
+            });
+          })
+        )
+      )
     )
-  ); */
+  );
 
   login$ = createEffect(() => {
     return this.actions.pipe(

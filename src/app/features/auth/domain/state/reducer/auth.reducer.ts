@@ -10,6 +10,12 @@ export const authInitialState: AuthState = {
 
 const authReducer = createReducer(
   authInitialState,
+  on(fromActions.AuthViewActions.viewInitialisedSucceeded, (state, action) => {
+    return {
+      ...state,
+      defaultSelectedTab: action.defaultSelectedTab,
+    };
+  }),
   on(fromActions.LoginViewActions.loginSuccess, (state, action) => {
     return {
       ...state,

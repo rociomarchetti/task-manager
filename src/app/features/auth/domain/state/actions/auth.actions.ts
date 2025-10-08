@@ -6,7 +6,7 @@ import {
 } from '../../entities/auth.model';
 import { User } from '@shared/user.model';
 
-/* export const AuthViewActions = createActionGroup({
+export const AuthViewActions = createActionGroup({
   source: '[Authentication]  Auth View',
   events: {
     'View Initialised': emptyProps(),
@@ -15,7 +15,7 @@ import { User } from '@shared/user.model';
     }>(),
     'View Destroyed': emptyProps(),
   },
-}); */
+});
 
 export const LoginViewActions = createActionGroup({
   source: '[Authentication]  Login View',

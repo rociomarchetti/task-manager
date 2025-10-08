@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoginFormComponent } from '../ui-login-form/login-form';
 import { RegisterFormComponent } from '../ui-register-form/register-form';
@@ -11,16 +16,20 @@ import { AsyncPipe } from '@angular/common';
   imports: [
     AsyncPipe,
     LoginFormComponent,
-    RegisterFormComponent,
     MatTabsModule,
+    RegisterFormComponent,
   ],
   templateUrl: './auth.html',
   styleUrl: './auth.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthFeature {
+export class AuthFeature implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   readonly viewModel$ = this.authFacade.viewModel$;
+
+  ngOnInit(): void {
+    this.authFacade.viewInitialised();
+  }
 
   onLoginRequest(userData: LoginRequest): void {
     this.authFacade.logIn(userData);

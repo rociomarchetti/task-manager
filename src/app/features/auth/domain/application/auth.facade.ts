@@ -14,9 +14,9 @@ export class AuthFacade {
     fromSelectors.selectAuthViewModel
   );
 
-  /*   viewInitialised(): void {
+  viewInitialised(): void {
     this.store.dispatch(fromActions.AuthViewActions.viewInitialised());
-  } */
+  }
 
   logIn(userData: LoginRequest): void {
     this.store.dispatch(
