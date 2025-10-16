@@ -61,7 +61,7 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.currentUserKey);
     this.loggedIn$.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 
   getCurrentUser(): AuthResponse | null {

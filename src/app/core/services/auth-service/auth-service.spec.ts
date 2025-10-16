@@ -1,6 +1,11 @@
+import { inject } from '@angular/core';
+import {
+  AuthResponse,
+  RegisterRequest,
+} from 'app/features/auth/domain/entities/auth.model';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from './auth-service';
-import { inject } from '@angular/core';
+import { User } from '@shared/user.model';
 
 jest.mock('@angular/core', () => {
   const actual = jest.requireActual('@angular/core');
@@ -10,8 +15,20 @@ jest.mock('@angular/core', () => {
   };
 });
 
-describe('AuthService', () => {
+describe('GIVEN: AuthService', () => {
   let service: AuthService;
+
+  const authResponseMock: AuthResponse = {
+    token:
+      'eyJ1c2VySWQiOjIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTc2MDYwNzAwNDc5MX0=',
+    user: {
+      email: 'test@mail.com',
+      id: 2,
+      lastName: 'Doe',
+      name: 'John',
+      password: '1234',
+    },
+  };
 
   const routerMock = {
     navigate: jest.fn(),
@@ -30,62 +47,126 @@ describe('AuthService', () => {
     service = new AuthService();
   });
 
-  it('should register a new member', async () => {
-    const user = { email: 'test@mail.com', password: '1234' };
+  describe('WHEN: register', () => {
+    const registerRequestMock: RegisterRequest = {
+      email: 'test@mail.com',
+      password: '1234',
+      name: 'John',
+      lastName: 'Doe',
+    };
+    it('THEN: should save the user in local storage', (done) => {
+      const setItemLocalInStorage = localStorage.setItem;
 
-    const result = await firstValueFrom(service.register(user));
+      service.register(registerRequestMock).subscribe(() => {
+        expect(setItemLocalInStorage).toHaveBeenCalledWith(
+          'fake_users',
+          expect.stringContaining(registerRequestMock.email)
+        );
 
-    expect(result).toBe(true);
-    expect(localStorage.setItem).toHaveBeenCalledWith(
-      'fake_users',
-      JSON.stringify([user])
-    );
+        done();
+      });
+    });
+
+    it('THEN: should retrieve the user if it does not already exists', async () => {
+      const result = await firstValueFrom(
+        service.register(registerRequestMock)
+      );
+
+      expect(result).not.toBeNull();
+      expect(result.user).toEqual(
+        expect.objectContaining(authResponseMock.user)
+      );
+    });
+
+    it('THEN: should retrieve null if the user already exists', async () => {
+      const mockAlreadyRegisteredUser: User = {
+        id: 1,
+        email: 'test@example.com',
+        password: '123456',
+        name: 'John',
+        lastName: 'Doe',
+      };
+      const result = await firstValueFrom(
+        service.register(mockAlreadyRegisteredUser)
+      );
+
+      expect(result).toBe(null);
+    });
+
+    it('THEN: should call the startSession private method', (done) => {
+      const startSessionSpy = jest.spyOn(service as any, 'startSession');
+
+      service.register(registerRequestMock).subscribe(() => {
+        expect(startSessionSpy).toHaveBeenCalledWith(
+          expect.objectContaining(authResponseMock.user)
+        );
+
+        done();
+      });
+    });
   });
 
-  it('should not register if member exists', async () => {
-    const user = { email: 'test@mail.com', password: '1234' };
-    await firstValueFrom(service.register(user));
+  describe('WHEN: login', () => {
+    const loginRequestMock = {
+      email: 'test@example.com',
+      password: '123456',
+    };
+    it('THEN: should retrieve the user if it is a registered one', async () => {
+      const result = await firstValueFrom(service.login(loginRequestMock));
 
-    const result = await firstValueFrom(service.register(user));
+      expect(result).not.toBeNull();
+      expect(result.user).toEqual(
+        expect.objectContaining({ email: 'test@example.com' })
+      );
+    });
 
-    expect(result).toBe(false);
+    it('THEN: should retrieve null if the user is not registered', async () => {
+      const result = await firstValueFrom(
+        service.login({ email: 'test@mail.com', password: '123' })
+      );
+
+      expect(result).toBe(null);
+    });
+
+    it('THEN: should call the startSession private method', (done) => {
+      const startSessionSpy = jest.spyOn(service as any, 'startSession');
+
+      service.login(loginRequestMock).subscribe(() => {
+        expect(startSessionSpy).toHaveBeenCalledWith(
+          expect.objectContaining(loginRequestMock)
+        );
+
+        done();
+      });
+    });
   });
 
-  it('should log in a valid user', async () => {
-    const user = { email: 'test@mail.com', password: '1234' };
-    await firstValueFrom(service.register(user));
+  describe('WHEN: logout', () => {
+    it('THEN: should remove the user from local storage', () => {
+      const tokenKey = 'fake_token';
+      const currentUserKey = '123';
 
-    const result = await firstValueFrom(service.login(user));
+      localStorage.setItem(tokenKey, currentUserKey);
+      service.logout();
 
-    expect(result).toBe(true);
-    expect(localStorage.setItem).toHaveBeenCalledWith(
-      'fake_token',
-      expect.any(String)
-    );
-  });
+      expect(localStorage.removeItem).toHaveBeenCalledWith(tokenKey);
+    });
 
-  it('should not log in an invalid user', async () => {
-    const result = await firstValueFrom(
-      service.login({ email: 'x', password: 'y' })
-    );
+    it('THEN: should set loggedIn$ to false', () => {
+      (service as any).loggedIn$.next(true);
 
-    expect(result).toBe(false);
-  });
+      service.logout();
 
-  it('should log out and redirect to login', () => {
-    localStorage.setItem('fake_token', '123');
-    service.logout();
+      expect((service as any).loggedIn$.getValue()).toBe(false);
+    });
 
-    expect(localStorage.removeItem).toHaveBeenCalledWith('fake_token');
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
-  });
+    it('THEN: should redirect to auth', () => {
+      const url = '/auth';
+      const routerNavigate = routerMock.navigate;
 
-  it('should return loggedIn observable', async () => {
-    const user = { email: 'test@mail.com', password: '1234' };
-    await firstValueFrom(service.register(user));
-    await firstValueFrom(service.login(user));
+      service.logout();
 
-    const isLogged = await firstValueFrom(service.isLoggedIn());
-    expect(isLogged).toBe(true);
+      expect(routerNavigate).toHaveBeenCalledWith([url]);
+    });
   });
 });
