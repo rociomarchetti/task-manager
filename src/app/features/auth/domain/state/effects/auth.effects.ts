@@ -73,8 +73,12 @@ export class AuthEffects {
               authenticationUser: authResponse.user,
             });
           }),
-          catchError(() => {
-            return of(fromActions.RegisterViewActions.registerError());
+          catchError((error) => {
+            return of(
+              fromActions.RegisterViewActions.registerError({
+                error,
+              })
+            );
           })
         )
       )

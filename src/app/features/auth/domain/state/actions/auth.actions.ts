@@ -45,7 +45,9 @@ export const RegisterViewActions = createActionGroup({
       authenticationUser: User;
     }>(),
 
-    'Register error': emptyProps(),
+    'Register error': props<{
+      error: string;
+    }>(),
   },
 });
 
