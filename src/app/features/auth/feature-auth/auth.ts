@@ -32,7 +32,7 @@ export class AuthFeature implements OnInit {
   }
 
   onLoginRequest(userData: LoginRequest): void {
-    this.authFacade.logIn(userData);
+    this.authFacade.login(userData);
   }
 
   onRegisterRequest(userData: RegisterRequest): void {

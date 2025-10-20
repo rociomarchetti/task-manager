@@ -18,7 +18,7 @@ export class AuthFacade {
     this.store.dispatch(fromActions.AuthViewActions.viewInitialised());
   }
 
-  logIn(userData: LoginRequest): void {
+  login(userData: LoginRequest): void {
     this.store.dispatch(
       fromActions.LoginViewActions.login({ loginRequest: userData })
     );
@@ -30,7 +30,7 @@ export class AuthFacade {
     );
   }
 
-  logOut(): void {
+  logout(): void {
     this.store.dispatch(fromActions.LogoutViewActions.logout());
   }
 }
