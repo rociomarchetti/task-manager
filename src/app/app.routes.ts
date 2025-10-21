@@ -27,12 +27,13 @@ export const appRoutes: Routes = [
         (m) => m.PrivateLayout
       ),
     children: [
-      // Ejemplo de más rutas privadas:
-      // {
-      //   path: 'profile',
-      //   loadChildren: () =>
-      //     import('./features/profile/profile.routes').then((m) => m.PROFILE_ROUTES),
-      // },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import(
+            './features/dashboard/feature-dashboard/dashboard.routes'
+          ).then((m) => m.DASHBOARD_ROUTES),
+      },
     ],
   },
 ];
