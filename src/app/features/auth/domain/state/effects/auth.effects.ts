@@ -97,6 +97,8 @@ export class AuthEffects {
           const path = state?.requestedPath;
           if (path) {
             this.router.navigate([`/${path}`]);
+          } else {
+            this.router.navigate(['/app/dashboard']);
           }
         })
       ),
