@@ -64,17 +64,16 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
-  getCurrentUser(): AuthResponse | null {
-    const userStr = localStorage.getItem(this.currentUserKey);
-    const token = this.getToken();
+  getCurrentUser(): Observable<User | null> {
+    const userData = localStorage.getItem(this.currentUserKey);
+    const hasValidToken = this.isLoggedInSync();
 
-    if (userStr && token) {
-      return {
-        user: JSON.parse(userStr),
-        token,
-      };
+    if (!userData || !hasValidToken) {
+      return of(null).pipe(delay(300));
+    } else {
+      const user: User = JSON.parse(userData);
+      return of(user).pipe(delay(300));
     }
-    return null;
   }
 
   isLoggedInSync(): boolean {
@@ -116,10 +115,6 @@ export class AuthService {
 
     localStorage.setItem(this.storageKey, JSON.stringify([mockUser]));
     return [mockUser];
-  }
-
-  private getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
   }
 
   private generateToken(user: User): string {
