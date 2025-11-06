@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+@if(viewModel$ | async; as vm) {
+<p>
+  ¡Hola {{vm.userName}}! Tienes {{vm.tasksAmounts.pending}} @if
+  (vm.tasksAmounts.pending === 1) { tarea pendiente. } @else { tareas
+  pendientes. }
+</p>
+<section class="panel-group">
+  <app-dashboard-tasks-summary
+    [tasks]="vm.tasksAmounts"
+  ></app-dashboard-tasks-summary>
+</section>
+}

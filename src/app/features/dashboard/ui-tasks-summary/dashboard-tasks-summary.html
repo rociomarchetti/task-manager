@@ -1,1 +1,11 @@
-<p>ui-tasks-summary works!</p>
+<app-panel>
+  <div appPanelHeader>
+    <p>Tareas pendientes: {{tasks().pending}}</p>
+  </div>
+  <div appPanelBody>
+    <p>Tareas en progreso: {{tasks().inProgress}}</p>
+  </div>
+  <div appPanelFooter>
+    <p>Tareas completadas: {{tasks().completed}}</p>
+  </div>
+</app-panel>
