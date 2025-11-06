@@ -1,0 +1,18 @@
+:host {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 1.25rem;
+  position: relative;
+  z-index: 1;
+
+  .panel__header,
+  .panel__footer {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+}
