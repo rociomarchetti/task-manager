@@ -1,4 +1,4 @@
-import { User } from '@shared/user.model';
+import { User } from '@shared/models/user.model';
 import { UserTasksSummary } from '../../entities/dashboard.model';
 
 export const featureKey = 'Dashboard_State';

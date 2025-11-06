@@ -1,4 +1,4 @@
-import { User } from '@shared/user.model';
+import { User } from '@shared/models/user.model';
 import { AuthTab } from '../../entities/auth.model';
 
 export const featureKey = 'Auth_State';

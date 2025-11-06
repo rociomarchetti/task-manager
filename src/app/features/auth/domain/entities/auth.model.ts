@@ -1,4 +1,4 @@
-import { User } from '@shared/user.model';
+import { User } from '@shared/models/user.model';
 
 export enum AuthTab {
   LOGIN = 'LOGIN',

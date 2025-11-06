@@ -4,7 +4,7 @@ import {
   LoginRequest,
   RegisterRequest,
 } from '../../entities/auth.model';
-import { User } from '@shared/user.model';
+import { User } from '@shared/models/user.model';
 
 export const AuthViewActions = createActionGroup({
   source: '[Authentication]  Auth View',
