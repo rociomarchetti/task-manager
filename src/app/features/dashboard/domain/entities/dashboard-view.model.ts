@@ -1,8 +1,6 @@
+import { TaskAmounts } from './dashboard.model';
+
 export interface DashboardViewModel {
   userName: string;
-  tasksAmounts: {
-    pending: number;
-    inProgress: number;
-    completed: number;
-  };
+  tasksAmounts: TaskAmounts;
 }
