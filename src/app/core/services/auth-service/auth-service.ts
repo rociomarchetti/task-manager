@@ -7,6 +7,7 @@ import {
   AuthResponse,
 } from 'app/features/auth/domain/entities/auth.model';
 import { BehaviorSubject, delay, Observable, of } from 'rxjs';
+import { mockUser } from './__mocks__/mock-user';
 
 @Injectable({
   providedIn: 'root',
@@ -104,14 +105,6 @@ export class AuthService {
   private seedUsers(): Array<User> {
     const stored = localStorage.getItem(this.storageKey);
     if (stored) return JSON.parse(stored);
-
-    const mockUser: User = {
-      id: 1,
-      email: 'test@example.com',
-      password: '123456',
-      name: 'John',
-      lastName: 'Doe',
-    };
 
     localStorage.setItem(this.storageKey, JSON.stringify([mockUser]));
     return [mockUser];
