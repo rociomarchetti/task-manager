@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthState, featureKey } from '../state/auth.state';
+import { AuthState, authFeatureKey } from '../state/auth.state';
 import { AuthViewModel } from '../../entities/auth-view.model';
 import { AuthTabsIndex } from '../../entities/auth.model';
 
-export const selectAuthState = createFeatureSelector<AuthState>(featureKey);
+export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
 
 export const selectAuthenticatedUser = createSelector(
   selectAuthState,
