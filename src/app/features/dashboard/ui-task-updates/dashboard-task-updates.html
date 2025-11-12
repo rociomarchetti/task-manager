@@ -1,24 +1,17 @@
 <app-panel>
-  @if(recentlyCreatedTasks()?.length > 0) {
-  <div appPanelHeader>
-    <p>Tareas creadas recientemente:</p>
+  <div appPanelBody>
+    @if(recentlyCreatedTasks()?.length > 0) {
+    <h4>Tareas creadas recientemente:</h4>
     @for(task of recentlyCreatedTasks(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
-    }
-  </div>
-  } @if(recentlyUpdatedTasks()?.length > 0) {
-  <div appPanelBody>
-    <p>Tareas actualizadas recientemente:</p>
+    } } @if(recentlyUpdatedTasks()?.length > 0) {
+    <h4>Tareas actualizadas recientemente:</h4>
     @for(task of recentlyUpdatedTasks(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
-    }
-  </div>
-  } @if(tasksDueSoon()?.length > 0) {
-  <div appPanelFooter>
-    <p>Tareas próximas a vencerse:</p>
+    } } @if(tasksDueSoon()?.length > 0) {
+    <h4>Tareas próximas a vencerse:</h4>
     @for(task of tasksDueSoon(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
-    }
+    } }
   </div>
-  }
 </app-panel>
