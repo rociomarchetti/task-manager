@@ -7,12 +7,12 @@ import {
 import { TaskAmounts } from '../domain/entities/dashboard.model';
 
 @Component({
-  selector: 'app-dashboard-tasks-summary',
+  selector: 'app-dashboard-task-summary',
   imports: [Panel, PanelHeaderDirective, PanelFooterDirective],
-  templateUrl: './dashboard-tasks-summary.html',
-  styleUrl: './dashboard-tasks-summary.scss',
+  templateUrl: './dashboard-task-summary.html',
+  styleUrl: './dashboard-task-summary.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardTasksSummary {
+export class DashboardTaskSummary {
   tasks = input<TaskAmounts>();
 }

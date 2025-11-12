@@ -5,12 +5,12 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { DashboardTasksSummary } from '../ui-tasks-summary/dashboard-tasks-summary';
+import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary';
 import { DashboardFacade } from './../domain/application/dashboard.facade';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, DashboardTasksSummary],
+  imports: [AsyncPipe, DashboardTaskSummary],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
