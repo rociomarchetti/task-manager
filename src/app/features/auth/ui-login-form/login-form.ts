@@ -27,8 +27,10 @@ export class LoginFormComponent {
   loginRequested = output<LoginRequest>();
 
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl<string | null>(null, [Validators.required]),
-    password: new FormControl<string | null>(null, [Validators.required]),
+    email: new FormControl<string | null>('test@example.com', [
+      Validators.required,
+    ]),
+    password: new FormControl<string | null>('123456', [Validators.required]),
   });
 
   onLogin(): void {
