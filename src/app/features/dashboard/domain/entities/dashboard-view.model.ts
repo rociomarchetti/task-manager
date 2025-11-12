@@ -1,6 +1,9 @@
-import { TaskAmounts } from './dashboard.model';
+import { Task, TaskAmounts } from './dashboard.model';
 
 export interface DashboardViewModel {
-  userName: string;
+  recentlyCreatedTasks: Array<Task>;
+  recentlyUpdatedTasks: Array<Task>;
   tasksAmounts: TaskAmounts;
+  tasksDueSoon: Array<Task>;
+  userName: string;
 }
