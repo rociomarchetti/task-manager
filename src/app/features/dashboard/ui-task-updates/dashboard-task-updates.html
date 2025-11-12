@@ -1,1 +1,24 @@
-<p>ui-task-updates works!</p>
+<app-panel>
+  @if(recentlyCreatedTasks()?.length > 0) {
+  <div appPanelHeader>
+    <p>Tareas creadas recientemente:</p>
+    @for(task of recentlyCreatedTasks(); track $index; let i = $index ) {
+    <p>{{task?.title}}</p>
+    }
+  </div>
+  } @if(recentlyUpdatedTasks()?.length > 0) {
+  <div appPanelBody>
+    <p>Tareas actualizadas recientemente:</p>
+    @for(task of recentlyUpdatedTasks(); track $index; let i = $index ) {
+    <p>{{task?.title}}</p>
+    }
+  </div>
+  } @if(tasksDueSoon()?.length > 0) {
+  <div appPanelFooter>
+    <p>Tareas próximas a vencerse:</p>
+    @for(task of tasksDueSoon(); track $index; let i = $index ) {
+    <p>{{task?.title}}</p>
+    }
+  </div>
+  }
+</app-panel>

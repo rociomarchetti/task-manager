@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary';
 import { DashboardFacade } from './../domain/application/dashboard.facade';
+import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, DashboardTaskSummary],
+  imports: [AsyncPipe, DashboardTaskSummary, DashboardTaskUpdates],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

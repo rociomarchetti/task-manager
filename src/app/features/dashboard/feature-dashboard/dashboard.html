@@ -8,5 +8,10 @@
   <app-dashboard-task-summary
     [tasks]="vm.tasksAmounts"
   ></app-dashboard-task-summary>
+  <app-dashboard-task-updates
+    [recentlyCreatedTasks]="vm.recentlyCreatedTasks"
+    [recentlyUpdatedTasks]="vm.recentlyUpdatedTasks"
+    [tasksDueSoon]="vm.tasksDueSoon"
+  ></app-dashboard-task-updates>
 </section>
 }
