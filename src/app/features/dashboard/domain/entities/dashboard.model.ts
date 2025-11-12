@@ -4,11 +4,13 @@ export interface UserTasksSummary {
 }
 
 export interface Task {
+  createdAt: Date;
   description?: string;
   dueDate?: Date;
   id: string;
   status: TaskStatus;
   title: string;
+  updatedAt?: Date;
   userId: number;
 }
 
