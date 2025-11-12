@@ -8,12 +8,14 @@ export const countTasksByStatus = (tasks: Task[]) => ({
 
 export function getRecentlyCreatedTasks(tasks: Task[]): Task[] {
   return tasks
+    ?.slice()
     .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
     .slice(0, 3);
 }
 
 export function getUpcomingDueDateTasks(tasks: Task[]): Task[] {
   return tasks
+    ?.slice()
     .filter((t) => t.status !== TaskStatus.DONE && !!t.dueDate)
     .sort((a, b) => a.dueDate.getTime() - b.dueDate.getTime())
     .slice(0, 3);
@@ -21,6 +23,7 @@ export function getUpcomingDueDateTasks(tasks: Task[]): Task[] {
 
 export function getRecentlyStatusChangedTasks(tasks: Task[]): Task[] {
   return tasks
+    ?.slice()
     .filter((t) => !!t.updatedAt)
     .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
     .slice(0, 3);

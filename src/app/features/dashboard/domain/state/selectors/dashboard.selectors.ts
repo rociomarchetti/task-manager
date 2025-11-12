@@ -1,6 +1,6 @@
 import { DashboardViewModel } from './../../entities/dashboard-view.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { DashboardState, featureKey } from '../state/dashboard.state';
+import { DashboardState, dashboardFeatureKey } from '../state/dashboard.state';
 import {
   countTasksByStatus,
   getRecentlyStatusChangedTasks,
@@ -9,7 +9,7 @@ import {
 } from '../util/dashboard.util';
 
 export const selectDashboardState =
-  createFeatureSelector<DashboardState>(featureKey);
+  createFeatureSelector<DashboardState>(dashboardFeatureKey);
 
 export const selectDashboardViewModel = createSelector(
   selectDashboardState,
