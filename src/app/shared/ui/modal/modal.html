@@ -1,1 +1,24 @@
-<p>modal works!</p>
+<ng-template #content>
+  @if (isCloseable()) {
+  <div class="modal__close">
+    <button (click)="close()">
+      @if(!isOpen()){
+      <mat-icon>menu</mat-icon>
+      } @if(isOpen()){
+      <mat-icon>close</mat-icon>
+      }
+    </button>
+  </div>
+  }
+  <div class="modal__header">
+    <ng-content select="[ModalHeader]"></ng-content>
+  </div>
+
+  <div class="modal__content">
+    <ng-content select="[ModalContent]"></ng-content>
+  </div>
+
+  <div class="modal__actions">
+    <ng-content select="[ModalActions]"></ng-content>
+  </div>
+</ng-template>
