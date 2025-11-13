@@ -1,11 +1,17 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 import { Task } from '../domain/entities/dashboard.model';
 
 @Component({
   selector: 'app-dashboard-task-updates',
-  imports: [Panel, PanelBodyDirective],
+  imports: [MatCheckboxModule, Panel, PanelBodyDirective],
   templateUrl: './dashboard-task-updates.html',
   styleUrl: './dashboard-task-updates.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,4 +20,25 @@ export class DashboardTaskUpdates {
   recentlyCreatedTasks = input<Array<Task>>();
   recentlyUpdatedTasks = input<Array<Task>>();
   tasksDueSoon = input<Array<Task>>();
+
+  markTaskAsCompleted = output<Task>();
+  editTaskClicked = output<Task>();
+  seeDetailsClicked = output<Task>();
+  postponeTaskClicked = output<Task>();
+
+  onMarkTaskAsCompleted(task: Task): void {
+    this.markTaskAsCompleted.emit(task);
+  }
+
+  onEditTask(task: Task): void {
+    this.editTaskClicked.emit(task);
+  }
+
+  onSeeTaskDetails(task: Task): void {
+    this.seeDetailsClicked.emit(task);
+  }
+
+  onPostponeTask(task: Task): void {
+    this.postponeTaskClicked.emit(task);
+  }
 }

@@ -4,14 +4,30 @@
     <h4>Tareas creadas recientemente:</h4>
     @for(task of recentlyCreatedTasks(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
+    <mat-checkbox (click)="onMarkTaskAsCompleted(task)">
+      Marcar como completada
+    </mat-checkbox>
+    <a (click)="onEditTask(task)" href="javascript:void(0)">Editar</a>
     } } @if(recentlyUpdatedTasks()?.length > 0) {
     <h4>Tareas actualizadas recientemente:</h4>
     @for(task of recentlyUpdatedTasks(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
+    <mat-checkbox (click)="onMarkTaskAsCompleted(task)">
+      Marcar como completada
+    </mat-checkbox>
+    <a (click)="onSeeTaskDetails(task)" href="javascript:void(0)"
+      >Ver detalles</a
+    >
     } } @if(tasksDueSoon()?.length > 0) {
     <h4>Tareas próximas a vencerse:</h4>
     @for(task of tasksDueSoon(); track $index; let i = $index ) {
     <p>{{task?.title}}</p>
+    <mat-checkbox (click)="onMarkTaskAsCompleted(task)">
+      Marcar como completada
+    </mat-checkbox>
+    <a (click)="onPostponeTask(task)" href="javascript:void(0)"
+      >Posponer fecha límite</a
+    >
     } }
   </div>
 </app-panel>

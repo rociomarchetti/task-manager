@@ -12,6 +12,10 @@
     [recentlyCreatedTasks]="vm.recentlyCreatedTasks"
     [recentlyUpdatedTasks]="vm.recentlyUpdatedTasks"
     [tasksDueSoon]="vm.tasksDueSoon"
+    (markTaskAsCompleted)="onMarkTaskAsCompleted($event)"
+    (editTaskClicked)="onEditTask($event)"
+    (seeDetailsClicked)="onSeeTaskDetails($event)"
+    (postponeTaskClicked)="onPostponeTask($event)"
   ></app-dashboard-task-updates>
 </section>
 }
