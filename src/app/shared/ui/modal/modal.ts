@@ -4,6 +4,8 @@ import {
   Component,
   inject,
   input,
+  OnChanges,
+  OnDestroy,
   output,
   SimpleChanges,
   TemplateRef,
@@ -23,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Modal {
+export class Modal implements OnChanges, OnDestroy {
   private readonly dialog = inject(MatDialog);
 
   isOpen = input(false);

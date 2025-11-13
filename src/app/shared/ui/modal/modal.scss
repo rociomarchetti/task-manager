@@ -5,7 +5,6 @@
 
     .mat-mdc-dialog-container .mdc-dialog__surface {
       position: static;
-      background-color: transparent !important;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
       border-radius: 0px;
     }
@@ -36,10 +35,4 @@
       z-index: 1;
     }
   }
-}
-
-::ng-deep .modal__backdrop {
-  background-image: url('/assets/text-madera.png');
-  background-size: cover;
-  background-position: center;
 }

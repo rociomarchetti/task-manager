@@ -18,4 +18,10 @@
     (postponeTaskClicked)="onPostponeTask($event)"
   ></app-dashboard-task-updates>
 </section>
+
+<app-task-modal
+  [isModalOpen]="isModalOpen()"
+  [selectedTask]="selectedTask()"
+  (modalClosed)="onModalClosed()"
+></app-task-modal>
 }

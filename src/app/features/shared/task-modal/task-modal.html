@@ -1,1 +1,6 @@
-<p>task-modal works!</p>
+<app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
+  <ng-container ModalHeader>
+    <p>modal header</p>
+  </ng-container>
+  <ng-container ModalContent>modal content</ng-container>
+</app-modal>

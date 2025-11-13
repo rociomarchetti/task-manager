@@ -10,10 +10,11 @@ import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary'
 import { DashboardFacade } from './../domain/application/dashboard.facade';
 import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates';
 import { Task } from '../domain/entities/dashboard.model';
+import { TaskModal } from 'app/features/shared/task-modal/task-modal';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, DashboardTaskSummary, DashboardTaskUpdates],
+  imports: [AsyncPipe, DashboardTaskSummary, DashboardTaskUpdates, TaskModal],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,10 +24,14 @@ export class DashboardFeature implements OnInit {
   readonly viewModel$ = this.dashboardFacade.viewModel$;
 
   isModalOpen = signal(false);
-  selectedTask = signal<string | null>(null);
+  selectedTask = signal<Task | null>(null);
 
   ngOnInit(): void {
     this.dashboardFacade.viewInitialised();
+  }
+
+  onModalClosed(): void {
+    this.isModalOpen.set(false);
   }
 
   onMarkTaskAsCompleted(task: Task): void {
@@ -34,11 +39,13 @@ export class DashboardFeature implements OnInit {
   }
 
   onEditTask(task: Task): void {
-    console.log(task);
+    this.selectedTask.set(task);
+    this.isModalOpen.set(true);
   }
 
   onSeeTaskDetails(task: Task): void {
-    console.log(task);
+    this.selectedTask.set(task);
+    this.isModalOpen.set(true);
   }
 
   onPostponeTask(task: Task): void {

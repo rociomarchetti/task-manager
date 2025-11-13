@@ -1,0 +1,19 @@
+::ng-deep {
+  .modal {
+    background-size: cover;
+    background-position: center;
+
+    .modal__header {
+      position: relative;
+      margin: 0.5rem 2rem;
+      min-height: 30%;
+    }
+
+    .modal__content {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      height: 100%;
+    }
+  }
+}
