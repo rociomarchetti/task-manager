@@ -34,8 +34,8 @@ export class DashboardFeature implements OnInit {
     this.isModalOpen.set(false);
   }
 
-  onMarkTaskAsCompleted(task: Task): void {
-    console.log(task);
+  onMarkTaskAsDone(task: Task): void {
+    this.dashboardFacade.markTaskAsDone(task?.id);
   }
 
   onEditTask(task: Task): void {
@@ -49,6 +49,6 @@ export class DashboardFeature implements OnInit {
   }
 
   onPostponeTask(task: Task): void {
-    console.log(task);
+    this.dashboardFacade.postponeTask(task?.id);
   }
 }

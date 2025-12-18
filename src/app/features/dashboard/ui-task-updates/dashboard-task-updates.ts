@@ -21,13 +21,13 @@ export class DashboardTaskUpdates {
   recentlyUpdatedTasks = input<Array<Task>>();
   tasksDueSoon = input<Array<Task>>();
 
-  markTaskAsCompleted = output<Task>();
+  markTaskAsDone = output<Task>();
   editTaskClicked = output<Task>();
   seeDetailsClicked = output<Task>();
   postponeTaskClicked = output<Task>();
 
   onMarkTaskAsCompleted(task: Task): void {
-    this.markTaskAsCompleted.emit(task);
+    this.markTaskAsDone.emit(task);
   }
 
   onEditTask(task: Task): void {
