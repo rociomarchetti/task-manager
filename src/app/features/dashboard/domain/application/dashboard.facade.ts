@@ -16,4 +16,16 @@ export class DashboardFacade {
   viewInitialised(): void {
     this.store.dispatch(fromActions.DashboardViewActions.viewInitialised());
   }
+
+  markTaskAsDone(taskId: string): void {
+    this.store.dispatch(
+      fromActions.DashboardTaskActions.completedTask({ taskId })
+    );
+  }
+
+  postponeTask(taskId: string): void {
+    this.store.dispatch(
+      fromActions.DashboardTaskActions.postponedTask({ taskId })
+    );
+  }
 }

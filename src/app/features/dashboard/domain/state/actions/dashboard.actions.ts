@@ -13,3 +13,21 @@ export const DashboardViewActions = createActionGroup({
     'View Destroyed': emptyProps(),
   },
 });
+
+export const DashboardTaskActions = createActionGroup({
+  source: '[Dashboard]  Dashboard Tasks',
+  events: {
+    'Postponed Task': props<{
+      taskId: string;
+    }>(),
+    'Postponed Task Succeeded': emptyProps(),
+    'Completed Task': props<{
+      taskId: string;
+    }>(),
+    'Completed Task Succeeded': emptyProps(),
+    'Task Edit Succeeded': props<{
+      tasksData: UserTasksSummary;
+    }>(),
+    'Task Edit Error': emptyProps(),
+  },
+});
