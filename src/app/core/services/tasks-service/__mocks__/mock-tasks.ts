@@ -11,7 +11,7 @@ export const mockTasks: Task[] = [
     status: TaskStatus.IN_PROGRESS,
     createdAt: new Date('2025-11-01T10:00:00Z'),
     updatedAt: new Date('2025-11-10T14:30:00Z'),
-    dueDate: new Date('2025-11-15T00:00:00Z'),
+    dueDate: new Date('2025-12-23T00:00:00.000Z'),
     userId: 1,
   },
   {
@@ -22,7 +22,7 @@ export const mockTasks: Task[] = [
     status: TaskStatus.DONE,
     createdAt: new Date('2025-10-25T08:00:00Z'),
     updatedAt: new Date('2025-10-27T12:00:00Z'),
-    dueDate: new Date('2025-10-28T00:00:00Z'),
+    dueDate: new Date('2025-12-23T00:00:00.000Z'),
     userId: 1,
   },
   {
@@ -31,7 +31,7 @@ export const mockTasks: Task[] = [
     description: 'Agregar login y registro con JWT y refresh tokens',
     status: TaskStatus.PENDING,
     createdAt: new Date('2025-11-05T09:00:00Z'),
-    dueDate: new Date('2025-11-20T00:00:00Z'),
+    dueDate: new Date('2025-12-23T00:00:00.000Z'),
     userId: 1,
   },
   {

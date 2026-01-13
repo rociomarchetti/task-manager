@@ -36,12 +36,12 @@ export class DashboardEffects {
         this.tasksService.postponeTask(action?.taskId, 7).pipe(
           map(() => {
             return fromActions.DashboardTaskActions.postponedTaskSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardTaskActions.taskEditError());
           })
         )
-      ),
-      catchError(() => {
-        return of(fromActions.DashboardTaskActions.taskEditError());
-      })
+      )
     )
   );
 
@@ -52,12 +52,12 @@ export class DashboardEffects {
         this.tasksService.markTaskAsDone(action?.taskId).pipe(
           map(() => {
             return fromActions.DashboardTaskActions.completedTaskSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardTaskActions.taskEditError());
           })
         )
-      ),
-      catchError(() => {
-        return of(fromActions.DashboardTaskActions.taskEditError());
-      })
+      )
     )
   );
 

@@ -26,21 +26,18 @@ export class TasksService {
   }
 
   markTaskAsDone(taskId: string): Observable<Task | null> {
-    const task = this.tasks.find((t) => t.id === taskId);
-
-    if (!task) return null;
+    const task = this.getTask(taskId);
 
     task.status = TaskStatus.DONE;
     task.updatedAt = new Date();
 
+    this.updateTaskList(task);
     this.saveTasks();
     return of(task);
   }
 
   postponeTask(taskId: string, days: number): Observable<Task | null> {
-    const task = this.tasks.find((t) => t.id === taskId);
-
-    if (!task || !task.dueDate) return null;
+    const task = this.getTask(taskId);
 
     const newDueDate = new Date(task.dueDate);
     newDueDate.setDate(newDueDate.getDate() + days);
@@ -48,8 +45,34 @@ export class TasksService {
     task.dueDate = newDueDate;
     task.updatedAt = new Date();
 
+    this.updateTaskList(task);
     this.saveTasks();
     return of(task);
+  }
+
+  private getTask(taskId: string): Task | null {
+    const taskIndex = this.tasks.findIndex((t) => t.id === taskId);
+
+    if (taskIndex === -1) {
+      return null;
+    }
+
+    const originalTask = this.tasks[taskIndex];
+
+    if (!originalTask.dueDate) {
+      return null;
+    }
+
+    return { ...originalTask };
+  }
+
+  private updateTaskList(updatedTask: Task): void {
+    const taskIndex = this.tasks.findIndex((t) => t.id === updatedTask.id);
+    this.tasks = [
+      ...this.tasks.slice(0, taskIndex),
+      updatedTask,
+      ...this.tasks.slice(taskIndex + 1),
+    ];
   }
 
   private saveTasks(): void {

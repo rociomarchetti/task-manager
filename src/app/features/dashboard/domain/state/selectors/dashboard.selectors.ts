@@ -5,7 +5,7 @@ import {
   countTasksByStatus,
   getRecentlyStatusChangedTasks,
   getRecentlyCreatedTasks,
-  getUpcomingDueDateTasks,
+  getTasksDueInNext7Days,
 } from '../util/dashboard.util';
 
 export const selectDashboardState =
@@ -20,6 +20,6 @@ export const selectDashboardViewModel = createSelector(
     ),
     userName: state?.user?.name,
     tasksAmounts: countTasksByStatus(state?.tasksData?.tasks),
-    tasksDueSoon: getUpcomingDueDateTasks(state?.tasksData?.tasks),
+    tasksDueSoon: getTasksDueInNext7Days(state?.tasksData?.tasks),
   })
 );
