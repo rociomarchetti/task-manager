@@ -3,6 +3,7 @@ import { Task, TaskStatus } from '@shared/models';
 export const mockTasks: Task[] = [
   {
     id: '1',
+    boardId: 'A',
     title: 'Diseñar la página principal',
     description: 'Crear el diseño inicial del landing page en Figma',
     status: TaskStatus.IN_PROGRESS,
@@ -13,6 +14,7 @@ export const mockTasks: Task[] = [
   },
   {
     id: '2',
+    boardId: 'A',
     title: 'Configurar entorno de desarrollo',
     description:
       'Instalar dependencias y configurar el entorno local de React + Vite',
@@ -23,6 +25,7 @@ export const mockTasks: Task[] = [
   },
   {
     id: '3',
+    boardId: 'A',
     title: 'Implementar autenticación',
     description: 'Agregar login y registro con JWT y refresh tokens',
     status: TaskStatus.IN_PROGRESS,
@@ -33,6 +36,7 @@ export const mockTasks: Task[] = [
   },
   {
     id: '4',
+    boardId: 'A',
     title: 'Escribir documentación de la API',
     description: 'Generar documentación con Swagger y ejemplos de uso',
     status: TaskStatus.IN_PROGRESS,
@@ -43,6 +47,7 @@ export const mockTasks: Task[] = [
   },
   {
     id: '5',
+    boardId: 'A',
     title: 'Optimizar rendimiento del dashboard',
     description: 'Mejorar tiempos de carga y uso de memoización',
     status: TaskStatus.IN_PROGRESS,
@@ -53,6 +58,7 @@ export const mockTasks: Task[] = [
   },
   {
     id: '6',
+    boardId: 'B',
     title: 'Revisión de código semanal',
     description: 'Analizar PRs pendientes y dar feedback al equipo',
     status: TaskStatus.PENDING,
