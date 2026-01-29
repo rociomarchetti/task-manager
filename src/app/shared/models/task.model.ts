@@ -5,6 +5,7 @@ export interface Task {
   description?: string;
   dueDate?: Date;
   id: string;
+  boardId: string;
   status: TaskStatus;
   title: string;
   updatedAt?: Date;

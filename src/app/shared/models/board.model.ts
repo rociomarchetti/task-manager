@@ -3,5 +3,6 @@ export interface Board {
   name: string;
   description?: string;
   isFavorite: boolean;
-  createdAt: string;
+  createdAt: Date;
+  userId: number;
 }
