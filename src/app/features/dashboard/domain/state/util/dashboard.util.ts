@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from '../../entities/dashboard.model';
+import { Task, TaskStatus } from '@shared/models';
 
 export const countTasksByStatus = (tasks: Task[]) => ({
   pending: tasks?.filter((t) => t.status === TaskStatus.PENDING).length,

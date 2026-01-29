@@ -9,8 +9,8 @@ import {
 import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary';
 import { DashboardFacade } from './../domain/application/dashboard.facade';
 import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates';
-import { Task } from '../domain/entities/dashboard.model';
 import { TaskModal } from 'app/features/shared/task-modal/task-modal';
+import { Task } from '@shared/models';
 
 @Component({
   selector: 'app-dashboard',

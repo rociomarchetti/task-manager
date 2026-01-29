@@ -5,8 +5,8 @@ import {
   input,
   output,
 } from '@angular/core';
+import { Task } from '@shared/models';
 import { Modal } from '@shared/ui/modal/modal';
-import { Task } from 'app/features/dashboard/domain/entities/dashboard.model';
 
 @Component({
   selector: 'app-task-modal',

@@ -5,9 +5,9 @@ import {
   output,
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Task } from '@shared/models';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
-import { Task } from '../domain/entities/dashboard.model';
 
 @Component({
   selector: 'app-dashboard-task-updates',

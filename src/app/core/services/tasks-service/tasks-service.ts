@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  Task,
-  TaskStatus,
-  UserTasksSummary,
-} from 'app/features/dashboard/domain/entities/dashboard.model';
 import { delay, Observable, of } from 'rxjs';
 import { mockTasks } from './__mocks__/mock-tasks';
+import { Task, TaskStatus, UserTasksSummary } from '@shared/models';
 
 @Injectable({
   providedIn: 'root',

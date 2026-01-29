@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TaskAmounts } from '@shared/models';
 import { Panel } from '@shared/ui/panel/panel';
 import {
   PanelFooterDirective,
   PanelHeaderDirective,
 } from '@shared/ui/panel/panel.directive';
-import { TaskAmounts } from '../domain/entities/dashboard.model';
 
 @Component({
   selector: 'app-dashboard-task-summary',

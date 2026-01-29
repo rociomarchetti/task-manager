@@ -1,4 +1,4 @@
-import { Task, TaskAmounts } from './dashboard.model';
+import { Task, TaskAmounts } from '@shared/models';
 
 export interface DashboardViewModel {
   recentlyCreatedTasks: Array<Task>;

@@ -1,7 +1,4 @@
-import {
-  Task,
-  TaskStatus,
-} from 'app/features/dashboard/domain/entities/dashboard.model';
+import { Task, TaskStatus } from '@shared/models';
 
 export const mockTasks: Task[] = [
   {

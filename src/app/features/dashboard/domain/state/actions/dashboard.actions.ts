@@ -1,6 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { User } from '@shared/models';
-import { UserTasksSummary } from '../../entities/dashboard.model';
+import { User, UserTasksSummary } from '@shared/models';
 
 export const DashboardViewActions = createActionGroup({
   source: '[Dashboard]  Dashboard View',
