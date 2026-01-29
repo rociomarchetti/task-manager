@@ -5,7 +5,7 @@ import {
 } from 'app/features/auth/domain/entities/auth.model';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from './auth-service';
-import { User } from '@shared/user.model';
+import { User } from '@shared/models';
 
 jest.mock('@angular/core', () => {
   const actual = jest.requireActual('@angular/core');

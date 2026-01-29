@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@shared/models/user.model';
+import { User } from '@shared/models';
 import {
   LoginRequest,
   RegisterRequest,
