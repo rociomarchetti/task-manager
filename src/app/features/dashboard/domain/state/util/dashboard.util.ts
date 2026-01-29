@@ -18,9 +18,11 @@ export function getRecentlyCreatedTasks(tasks: Task[]): Task[] {
 
 export function getTasksDueInNext7Days(tasks: Task[]): Task[] {
   const start = new Date();
+  start.setHours(0, 0, 0, 0);
 
   const end = new Date();
   end.setDate(start.getDate() + 7);
+  end.setHours(23, 59, 59, 999);
 
   return tasks
     ?.filter((t) => {
