@@ -1,5 +1,8 @@
 <app-panel>
   <div appPanelHeader>
+    <p>
+      Total tareas: {{tasks().pending + tasks().inProgress + tasks().completed}}
+    </p>
     <p>Tareas pendientes: {{tasks().pending}}</p>
   </div>
   <div appPanelBody>
