@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from '@shared/models';
+import { Board, Task, TaskStatus } from '@shared/models';
 
 export const countTasksByStatus = (tasks: Task[]) => ({
   pending: tasks?.filter((t) => t.status === TaskStatus.PENDING).length,
@@ -45,6 +45,17 @@ export function getRecentlyStatusChangedTasks(tasks: Task[]): Task[] {
     .sort(
       (a, b) =>
         new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    )
+    .slice(0, 3);
+}
+
+export function getCurrentBoards(boards: Board[]): Board[] {
+  return boards
+    ?.slice()
+    .filter((t) => t.isWip)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
     .slice(0, 3);
 }

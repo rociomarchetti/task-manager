@@ -6,6 +6,7 @@ import {
   getRecentlyStatusChangedTasks,
   getRecentlyCreatedTasks,
   getTasksDueInNext7Days,
+  getCurrentBoards,
 } from '../util/dashboard.util';
 
 export const selectDashboardState =
@@ -14,6 +15,7 @@ export const selectDashboardState =
 export const selectDashboardViewModel = createSelector(
   selectDashboardState,
   (state): DashboardViewModel => ({
+    currentBoards: getCurrentBoards(state?.boardsData?.boards),
     recentlyCreatedTasks: getRecentlyCreatedTasks(state?.tasksData?.tasks),
     recentlyUpdatedTasks: getRecentlyStatusChangedTasks(
       state?.tasksData?.tasks

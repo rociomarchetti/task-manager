@@ -5,6 +5,7 @@ import * as fromActions from '../actions/dashboard.actions';
 export const dashboardInitialState: DashboardState = {
   user: null,
   tasksData: null,
+  boardsData: null,
 };
 
 const dashboardReducer = createReducer(
@@ -16,6 +17,7 @@ const dashboardReducer = createReducer(
         ...state,
         user: action.currentUser,
         tasksData: action.tasksData,
+        boardsData: action.boardsData,
       };
     }
   ),

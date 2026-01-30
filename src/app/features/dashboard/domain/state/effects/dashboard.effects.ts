@@ -3,13 +3,22 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TasksService } from 'app/core/services/tasks-service/tasks-service';
 import * as fromActions from '../actions/dashboard.actions';
-import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
+import {
+  catchError,
+  exhaustMap,
+  forkJoin,
+  map,
+  of,
+  withLatestFrom,
+} from 'rxjs';
 import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
+import { BoardsService } from 'app/core/services/boards-service/boards-service';
 
 @Injectable()
 export class DashboardEffects {
   private readonly actions = inject(Actions);
   private readonly tasksService = inject(TasksService);
+  private readonly boardsService = inject(BoardsService);
   private store = inject(Store);
 
   viewInitialised$ = createEffect(() =>
@@ -17,11 +26,15 @@ export class DashboardEffects {
       ofType(fromActions.DashboardViewActions.viewInitialised),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([_, user]) => {
-        return this.tasksService.getTasksForUser(user?.id).pipe(
-          map((userTasksSummary) => {
+        const userTasksSummary = this.tasksService.getTasksForUser(user?.id);
+        const userCurrentBoards = this.boardsService.getBoardsForUser(user?.id);
+
+        return forkJoin([userTasksSummary, userCurrentBoards]).pipe(
+          map(([userTasksSummary, userCurrentBoards]) => {
             return fromActions.DashboardViewActions.viewInitialisedSucceeded({
               currentUser: user,
               tasksData: userTasksSummary,
+              boardsData: userCurrentBoards,
             });
           })
         );
