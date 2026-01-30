@@ -12,15 +12,17 @@ import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates'
 import { TaskModal } from 'app/features/shared/task-modal/task-modal';
 import { Board, Task } from '@shared/models';
 import { DashboardCurrentBoards } from '../ui-current-boards/dashboard-current-boards';
+import { DashboardQuickActions } from '../ui-quick-actions/dashboard-quick-actions';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     AsyncPipe,
+    DashboardCurrentBoards,
+    DashboardQuickActions,
     DashboardTaskSummary,
     DashboardTaskUpdates,
     TaskModal,
-    DashboardCurrentBoards,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
@@ -61,5 +63,17 @@ export class DashboardFeature implements OnInit {
 
   onGoToBoard(board: Board): void {
     this.dashboardFacade.goToBoard(board?.id);
+  }
+
+  onCreateNewBoard(): void {
+    this.dashboardFacade.createNewBoard();
+  }
+
+  onCreateNewTaskClicked(): void {
+    this.dashboardFacade.createNewTask();
+  }
+
+  onGoToBoardsListClicked(): void {
+    this.dashboardFacade.goToBoardsList();
   }
 }

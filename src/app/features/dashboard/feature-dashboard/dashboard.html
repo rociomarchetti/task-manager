@@ -21,6 +21,11 @@
     [currentBoards]="vm.currentBoards"
     (goToBoardClicked)="onGoToBoard($event)"
   ></app-dashboard-current-boards>
+  <app-dashboard-quick-actions
+    (createNewBoardClicked)="onCreateNewBoard()"
+    (createNewTaskClicked)="onCreateNewTaskClicked()"
+    (goToBoardsListClicked)="onGoToBoardsListClicked()"
+  ></app-dashboard-quick-actions>
 </section>
 
 <app-task-modal

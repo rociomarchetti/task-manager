@@ -107,4 +107,16 @@ export class DashboardEffects {
     },
     { dispatch: false }
   );
+
+  onGoToBoardsListClicked$ = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(fromActions.DashboardBoardActions.goToBoardsListClicked),
+        tap(() => {
+          this.router.navigate(['/boards']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }

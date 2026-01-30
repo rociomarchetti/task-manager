@@ -29,6 +29,9 @@ export const DashboardTaskActions = createActionGroup({
       tasksData: UserTasksSummary;
     }>(),
     'Task Edit Error': emptyProps(),
+    'Create New Task Clicked': emptyProps(),
+    'Create New Task Succeeded': emptyProps(),
+    'Create New Task Error': emptyProps(),
   },
 });
 
@@ -38,5 +41,9 @@ export const DashboardBoardActions = createActionGroup({
     'Go To Board Clicked': props<{
       boardId: string;
     }>(),
+    'Create New Board Clicked': emptyProps(),
+    'Create New Board Succeeded': emptyProps(),
+    'Create New Board Error': emptyProps(),
+    'Go To Boards List Clicked': emptyProps(),
   },
 });

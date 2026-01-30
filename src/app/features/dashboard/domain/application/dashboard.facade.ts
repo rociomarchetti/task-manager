@@ -34,4 +34,22 @@ export class DashboardFacade {
       fromActions.DashboardBoardActions.goToBoardClicked({ boardId })
     );
   }
+
+  createNewBoard(): void {
+    this.store.dispatch(
+      fromActions.DashboardBoardActions.createNewBoardClicked()
+    );
+  }
+
+  createNewTask(): void {
+    this.store.dispatch(
+      fromActions.DashboardTaskActions.createNewTaskClicked()
+    );
+  }
+
+  goToBoardsList(): void {
+    this.store.dispatch(
+      fromActions.DashboardBoardActions.goToBoardsListClicked()
+    );
+  }
 }
