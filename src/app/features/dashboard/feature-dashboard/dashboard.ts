@@ -10,11 +10,18 @@ import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary'
 import { DashboardFacade } from './../domain/application/dashboard.facade';
 import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates';
 import { TaskModal } from 'app/features/shared/task-modal/task-modal';
-import { Task } from '@shared/models';
+import { Board, Task } from '@shared/models';
+import { DashboardCurrentBoards } from '../ui-current-boards/dashboard-current-boards';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AsyncPipe, DashboardTaskSummary, DashboardTaskUpdates, TaskModal],
+  imports: [
+    AsyncPipe,
+    DashboardTaskSummary,
+    DashboardTaskUpdates,
+    TaskModal,
+    DashboardCurrentBoards,
+  ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,5 +57,9 @@ export class DashboardFeature implements OnInit {
 
   onPostponeTask(task: Task): void {
     this.dashboardFacade.postponeTask(task?.id);
+  }
+
+  onGoToBoard(board: Board): void {
+    this.dashboardFacade.goToBoard(board?.id);
   }
 }

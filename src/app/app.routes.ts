@@ -34,6 +34,9 @@ export const APP_ROUTES: Routes = [
             './features/dashboard/feature-dashboard/dashboard.routes'
           ).then((m) => m.DASHBOARD_ROUTES),
       },
+      {
+        path: 'boards/:id',
+      },
     ],
   },
 ];

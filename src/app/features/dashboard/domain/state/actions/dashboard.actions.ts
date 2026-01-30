@@ -31,3 +31,12 @@ export const DashboardTaskActions = createActionGroup({
     'Task Edit Error': emptyProps(),
   },
 });
+
+export const DashboardBoardActions = createActionGroup({
+  source: '[Dashboard] Dashboard Boards',
+  events: {
+    'Go To Board Clicked': props<{
+      boardId: string;
+    }>(),
+  },
+});

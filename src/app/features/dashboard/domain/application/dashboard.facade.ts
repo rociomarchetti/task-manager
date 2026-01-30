@@ -28,4 +28,10 @@ export class DashboardFacade {
       fromActions.DashboardTaskActions.postponedTask({ taskId })
     );
   }
+
+  goToBoard(boardId: string): void {
+    this.store.dispatch(
+      fromActions.DashboardBoardActions.goToBoardClicked({ boardId })
+    );
+  }
 }

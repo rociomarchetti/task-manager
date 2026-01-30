@@ -1,1 +1,9 @@
-<p>dashboard-current-boards works!</p>
+<app-panel>
+  <div appPanelBody>
+    Tableros con actividades en curso: @for (board of currentBoards(); track
+    $index; let i = $index ){
+    <p>{{board.name}}</p>
+    <a (click)="onGoToBoard(board)" href="javascript:void(0)">Ir al tablero</a>
+    }
+  </div>
+</app-panel>

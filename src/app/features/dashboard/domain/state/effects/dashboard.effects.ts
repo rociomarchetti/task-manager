@@ -9,16 +9,19 @@ import {
   forkJoin,
   map,
   of,
+  tap,
   withLatestFrom,
 } from 'rxjs';
 import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
 import { BoardsService } from 'app/core/services/boards-service/boards-service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class DashboardEffects {
   private readonly actions = inject(Actions);
   private readonly tasksService = inject(TasksService);
   private readonly boardsService = inject(BoardsService);
+  private router = inject(Router);
   private store = inject(Store);
 
   viewInitialised$ = createEffect(() =>
@@ -91,5 +94,17 @@ export class DashboardEffects {
         )
       )
     )
+  );
+
+  onGoToBoardClicked$ = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(fromActions.DashboardBoardActions.goToBoardClicked),
+        tap((boardId) => {
+          this.router.navigate([`/boards/${boardId}`]);
+        })
+      );
+    },
+    { dispatch: false }
   );
 }

@@ -17,6 +17,10 @@
     (seeDetailsClicked)="onSeeTaskDetails($event)"
     (postponeTaskClicked)="onPostponeTask($event)"
   ></app-dashboard-task-updates>
+  <app-dashboard-current-boards
+    [currentBoards]="vm.currentBoards"
+    (goToBoardClicked)="onGoToBoard($event)"
+  ></app-dashboard-current-boards>
 </section>
 
 <app-task-modal
