@@ -3,6 +3,7 @@ export interface Board {
   name: string;
   description?: string;
   isFavorite: boolean;
+  isWip: boolean;
   createdAt: Date;
   userId: number;
 }
