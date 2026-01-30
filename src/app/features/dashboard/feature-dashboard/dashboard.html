@@ -17,15 +17,17 @@
     (seeDetailsClicked)="onSeeTaskDetails($event)"
     (postponeTaskClicked)="onPostponeTask($event)"
   ></app-dashboard-task-updates>
-  <app-dashboard-current-boards
-    [currentBoards]="vm.currentBoards"
-    (goToBoardClicked)="onGoToBoard($event)"
-  ></app-dashboard-current-boards>
-  <app-dashboard-quick-actions
-    (createNewBoardClicked)="onCreateNewBoard()"
-    (createNewTaskClicked)="onCreateNewTaskClicked()"
-    (goToBoardsListClicked)="onGoToBoardsListClicked()"
-  ></app-dashboard-quick-actions>
+  <div>
+    <app-dashboard-current-boards
+      [currentBoards]="vm.currentBoards"
+      (goToBoardClicked)="onGoToBoard($event)"
+    ></app-dashboard-current-boards>
+    <app-dashboard-quick-actions
+      (createNewBoardClicked)="onCreateNewBoard()"
+      (createNewTaskClicked)="onCreateNewTaskClicked()"
+      (goToBoardsListClicked)="onGoToBoardsListClicked()"
+    ></app-dashboard-quick-actions>
+  </div>
 </section>
 
 <app-task-modal
