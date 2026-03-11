@@ -1,1 +1,16 @@
-<p>list-item works!</p>
+<div class="content">
+  <p>{{itemTitle()}}</p>
+</div>
+
+<div class="actions">
+  @for (action of actions(); track action.id) {
+  <button
+    type="button"
+    (click)="onActionClick(action.id)"
+    [attr.aria-label]="action.label"
+    [title]="action.label"
+  >
+    {{ action.icon }}
+  </button>
+  }
+</div>

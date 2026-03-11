@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  input,
+  output,
+} from '@angular/core';
+import { QuickAction } from '@shared/models/quick-action.model';
 
 @Component({
   selector: 'app-list-item',
@@ -7,4 +14,19 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListItem {}
+export class ListItem {
+  variant = input<'one' | 'two'>();
+  itemTitle = input<string>();
+  actions = input<Array<QuickAction>>([]);
+
+  actionClicked = output<string>();
+
+  onActionClick(actionId: string) {
+    this.actionClicked.emit(actionId);
+  }
+
+  @HostBinding('class')
+  get hostClasses(): string {
+    return `list-item list-item--${this.variant()}`;
+  }
+}
