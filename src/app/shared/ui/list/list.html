@@ -1,1 +1,5 @@
-<p>list works!</p>
+@if(listItems().length > 0) {
+<ng-content></ng-content>
+} @else {
+<p class="empty">{{emptyStateMssg()}}</p>
+}

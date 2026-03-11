@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -7,4 +12,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class List {}
+export class List {
+  listItems = input<Array<unknown>>([]);
+  variant = input<'one' | 'two'>('one');
+  emptyStateMssg = input<string>();
+
+  @HostBinding('class')
+  get hostClasses(): string {
+    return `list list--${this.variant()}`;
+  }
+}
