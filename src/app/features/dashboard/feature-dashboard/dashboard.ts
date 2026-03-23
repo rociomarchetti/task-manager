@@ -57,6 +57,10 @@ export class DashboardFeature implements OnInit {
     this.isModalOpen.set(true);
   }
 
+  onRemoveTask(task: Task): void {
+    this.dashboardFacade.removeTask(task?.id);
+  }
+
   onPostponeTask(task: Task): void {
     this.dashboardFacade.postponeTask(task?.id);
   }

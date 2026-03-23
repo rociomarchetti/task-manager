@@ -46,6 +46,12 @@ export class TasksService {
     return of(task);
   }
 
+  removeTask(taskId: string): Observable<void> {
+    this.tasks = this.tasks.filter((t) => t.id !== taskId);
+    this.saveTasks();
+    return of(void 0);
+  }
+
   private getTask(taskId: string): Task | null {
     const taskIndex = this.tasks.findIndex((t) => t.id === taskId);
 

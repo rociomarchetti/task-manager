@@ -32,6 +32,11 @@ export const DashboardTaskActions = createActionGroup({
     'Create New Task Clicked': emptyProps(),
     'Create New Task Succeeded': emptyProps(),
     'Create New Task Error': emptyProps(),
+    'Remove Task Clicked': props<{
+      taskId: string;
+    }>(),
+    'Remove Task Succeeded': emptyProps(),
+    'Remove Task Error': emptyProps(),
   },
 });
 

@@ -112,6 +112,22 @@ export class DashboardEffects {
     )
   );
 
+  onRemoveTask$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.DashboardTaskActions.removeTaskClicked),
+      exhaustMap((action) =>
+        this.tasksService.removeTask(action?.taskId).pipe(
+          map(() => {
+            return fromActions.DashboardTaskActions.removeTaskSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardTaskActions.removeTaskError());
+          })
+        )
+      )
+    )
+  );
+
   onGoToBoardClicked$ = createEffect(
     () => {
       return this.actions.pipe(

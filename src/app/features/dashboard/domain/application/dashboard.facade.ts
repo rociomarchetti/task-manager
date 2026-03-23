@@ -53,6 +53,12 @@ export class DashboardFacade {
     );
   }
 
+  removeTask(taskId: string): void {
+    this.store.dispatch(
+      fromActions.DashboardTaskActions.removeTaskClicked({ taskId })
+    );
+  }
+
   goToBoardsList(): void {
     this.store.dispatch(
       fromActions.DashboardBoardActions.goToBoardsListClicked()
