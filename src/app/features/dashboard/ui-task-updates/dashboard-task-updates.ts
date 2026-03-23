@@ -6,12 +6,14 @@ import {
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Task } from '@shared/models';
+import { List } from '@shared/ui/list/list';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
+import { TaskListItem } from 'app/features/shared/task-list-item/task-list-item';
 
 @Component({
   selector: 'app-dashboard-task-updates',
-  imports: [MatCheckboxModule, Panel, PanelBodyDirective],
+  imports: [TaskListItem, List, MatCheckboxModule, Panel, PanelBodyDirective],
   templateUrl: './dashboard-task-updates.html',
   styleUrl: './dashboard-task-updates.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,10 +23,34 @@ export class DashboardTaskUpdates {
   recentlyUpdatedTasks = input<Array<Task>>();
   tasksDueSoon = input<Array<Task>>();
 
+  seeTaskClicked = output<Task>();
+  removeTaskClicked = output<Task>();
   markTaskAsDone = output<Task>();
   editTaskClicked = output<Task>();
-  seeDetailsClicked = output<Task>();
   postponeTaskClicked = output<Task>();
+
+  sections = [
+    {
+      title: 'Tareas creadas recientemente:',
+      tasks: () => this.recentlyCreatedTasks(),
+    },
+    {
+      title: 'Tareas actualizadas recientemente:',
+      tasks: () => this.recentlyUpdatedTasks(),
+    },
+    {
+      title: 'Tareas próximas a vencerse:',
+      tasks: () => this.tasksDueSoon(),
+    },
+  ];
+
+  onSeeTask(task: Task): void {
+    this.seeTaskClicked.emit(task);
+  }
+
+  onRemoveTask(task: Task): void {
+    this.removeTaskClicked.emit(task);
+  }
 
   onMarkTaskAsCompleted(task: Task): void {
     this.markTaskAsDone.emit(task);
@@ -32,10 +58,6 @@ export class DashboardTaskUpdates {
 
   onEditTask(task: Task): void {
     this.editTaskClicked.emit(task);
-  }
-
-  onSeeTaskDetails(task: Task): void {
-    this.seeDetailsClicked.emit(task);
   }
 
   onPostponeTask(task: Task): void {

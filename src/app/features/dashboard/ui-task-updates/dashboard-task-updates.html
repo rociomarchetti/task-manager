@@ -1,39 +1,20 @@
+@for (section of sections; track $index) { @if (section.tasks()?.length > 0) {
 <app-panel>
   <div appPanelBody>
-    @if(recentlyCreatedTasks()?.length > 0) {
-    <h4>Tareas creadas recientemente:</h4>
-    @for(task of recentlyCreatedTasks(); track $index; let i = $index ) {
-    <p>{{task?.title}}</p>
-    <a (click)="onEditTask(task)" href="javascript:void(0)">Editar</a>
-    } }
-  </div>
-</app-panel>
+    <h4>{{ section.title }}</h4>
 
-<app-panel>
-  <div appPanelBody>
-    @if(recentlyUpdatedTasks()?.length > 0) {
-    <h4>Tareas actualizadas recientemente:</h4>
-    @for(task of recentlyUpdatedTasks(); track $index; let i = $index ) {
-    <p>{{task?.title}}</p>
-    <mat-checkbox (click)="onMarkTaskAsCompleted(task)">
-      Marcar como completada
-    </mat-checkbox>
-    <a (click)="onSeeTaskDetails(task)" href="javascript:void(0)"
-      >Ver detalles</a
-    >
-    } }
+    <app-list [listItems]="section.tasks()" [variant]="'one'">
+      @for (task of section.tasks(); track $index) {
+      <app-task-list-item
+        [task]="task"
+        (seeTask)="onSeeTask($event)"
+        (removeTask)="onRemoveTask($event)"
+        (markAsCompleted)="onMarkTaskAsCompleted($event)"
+        (editTask)="onEditTask($event)"
+        (postponeTask)="onPostponeTask($event)"
+      />
+      }
+    </app-list>
   </div>
 </app-panel>
-
-<app-panel>
-  <div appPanelBody>
-    @if(tasksDueSoon()?.length > 0) {
-    <h4>Tareas próximas a vencerse:</h4>
-    @for(task of tasksDueSoon(); track $index; let i = $index ) {
-    <p>{{task?.title}}</p>
-    <a (click)="onPostponeTask(task)" href="javascript:void(0)"
-      >Posponer fecha límite</a
-    >
-    } }
-  </div>
-</app-panel>
+} }
