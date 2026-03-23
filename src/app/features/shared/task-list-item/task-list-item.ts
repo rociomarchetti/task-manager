@@ -20,6 +20,9 @@ export class TaskListItem {
 
   seeTask = output<Task>();
   removeTask = output<Task>();
+  markAsCompleted = output<Task>();
+  editTask = output<Task>();
+  postponeTask = output<Task>();
 
   get quickActions(): Array<QuickAction> {
     return [
@@ -33,6 +36,21 @@ export class TaskListItem {
         icon: 'delete',
         label: 'Eliminar',
       },
+      {
+        id: 'check',
+        icon: 'check',
+        label: 'Marcar como completada',
+      },
+      {
+        id: 'edit',
+        icon: 'edit',
+        label: 'Editar',
+      },
+      {
+        id: 'postpone',
+        icon: 'more_time',
+        label: 'Retrasar vencimiento',
+      },
     ];
   }
 
@@ -45,6 +63,18 @@ export class TaskListItem {
       case 'remove':
         this.onRemoveTaskClicked();
         break;
+
+      case 'check':
+        this.onRemoveTaskClicked();
+        break;
+
+      case 'edit':
+        this.onEditTaskClicked();
+        break;
+
+      case 'postpone':
+        this.onPostponeTaskClicked();
+        break;
     }
   }
 
@@ -54,5 +84,17 @@ export class TaskListItem {
 
   onRemoveTaskClicked() {
     this.removeTask.emit(this.task());
+  }
+
+  onCheckTaskCompleted() {
+    this.markAsCompleted.emit(this.task());
+  }
+
+  onEditTaskClicked() {
+    this.editTask.emit(this.task());
+  }
+
+  onPostponeTaskClicked() {
+    this.postponeTask.emit(this.task());
   }
 }
