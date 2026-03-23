@@ -20,17 +20,21 @@ export function getTasksDueInNext7Days(tasks: Task[]): Task[] {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
 
-  const end = new Date();
+  const end = new Date(start);
   end.setDate(start.getDate() + 7);
   end.setHours(23, 59, 59, 999);
+
+  const startTime = start.getTime();
+  const endTime = end.getTime();
 
   return tasks
     ?.filter((t) => {
       if (!t.dueDate) return false;
       if (t.status === TaskStatus.DONE) return false;
 
-      const due = new Date(t.dueDate);
-      return due >= start && due <= end;
+      const dueTime = new Date(t.dueDate).getTime();
+
+      return dueTime >= startTime && dueTime <= endTime;
     })
     .sort(
       (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
