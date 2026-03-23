@@ -65,6 +65,10 @@ export class DashboardFeature implements OnInit {
     this.dashboardFacade.goToBoard(board?.id);
   }
 
+  onRemoveBoard(board: Board): void {
+    this.dashboardFacade.removeBoard(board?.id);
+  }
+
   onCreateNewBoard(): void {
     this.dashboardFacade.createNewBoard();
   }

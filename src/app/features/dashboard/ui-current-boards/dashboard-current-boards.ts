@@ -23,12 +23,13 @@ export class DashboardCurrentBoards {
   currentBoards = input<Array<Board>>();
 
   goToBoardClicked = output<Board>();
+  removeBoardClicked = output<Board>();
 
   onGoToBoard(board: Board): void {
     this.goToBoardClicked.emit(board);
   }
 
-  onActionClicked(actionId: string) {
-    console.log(actionId);
+  onRemoveBoard(board: Board): void {
+    this.removeBoardClicked.emit(board);
   }
 }

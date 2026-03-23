@@ -1,19 +1,13 @@
-<!-- <app-panel>
-  <div appPanelBody>
-    Tableros con actividades en curso: @for (board of currentBoards(); track
-    $index; let i = $index ){
-    <p>{{board.title}}</p>
-    <a (click)="onGoToBoard(board)" href="javascript:void(0)">Ir al tablero</a>
-    }
-  </div>
-</app-panel>
- -->
-
 <app-panel>
   <div appPanelBody>
+    Tableros con actividades en curso:
     <app-list [listItems]="mockBoards" [variant]="'two'">
       @for(item of mockBoards; track $index; let i = $index ) {
-      <app-board-list-item [board]="item"></app-board-list-item>
+      <app-board-list-item
+        [board]="item"
+        (seeBoard)="onGoToBoard($event)"
+        (removeBoard)="onRemoveBoard($event)"
+      ></app-board-list-item>
       }
     </app-list>
   </div>

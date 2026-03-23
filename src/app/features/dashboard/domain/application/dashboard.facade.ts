@@ -35,6 +35,12 @@ export class DashboardFacade {
     );
   }
 
+  removeBoard(boardId: string): void {
+    this.store.dispatch(
+      fromActions.DashboardBoardActions.removeBoardClicked({ boardId })
+    );
+  }
+
   createNewBoard(): void {
     this.store.dispatch(
       fromActions.DashboardBoardActions.createNewBoardClicked()

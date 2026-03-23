@@ -96,6 +96,22 @@ export class DashboardEffects {
     )
   );
 
+  onRemoveBoard$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.DashboardBoardActions.removeBoardClicked),
+      exhaustMap((action) =>
+        this.boardsService.deleteBoard(action?.boardId).pipe(
+          map(() => {
+            return fromActions.DashboardBoardActions.removeBoardSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardBoardActions.removeBoardError());
+          })
+        )
+      )
+    )
+  );
+
   onGoToBoardClicked$ = createEffect(
     () => {
       return this.actions.pipe(

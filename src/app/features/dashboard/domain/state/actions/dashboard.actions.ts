@@ -44,6 +44,11 @@ export const DashboardBoardActions = createActionGroup({
     'Create New Board Clicked': emptyProps(),
     'Create New Board Succeeded': emptyProps(),
     'Create New Board Error': emptyProps(),
+    'Remove Board Clicked': props<{
+      boardId: string;
+    }>(),
+    'Remove Board Succeeded': emptyProps(),
+    'Remove Board Error': emptyProps(),
     'Go To Boards List Clicked': emptyProps(),
   },
 });
