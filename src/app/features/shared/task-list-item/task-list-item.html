@@ -1,1 +1,6 @@
-<p>task-list-item works!</p>
+<app-list-item
+  [variant]="'one'"
+  [itemTitle]="task().title"
+  [actions]="quickActions"
+  (actionClicked)="onActionClicked($event)"
+></app-list-item>

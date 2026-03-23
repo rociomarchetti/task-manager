@@ -37,7 +37,6 @@ export class BoardListItem {
   }
 
   onActionClicked(actionId: string) {
-    console.log(actionId);
     switch (actionId) {
       case 'see':
         this.onSeeBoardClicked();
