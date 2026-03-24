@@ -133,7 +133,7 @@ export class DashboardEffects {
       return this.actions.pipe(
         ofType(fromActions.DashboardBoardActions.goToBoardClicked),
         tap((boardId) => {
-          this.router.navigate([`/boards/${boardId}`]);
+          this.router.navigate([`/app/boards/${boardId}`]);
         })
       );
     },
@@ -145,7 +145,7 @@ export class DashboardEffects {
       return this.actions.pipe(
         ofType(fromActions.DashboardBoardActions.goToBoardsListClicked),
         tap(() => {
-          this.router.navigate(['/boards']);
+          this.router.navigate(['/app/boards']);
         })
       );
     },
