@@ -1,1 +1,10 @@
-<p>feature-board-list works!</p>
+<section class="panel-group">
+  @for(board of mockBoards; track $index){
+  <app-panel>
+    <div appPanelBody>
+      <h4>{{board.title}}</h4>
+      <h5>{{board.description}}</h5>
+    </div>
+  </app-panel>
+  }
+</section>
