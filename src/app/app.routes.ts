@@ -41,9 +41,13 @@ export const APP_ROUTES: Routes = [
             './features/board-list/feature-board-list/board-list.routes'
           ).then((m) => m.BOARD_LIST_ROUTES),
       },
-      /*       {
+      {
         path: 'boards/:id',
-      }, */
+        loadChildren: () =>
+          import('./features/board/feature-board/board.routes').then(
+            (m) => m.BOARD_ROUTES
+          ),
+      },
     ],
   },
 ];

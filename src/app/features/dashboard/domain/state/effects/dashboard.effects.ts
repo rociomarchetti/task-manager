@@ -132,8 +132,8 @@ export class DashboardEffects {
     () => {
       return this.actions.pipe(
         ofType(fromActions.DashboardBoardActions.goToBoardClicked),
-        tap((boardId) => {
-          this.router.navigate([`/app/boards/${boardId}`]);
+        tap((action) => {
+          this.router.navigate([`/app/boards/${action?.boardId}`]);
         })
       );
     },
