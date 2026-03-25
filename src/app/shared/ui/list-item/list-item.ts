@@ -6,10 +6,13 @@ import {
   output,
 } from '@angular/core';
 import { QuickAction } from '@shared/models/quick-action.model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-item',
-  imports: [],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule],
   templateUrl: './list-item.html',
   styleUrl: './list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +21,7 @@ export class ListItem {
   variant = input<'one' | 'two'>();
   itemTitle = input<string>();
   actions = input<Array<QuickAction>>([]);
+  hasMoreOptions = input<boolean>(false);
 
   actionClicked = output<string>();
 

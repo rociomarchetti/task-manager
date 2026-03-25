@@ -27,24 +27,14 @@ export class TaskListItem {
   get quickActions(): Array<QuickAction> {
     return [
       {
-        id: 'see',
-        icon: 'visibility',
-        label: 'Ver',
-      },
-      {
-        id: 'remove',
-        icon: 'delete',
-        label: 'Eliminar',
+        id: 'edit',
+        icon: 'edit',
+        label: 'Editar',
       },
       {
         id: 'check',
         icon: 'check',
         label: 'Marcar como completada',
-      },
-      {
-        id: 'edit',
-        icon: 'edit',
-        label: 'Editar',
       },
       {
         id: 'postpone',

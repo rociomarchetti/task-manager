@@ -2,16 +2,41 @@
   <p>{{itemTitle()}}</p>
 </div>
 
-<div class="actions">
-  @for (action of actions(); track action.id) {
+<section class="actions">
   <button
     type="button"
-    (click)="onActionClick(action.id)"
-    [attr.aria-label]="action.label"
-    [title]="action.label"
+    (click)="onActionClick('see')"
+    [attr.aria-label]="'Ver'"
+    [title]="'Ver'"
   >
-    <!-- {{ action.icon }} -->
-    <span class="material-icons">{{ action.icon }}</span>
+    <span class="material-icons">{{ 'visibility' }}</span>
   </button>
+  <button
+    type="button"
+    (click)="onActionClick('remove')"
+    [attr.aria-label]="'Eliminar'"
+    [title]="'Eliminar'"
+  >
+    <span class="material-icons">{{ 'delete' }}</span>
+  </button>
+  <!-- more options menu -->
+  @if(hasMoreOptions()) {
+  <button matIconButton [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (action of actions(); track action.id) {
+    <button
+      mat-menu-item
+      type="button"
+      (click)="onActionClick(action.id)"
+      [attr.aria-label]="action.label"
+      [title]="action.label"
+    >
+      <span class="material-icons">{{ action.icon }}</span>
+      <span>{{action.label}}</span>
+    </button>
+    }
+  </mat-menu>
   }
-</div>
+</section>
