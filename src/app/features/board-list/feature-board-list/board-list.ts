@@ -1,21 +1,34 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { mockBoards } from 'app/core/services/boards-service/__mocks__/mock-boards';
+import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { BoardListFacade } from '../domain/application/board-list.facade';
 import { BoardListList } from '../ui-list/board-list-list';
 import { BoardListTopActionBar } from '../ui-top-action-bar/board-list-top-action-bar';
 
 @Component({
   selector: 'app-board-list',
-  imports: [BoardListList, BoardListTopActionBar],
+  imports: [AsyncPipe, BoardListList, BoardListTopActionBar],
   templateUrl: './board-list.html',
   styleUrl: './board-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardListFeature {
-  mockBoards = mockBoards;
+export class BoardListFeature implements OnInit {
+  private readonly boardListFacade = inject(BoardListFacade);
+  readonly viewModel$ = this.boardListFacade.viewModel$;
+
   filtersChanged = signal<{ search: string; favorites: boolean } | null>(null);
 
+  ngOnInit(): void {
+    this.boardListFacade.viewInitialised();
+  }
+
   onCreateBoard(): void {
-    console.log('onCreateBoard');
+    this.boardListFacade.createNewBoard();
   }
 
   onSearchBoardUpdated(event: { search: string; favorites: boolean }): void {

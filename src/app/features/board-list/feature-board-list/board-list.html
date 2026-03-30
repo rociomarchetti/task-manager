@@ -1,10 +1,12 @@
+@if(viewModel$ | async; as vm) {
 <app-board-list-top-action-bar
-  [boards]="mockBoards"
+  [boards]="vm.boards"
   (createBoard)="onCreateBoard()"
   (searchBoardUpdated)="onSearchBoardUpdated($event)"
 ></app-board-list-top-action-bar>
 
 <app-board-list-list
-  [boards]="mockBoards"
+  [boards]="vm.boards"
   [filters]="filtersChanged()"
 ></app-board-list-list>
+}
