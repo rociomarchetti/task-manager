@@ -1,10 +1,13 @@
 import { Board } from '@shared/models';
 
+const now = new Date();
+
 export const mockBoards: Board[] = [
   {
     id: 'A',
     title: 'Crear el gestor de tareas',
-    createdAt: new Date('2026-01-27T10:00:00Z'),
+    description: 'Generar estructura primera del proyecto',
+    createdAt: now, // Hoy
     isFavorite: true,
     isWip: true,
     userId: 1,
@@ -12,7 +15,7 @@ export const mockBoards: Board[] = [
   {
     id: 'B',
     title: 'Mantenimiento del mes',
-    createdAt: new Date('2026-01-27T10:00:00Z'),
+    createdAt: new Date(now.getTime() - 24 * 60 * 60 * 1000), // Ayer
     isFavorite: false,
     isWip: true,
     userId: 1,
@@ -20,7 +23,8 @@ export const mockBoards: Board[] = [
   {
     id: 'C',
     title: 'Crear el listado de tableros',
-    createdAt: new Date('2026-01-27T10:00:00Z'),
+    description: 'Vista donde se podrán ver todos los tableros en progreso',
+    createdAt: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), // Hace 3 días
     isFavorite: true,
     isWip: true,
     userId: 1,
