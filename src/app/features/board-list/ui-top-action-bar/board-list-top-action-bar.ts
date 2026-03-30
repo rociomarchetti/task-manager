@@ -28,7 +28,7 @@ import { Board } from '@shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardListTopActionBar {
-  boards = input<Array<Board>>();
+  boards = input<Array<Board>>([]);
 
   showFavorites = signal(false);
   isFocused = signal(false);
@@ -41,11 +41,11 @@ export class BoardListTopActionBar {
     initialValue: '',
   });
 
-  boardTitles = computed(() => this.boards().map((b) => b.title));
+  boardTitles = computed(() => this.boards()?.map((b) => b.title));
 
   filteredTitles = computed(() => {
     const search = (this.searchTerm() ?? '').toLowerCase();
-    return this.boardTitles().filter((title) =>
+    return this.boardTitles()?.filter((title) =>
       title.toLowerCase().includes(search)
     );
   });
