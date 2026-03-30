@@ -31,6 +31,14 @@ export class BoardListFeature implements OnInit {
     this.boardListFacade.createNewBoard();
   }
 
+  onRemoveBoard(boardId: string): void {
+    this.boardListFacade.removeBoard(boardId);
+  }
+
+  onGoToBoardDetails(boardId: string): void {
+    this.boardListFacade.goToBoardDetails(boardId);
+  }
+
   onSearchBoardUpdated(event: { search: string; favorites: boolean }): void {
     this.filtersChanged.set(event);
   }

@@ -26,4 +26,10 @@ export class BoardListFacade {
       fromActions.BoardListViewActions.removeBoardClicked({ boardId })
     );
   }
+
+  goToBoardDetails(boardId: string): void {
+    this.store.dispatch(
+      fromActions.BoardListViewActions.goToBoardDetailsClicked({ boardId })
+    );
+  }
 }
