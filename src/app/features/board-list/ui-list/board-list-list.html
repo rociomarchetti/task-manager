@@ -2,13 +2,21 @@
   @for (board of boardsToShow(); track $index) {
   <app-panel>
     <div appPanelBody>
-      <h4>{{ board.title }}</h4>
+      <div class="board-header">
+        <h4>{{ board.title }}</h4>
 
-      @if (board.isFavorite) {
-      <span class="material-icons">favorite</span>
+        @if (board.isFavorite) {
+        <span class="material-icons">favorite</span>
+        }
+      </div>
+      @if(board.description){
+      <p>{{ board.description }}</p>
       }
-
-      <h5>{{ board.description }}</h5>
+      <p>Creado: {{formatDate(board.createdAt)}}</p>
+    </div>
+    <div appPanelFooter>
+      <button (click)="onGoToBoardDetails(board.id)">Ver Tablero</button>
+      <button (click)="onRemoveBoard(board.id)">Eliminar</button>
     </div>
   </app-panel>
   }

@@ -8,6 +8,10 @@
     margin: 0 auto;
   }
 
+  .board-header {
+    display: flex;
+  }
+
   @media (min-width: 1280px) {
     .panel-group {
       grid-template-columns: repeat(2, 1fr);
