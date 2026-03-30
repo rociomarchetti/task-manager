@@ -1,1 +1,15 @@
-<p>board-list-list works!</p>
+<section class="panel-group">
+  @for (board of boardsToShow(); track $index) {
+  <app-panel>
+    <div appPanelBody>
+      <h4>{{ board.title }}</h4>
+
+      @if (board.isFavorite) {
+      <span class="material-icons">favorite</span>
+      }
+
+      <h5>{{ board.description }}</h5>
+    </div>
+  </app-panel>
+  }
+</section>

@@ -1,1 +1,32 @@
-<p>ui-top-action-bar works!</p>
+<section>
+  <h3>Mis tableros</h3>
+  <button type="button" (click)="toggleFavorites(false)">Todos</button>
+
+  <button type="button" (click)="toggleFavorites(true)">
+    Favoritos
+    <span class="material-icons">favorite</span>
+  </button>
+
+  <button type="button" (click)="onCreateBoardClicked()">
+    + Nuevo tablero
+  </button>
+
+  <form>
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        [placeholder]="isFocused() ? '' : 'Escribir nombre del tablero'"
+        (focus)="isFocused.set(true)"
+        (blur)="isFocused.set(false)"
+        [formControl]="searchBoard"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredTitles(); track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</section>
