@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 
-export const BOARD_EDIT_ROUTES: Routes = [
+export const BOARD_CREATE_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () => import('./board-edit').then((m) => m.BoardEditFeature),
+    loadComponent: () =>
+      import('./board-create').then((m) => m.BoardCreateFeature),
     providers: [
       //DashboardFacade,
       //provideState(dashboardFeatureKey, dashboardReducerFunction),

@@ -45,15 +45,15 @@ export const APP_ROUTES: Routes = [
         path: 'boards/:id',
         loadChildren: () =>
           import('./features/board/feature-board-edit/board-edit.routes').then(
-            (m) => m.BOARD_ROUTES
+            (m) => m.BOARD_EDIT_ROUTES
           ),
       },
       {
         path: 'boards/new',
         loadChildren: () =>
-          import('./features/board/feature-board-edit/board-edit.routes').then(
-            (m) => m.BOARD_ROUTES
-          ),
+          import(
+            './features/board/feature-board-create/board-create.routes'
+          ).then((m) => m.BOARD_CREATE_ROUTES),
       },
     ],
   },
