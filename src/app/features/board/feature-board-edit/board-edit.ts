@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-board',
+  selector: 'app-board-edit',
   imports: [],
-  templateUrl: './board.html',
-  styleUrl: './board.scss',
+  templateUrl: './board-edit.html',
+  styleUrl: './board-edit.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardFeature {}
+export class BoardEditFeature {}

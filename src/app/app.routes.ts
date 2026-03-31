@@ -44,14 +44,14 @@ export const APP_ROUTES: Routes = [
       {
         path: 'boards/:id',
         loadChildren: () =>
-          import('./features/board/feature-board/board.routes').then(
+          import('./features/board/feature-board-edit/board-edit.routes').then(
             (m) => m.BOARD_ROUTES
           ),
       },
       {
         path: 'boards/new',
         loadChildren: () =>
-          import('./features/board/feature-board/board.routes').then(
+          import('./features/board/feature-board-edit/board-edit.routes').then(
             (m) => m.BOARD_ROUTES
           ),
       },
