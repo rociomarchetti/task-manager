@@ -35,25 +35,16 @@ export const APP_ROUTES: Routes = [
           ).then((m) => m.DASHBOARD_ROUTES),
       },
       {
-        path: 'boards',
+        path: 'boards-list',
         loadChildren: () =>
           import(
             './features/board-list/feature-board-list/board-list.routes'
           ).then((m) => m.BOARD_LIST_ROUTES),
       },
       {
-        path: 'boards/:id',
+        path: 'boards',
         loadChildren: () =>
-          import('./features/board/feature-board-edit/board-edit.routes').then(
-            (m) => m.BOARD_EDIT_ROUTES
-          ),
-      },
-      {
-        path: 'boards/new',
-        loadChildren: () =>
-          import(
-            './features/board/feature-board-create/board-create.routes'
-          ).then((m) => m.BOARD_CREATE_ROUTES),
+          import('./features/board/board.routes').then((m) => m.BOARD_ROUTES),
       },
     ],
   },
