@@ -30,15 +30,17 @@ export class BoardListEffects {
     )
   );
 
-  //TODO: create create board effect
-  /*   onCreateNewBoard$ = createEffect(() => {
-    this.actions.pipe(
-      ofType(fromActions.BoardListViewActions.createBoardClicked),
-      exhaustMap((action) =>{
-        return 
-      })
-    )
-  }) */
+  onCreateNewBoard$ = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(fromActions.BoardListViewActions.createBoardClicked),
+        tap((_) => {
+          this.router.navigate(['/app/boards/new']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   onRemoveBoard$ = createEffect(() =>
     this.actions.pipe(

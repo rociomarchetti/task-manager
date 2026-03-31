@@ -48,6 +48,13 @@ export const APP_ROUTES: Routes = [
             (m) => m.BOARD_ROUTES
           ),
       },
+      {
+        path: 'boards/new',
+        loadChildren: () =>
+          import('./features/board/feature-board/board.routes').then(
+            (m) => m.BOARD_ROUTES
+          ),
+      },
     ],
   },
 ];
