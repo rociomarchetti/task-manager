@@ -140,6 +140,18 @@ export class DashboardEffects {
     { dispatch: false }
   );
 
+  onCreateBoardClicked$ = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(fromActions.DashboardBoardActions.createNewBoardClicked),
+        tap((_) => {
+          this.router.navigate(['/app/boards/new']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   onGoToBoardsListClicked$ = createEffect(
     () => {
       return this.actions.pipe(
