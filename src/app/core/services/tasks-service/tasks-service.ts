@@ -21,6 +21,11 @@ export class TasksService {
     return of(summary).pipe(delay(500));
   }
 
+  getTasksByBoardId(boardId: string): Observable<Array<Task>> {
+    const boardTasks = this.tasks.filter((t) => t.boardId === boardId);
+    return of(boardTasks).pipe(delay(500));
+  }
+
   markTaskAsDone(taskId: string): Observable<Task | null> {
     const task = this.getTask(taskId);
 

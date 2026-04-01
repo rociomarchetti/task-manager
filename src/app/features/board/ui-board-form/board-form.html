@@ -1,1 +1,77 @@
-<p>board-form works!</p>
+<div class="board-header">
+  <h2>{{boardTitle}}</h2>
+  @if(mode() === 'edit') {
+  <button type="button" (click)="onEditTitleClicked()">
+    <span class="material-icons">edit</span>
+  </button>
+  }
+</div>
+<form [formGroup]="boardForm">
+  @if(mode() === 'edit' && !!isEditTitleOn()) {
+  <section>
+    <mat-form-field>
+      <mat-label>Editar nombre del tablero</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+  </section>
+  }
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Agrega un contexto para tus futuras tareas"
+    ></textarea>
+  </mat-form-field>
+  <section class="panel-group">
+    <app-panel>
+      <div appPanelBody>
+        <div>
+          <h4>To Do</h4>
+          @for(task of tasks().pending; track $index){
+          <span>{{task.title}}</span><br />
+          }
+        </div>
+      </div>
+    </app-panel>
+    <app-panel>
+      <div appPanelBody>
+        <div>
+          <h4>In Progress</h4>
+          @for(task of tasks().inProgress; track $index){
+          <span>{{task.title}}</span><br />
+          }
+        </div>
+      </div>
+    </app-panel>
+    <app-panel>
+      <div appPanelBody>
+        <div>
+          <h4>Done</h4>
+          @for(task of tasks().completed; track $index){
+          <span>{{task.title}}</span><br />
+          }
+        </div>
+      </div>
+    </app-panel>
+  </section>
+  @if(mode() === 'edit') {
+  <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
+  } @else {
+  <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
+  }
+  <section>
+    @if(mode() === 'edit') {
+    <button type="button" (click)="onSaveChangesClicked()">
+      Guardar cambios
+    </button>
+
+    } @else {
+    <button type="button" (click)="onSaveNewBoardClicked()">
+      Guardar tablero
+    </button>
+
+    }
+    <button type="button" (click)="onCancelClicked()">Cancelar</button>
+  </section>
+</form>

@@ -1,2 +1,6 @@
 <p>feature-board-edit works!</p>
-<app-board-form [mode]="'edit'"></app-board-form>
+<app-board-form
+  [mode]="'edit'"
+  [board]="currentBoard()"
+  [tasks]="taskLists()"
+></app-board-form>
