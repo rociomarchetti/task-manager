@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Board, Task, TaskStatus } from '@shared/models';
 import { BoardsService } from 'app/core/services/boards-service/boards-service';
 import { TasksService } from 'app/core/services/tasks-service/tasks-service';
+import { FormMode } from '@shared/models/form-mode.model';
 
 @Component({
   selector: 'app-board-edit',
@@ -22,6 +23,8 @@ export class BoardEditFeature implements OnInit {
   private route = inject(ActivatedRoute);
   private readonly boardsService = inject(BoardsService);
   private readonly tasksService = inject(TasksService);
+
+  FormMode = FormMode;
 
   currentBoard = signal<Board | null>(null);
   taskLists = signal<{
@@ -39,9 +42,9 @@ export class BoardEditFeature implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.boardsService
-      .getBoardById(id)
+      .getBoardById(id ?? '')
       .subscribe((board) => this.currentBoard.set(board));
-    this.tasksService.getTasksByBoardId(id).subscribe((tasks) => {
+    this.tasksService.getTasksByBoardId(id ?? '').subscribe((tasks) => {
       const filteredByStatus = this.tasksByStatus(tasks);
       this.taskLists.set(filteredByStatus);
     });

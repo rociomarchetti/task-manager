@@ -1,13 +1,13 @@
 <div class="board-header">
   <h2>{{boardTitle}}</h2>
-  @if(mode() === 'edit') {
+  @if(mode() === FormMode.EDIT) {
   <button type="button" (click)="onEditTitleClicked()">
     <span class="material-icons">edit</span>
   </button>
   }
 </div>
 <form [formGroup]="boardForm">
-  @if(mode() === 'edit' && !!isEditTitleOn()) {
+  @if(mode() === FormMode.EDIT && !!isEditTitleOn()) {
   <section>
     <mat-form-field>
       <mat-label>Editar nombre del tablero</mat-label>
@@ -55,13 +55,13 @@
       </div>
     </app-panel>
   </section>
-  @if(mode() === 'edit') {
+  @if(mode() === FormMode.EDIT) {
   <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
   } @else {
   <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
   }
   <section>
-    @if(mode() === 'edit') {
+    @if(mode() === FormMode.EDIT) {
     <button type="button" (click)="onSaveChangesClicked()">
       Guardar cambios
     </button>

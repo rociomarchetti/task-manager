@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
+import { FormMode } from '@shared/models/form-mode.model';
 
 @Component({
   selector: 'app-board-form',
@@ -35,7 +36,7 @@ import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardFormComponent {
-  mode = input<'edit' | 'create'>();
+  mode = input<FormMode>();
   board = input<Board | null>(null);
   tasks = input<{
     pending: Array<Task>;
@@ -43,6 +44,7 @@ export class BoardFormComponent {
     completed: Array<Task>;
   }>({ pending: [], inProgress: [], completed: [] });
 
+  FormMode = FormMode;
   isEditTitleOn = signal(false);
 
   boardForm: FormGroup = new FormGroup({
@@ -53,7 +55,7 @@ export class BoardFormComponent {
   syncBoardEffect = effect(() => {
     const data = this.board();
 
-    if (data && this.mode() === 'edit') {
+    if (data && this.mode() === FormMode.EDIT) {
       this.boardForm.patchValue({
         title: data.title,
         description: data.description,
@@ -67,9 +69,12 @@ export class BoardFormComponent {
   });
 
   get boardTitle(): string {
-    return !!this.mode() && this.mode() === 'create'
-      ? 'Crear nuevo tablero'
-      : this.board().title;
+    if (this.mode() === FormMode.CREATE) {
+      return 'Crear nuevo tablero';
+    }
+
+    const board = this.board();
+    return board ? board.title : '';
   }
 
   onEditTitleClicked(): void {
