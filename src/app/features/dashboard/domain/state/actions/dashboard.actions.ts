@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {
+  NewTaskData,
   Task,
   User,
   UserBoardsSummary,
@@ -38,7 +39,9 @@ export const DashboardTaskActions = createActionGroup({
     'Updated Tasks Succeeded': props<{
       tasksData: UserTasksSummary;
     }>(),
-    'Create New Task Clicked': emptyProps(),
+    'Create New Task Clicked': props<{
+      newTask: NewTaskData;
+    }>(),
     'Create New Task Succeeded': emptyProps(),
     'Create New Task Error': emptyProps(),
     'Remove Task Clicked': props<{

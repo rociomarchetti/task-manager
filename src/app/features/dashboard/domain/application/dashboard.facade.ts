@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { DashboardViewModel } from '../entities/dashboard-view.model';
 import * as fromSelectors from '../state/selectors/dashboard.selectors';
 import * as fromActions from '../state/actions/dashboard.actions';
-import { Task } from '@shared/models';
+import { NewTaskData, Task } from '@shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardFacade {
@@ -48,9 +48,9 @@ export class DashboardFacade {
     );
   }
 
-  createNewTask(): void {
+  createNewTask(newTask: NewTaskData): void {
     this.store.dispatch(
-      fromActions.DashboardTaskActions.createNewTaskClicked()
+      fromActions.DashboardTaskActions.createNewTaskClicked({ newTask })
     );
   }
 

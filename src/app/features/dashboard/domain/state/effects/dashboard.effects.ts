@@ -93,12 +93,30 @@ export class DashboardEffects {
     )
   );
 
-  onEditedTask$ = createEffect(() =>
+  createNewTask = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.DashboardTaskActions.createNewTaskClicked),
+      withLatestFrom(this.store.select(selectAuthenticatedUser)),
+      exhaustMap(([action, user]) =>
+        this.tasksService.addTask(action?.newTask, user?.id).pipe(
+          map(() => {
+            return fromActions.DashboardTaskActions.createNewTaskSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardTaskActions.createNewTaskError());
+          })
+        )
+      )
+    )
+  );
+
+  onEditedTaskList$ = createEffect(() =>
     this.actions.pipe(
       ofType(
         fromActions.DashboardTaskActions.completedTaskSucceeded,
         fromActions.DashboardTaskActions.postponedTaskSucceeded,
-        fromActions.DashboardTaskActions.editTaskSucceeded
+        fromActions.DashboardTaskActions.editTaskSucceeded,
+        fromActions.DashboardTaskActions.createNewTaskSucceeded
       ),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([_, user]) =>

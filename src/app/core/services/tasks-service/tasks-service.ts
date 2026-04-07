@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 import { mockTasks } from './__mocks__/mock-tasks';
-import { Task, TaskStatus, UserTasksSummary } from '@shared/models';
+import {
+  NewTaskData,
+  Task,
+  TaskStatus,
+  UserTasksSummary,
+} from '@shared/models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +29,23 @@ export class TasksService {
   getTasksByBoardId(boardId: string): Observable<Array<Task>> {
     const boardTasks = this.tasks.filter((t) => t.boardId === boardId);
     return of(boardTasks).pipe(delay(500));
+  }
+
+  addTask(newTask: NewTaskData, userId: number): Observable<Task> {
+    const id = this.generateId();
+
+    const taskToAdd: Task = {
+      ...newTask,
+      id,
+      userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    this.tasks = [...this.tasks, taskToAdd];
+    this.saveTasks();
+
+    return of(taskToAdd).pipe(delay(500));
   }
 
   markTaskAsDone(taskId: string): Observable<Task | null> {
@@ -116,5 +138,9 @@ export class TasksService {
 
     localStorage.setItem(this.tasksStorageKey, JSON.stringify(mockTasks));
     return mockTasks;
+  }
+
+  private generateId(): string {
+    return crypto.randomUUID();
   }
 }
