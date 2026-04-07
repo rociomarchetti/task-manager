@@ -1,3 +1,17 @@
+.data-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  p {
+    flex: 0 0 auto;
+  }
+
+  mat-form-field {
+    flex: 1 1 auto;
+  }
+}
+
 ::ng-deep {
   .modal {
     background-size: cover;
