@@ -1,5 +1,10 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { User, UserBoardsSummary, UserTasksSummary } from '@shared/models';
+import {
+  Task,
+  User,
+  UserBoardsSummary,
+  UserTasksSummary,
+} from '@shared/models';
 
 export const DashboardViewActions = createActionGroup({
   source: '[Dashboard]  Dashboard View',
@@ -25,10 +30,14 @@ export const DashboardTaskActions = createActionGroup({
       taskId: string;
     }>(),
     'Completed Task Succeeded': emptyProps(),
-    'Task Edit Succeeded': props<{
+    'Edit Task': props<{
+      updatedTask: Task;
+    }>(),
+    'Edit Task Succeeded': emptyProps(),
+    'Edit Task Error': emptyProps(),
+    'Updated Tasks Succeeded': props<{
       tasksData: UserTasksSummary;
     }>(),
-    'Task Edit Error': emptyProps(),
     'Create New Task Clicked': emptyProps(),
     'Create New Task Succeeded': emptyProps(),
     'Create New Task Error': emptyProps(),

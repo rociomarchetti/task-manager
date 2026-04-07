@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DashboardViewModel } from '../entities/dashboard-view.model';
 import * as fromSelectors from '../state/selectors/dashboard.selectors';
 import * as fromActions from '../state/actions/dashboard.actions';
+import { Task } from '@shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardFacade {
@@ -50,6 +51,12 @@ export class DashboardFacade {
   createNewTask(): void {
     this.store.dispatch(
       fromActions.DashboardTaskActions.createNewTaskClicked()
+    );
+  }
+
+  updateTask(updatedTask: Task): void {
+    this.store.dispatch(
+      fromActions.DashboardTaskActions.editTask({ updatedTask })
     );
   }
 

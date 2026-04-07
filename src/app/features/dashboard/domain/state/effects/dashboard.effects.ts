@@ -54,7 +54,7 @@ export class DashboardEffects {
             return fromActions.DashboardTaskActions.postponedTaskSucceeded();
           }),
           catchError(() => {
-            return of(fromActions.DashboardTaskActions.taskEditError());
+            return of(fromActions.DashboardTaskActions.editTaskError());
           })
         )
       )
@@ -70,7 +70,23 @@ export class DashboardEffects {
             return fromActions.DashboardTaskActions.completedTaskSucceeded();
           }),
           catchError(() => {
-            return of(fromActions.DashboardTaskActions.taskEditError());
+            return of(fromActions.DashboardTaskActions.editTaskError());
+          })
+        )
+      )
+    )
+  );
+
+  updatedTask$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.DashboardTaskActions.editTask),
+      exhaustMap((action) =>
+        this.tasksService.updateTask(action?.updatedTask).pipe(
+          map(() => {
+            return fromActions.DashboardTaskActions.editTaskSucceeded();
+          }),
+          catchError(() => {
+            return of(fromActions.DashboardTaskActions.editTaskError());
           })
         )
       )
@@ -81,13 +97,14 @@ export class DashboardEffects {
     this.actions.pipe(
       ofType(
         fromActions.DashboardTaskActions.completedTaskSucceeded,
-        fromActions.DashboardTaskActions.postponedTaskSucceeded
+        fromActions.DashboardTaskActions.postponedTaskSucceeded,
+        fromActions.DashboardTaskActions.editTaskSucceeded
       ),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([_, user]) =>
         this.tasksService.getTasksForUser(user?.id).pipe(
           map((userTasksSummary) => {
-            return fromActions.DashboardTaskActions.taskEditSucceeded({
+            return fromActions.DashboardTaskActions.updatedTasksSucceeded({
               tasksData: userTasksSummary,
             });
           })

@@ -28,6 +28,9 @@ export class TasksService {
 
   markTaskAsDone(taskId: string): Observable<Task | null> {
     const task = this.getTask(taskId);
+    if (!task) {
+      return of(null);
+    }
 
     task.status = TaskStatus.DONE;
     task.updatedAt = new Date();
@@ -39,8 +42,12 @@ export class TasksService {
 
   postponeTask(taskId: string, days: number): Observable<Task | null> {
     const task = this.getTask(taskId);
+    if (!task) {
+      return of(null);
+    }
 
-    const newDueDate = new Date(task.dueDate);
+    const today = new Date();
+    const newDueDate = new Date(task.dueDate ?? today);
     newDueDate.setDate(newDueDate.getDate() + days);
 
     task.dueDate = newDueDate;
@@ -49,6 +56,21 @@ export class TasksService {
     this.updateTaskList(task);
     this.saveTasks();
     return of(task);
+  }
+
+  updateTask(updatedTask: Task): Observable<Task | null> {
+    const existingTask = this.getTask(updatedTask.id);
+    if (!existingTask) {
+      return of(null);
+    }
+
+    updatedTask.createdAt = existingTask.createdAt;
+    updatedTask.updatedAt = new Date();
+
+    this.updateTaskList(updatedTask);
+    this.saveTasks();
+
+    return of(updatedTask).pipe(delay(500));
   }
 
   removeTask(taskId: string): Observable<void> {

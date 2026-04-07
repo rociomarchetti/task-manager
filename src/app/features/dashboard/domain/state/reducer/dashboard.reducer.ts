@@ -21,12 +21,15 @@ const dashboardReducer = createReducer(
       };
     }
   ),
-  on(fromActions.DashboardTaskActions.taskEditSucceeded, (state, action) => {
-    return {
-      ...state,
-      tasksData: action.tasksData,
-    };
-  })
+  on(
+    fromActions.DashboardTaskActions.updatedTasksSucceeded,
+    (state, action) => {
+      return {
+        ...state,
+        tasksData: action.tasksData,
+      };
+    }
+  )
 );
 
 export function dashboardReducerFunction(
