@@ -1,6 +1,6 @@
 <div class="board-header">
   <h2>{{boardTitle}}</h2>
-  @if(mode() === FormMode.EDIT) {
+  @if(isEditMode) {
   <button type="button" (click)="onEditTitleClicked()">
     <span class="material-icons">edit</span>
   </button>
@@ -55,13 +55,13 @@
       </div>
     </app-panel>
   </section>
-  @if(mode() === FormMode.EDIT) {
+  @if(isEditMode) {
   <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
   } @else {
   <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
   }
   <section>
-    @if(mode() === FormMode.EDIT) {
+    @if(isEditMode) {
     <button type="button" (click)="onSaveChangesClicked()">
       Guardar cambios
     </button>

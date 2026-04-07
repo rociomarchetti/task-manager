@@ -77,6 +77,10 @@ export class BoardFormComponent {
     return board ? board.title : '';
   }
 
+  get isEditMode(): boolean {
+    return this.mode() === FormMode.EDIT;
+  }
+
   onEditTitleClicked(): void {
     this.isEditTitleOn.set(!this.isEditTitleOn());
   }
