@@ -35,6 +35,10 @@
 <app-task-modal
   [isModalOpen]="isModalOpen()"
   [task]="selectedTask()"
+  [mode]="taskModalMode()"
+  [currentBoards]="vm.currentBoards"
   (modalClosed)="onModalClosed()"
+  (saveTaskChanges)="onSaveTaskChanges($event)"
+  (saveNewTask)="onSaveNewTask($event)"
 ></app-task-modal>
 }

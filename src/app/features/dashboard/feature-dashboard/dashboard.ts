@@ -10,9 +10,10 @@ import { DashboardTaskSummary } from '../ui-task-summary/dashboard-task-summary'
 import { DashboardFacade } from './../domain/application/dashboard.facade';
 import { DashboardTaskUpdates } from '../ui-task-updates/dashboard-task-updates';
 import { TaskModal } from 'app/features/shared/task-modal/task-modal';
-import { Board, Task } from '@shared/models';
+import { Board, NewTaskData, Task } from '@shared/models';
 import { DashboardCurrentBoards } from '../ui-current-boards/dashboard-current-boards';
 import { DashboardQuickActions } from '../ui-quick-actions/dashboard-quick-actions';
+import { FormMode } from '@shared/models/form-mode.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,6 +34,7 @@ export class DashboardFeature implements OnInit {
   readonly viewModel$ = this.dashboardFacade.viewModel$;
 
   isModalOpen = signal(false);
+  taskModalMode = signal<FormMode>(FormMode.EDIT);
   selectedTask = signal<Task | null>(null);
 
   ngOnInit(): void {
@@ -78,7 +80,16 @@ export class DashboardFeature implements OnInit {
   }
 
   onCreateNewTaskClicked(): void {
-    this.dashboardFacade.createNewTask();
+    this.isModalOpen.set(true);
+    this.taskModalMode.set(FormMode.CREATE);
+  }
+
+  onSaveNewTask(createdTask: NewTaskData): void {
+    this.dashboardFacade.createNewTask(createdTask);
+  }
+
+  onSaveTaskChanges(updatedTask: Task): void {
+    this.dashboardFacade.updateTask(updatedTask);
   }
 
   onGoToBoardsListClicked(): void {
