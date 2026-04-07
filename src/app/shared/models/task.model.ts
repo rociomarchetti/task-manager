@@ -11,3 +11,11 @@ export interface Task {
   updatedAt?: Date;
   userId: number;
 }
+
+export interface NewTaskData {
+  title: string;
+  description?: string;
+  status: TaskStatus;
+  dueDate?: Date;
+  boardId: string;
+}
