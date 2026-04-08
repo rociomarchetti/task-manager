@@ -47,6 +47,7 @@ export class BoardFormComponent {
 
   addTask = output<void>();
   saveBoardChanges = output<Board>();
+  cancelChanges = output<void>();
 
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
@@ -114,8 +115,13 @@ export class BoardFormComponent {
     console.log('onSaveNewBoardClicked');
   }
 
-  //TODO:
   onCancelClicked(): void {
-    console.log('onCancelClicked');
+    this.boardForm.reset();
+    this.cancelChanges.emit();
+  }
+
+  onGoBackClicked(): void {
+    this.boardForm.reset();
+    this.cancelChanges.emit();
   }
 }

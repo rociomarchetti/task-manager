@@ -34,5 +34,6 @@ export const BoardEditActions = createActionGroup({
     'Updated Tasks Succeeded': props<{
       tasksData: UserTasksSummary;
     }>(),
+    'Cancel Changes': emptyProps(),
   },
 });

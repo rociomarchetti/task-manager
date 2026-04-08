@@ -49,4 +49,8 @@ export class BoardEditFeature implements OnInit {
   onSaveNewTask(newTask: NewTaskData): void {
     this.boardEditFacade.addNewTask(newTask);
   }
+
+  onCancelChanges(): void {
+    this.boardEditFacade.cancelChanges();
+  }
 }

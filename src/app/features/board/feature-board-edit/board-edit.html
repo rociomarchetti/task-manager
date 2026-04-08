@@ -5,6 +5,7 @@
   [tasks]="vm.taskLists"
   (addTask)="onAddTaskClicked()"
   (saveBoardChanges)="onSaveBoardChanges($event)"
+  (cancelChanges)="onCancelChanges()"
 ></app-board-form>
 
 <app-task-modal

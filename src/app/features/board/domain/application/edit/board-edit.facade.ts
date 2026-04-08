@@ -31,4 +31,8 @@ export class BoardEditFacade {
       fromActions.BoardEditActions.editBoard({ updatedBoard })
     );
   }
+
+  cancelChanges(): void {
+    this.store.dispatch(fromActions.BoardEditActions.cancelChanges());
+  }
 }

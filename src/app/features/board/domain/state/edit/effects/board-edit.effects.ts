@@ -11,6 +11,7 @@ import {
   forkJoin,
   map,
   of,
+  tap,
   withLatestFrom,
 } from 'rxjs';
 import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
@@ -98,5 +99,16 @@ export class BoardEditEffects {
         )
       )
     )
+  );
+
+  cancelChanges$ = createEffect(
+    () =>
+      this.actions.pipe(
+        ofType(fromActions.BoardEditActions.cancelChanges),
+        tap(() => {
+          this.router.navigate(['/app/boards-list']);
+        })
+      ),
+    { dispatch: false }
   );
 }
