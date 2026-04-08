@@ -23,38 +23,86 @@
       placeholder="Agrega un contexto para tus futuras tareas"
     ></textarea>
   </mat-form-field>
+  <div
+    cdkDropList
+    #listOne="cdkDropList"
+    [cdkDropListConnectedTo]="[listTwo, listThree]"
+  ></div>
+  <div
+    cdkDropList
+    #listTwo="cdkDropList"
+    [cdkDropListConnectedTo]="[listOne, listThree]"
+  ></div>
+  <div
+    cdkDropList
+    #listThree="cdkDropList"
+    [cdkDropListConnectedTo]="[listOne, listTwo]"
+  ></div>
   <section class="panel-group">
     <app-panel>
       <div appPanelBody>
-        <div>
-          <h4>To Do</h4>
-          @for(task of tasks().pending; track $index){
-          <span>{{task.title}}</span><br />
-          }
+        <div class="example-container">
+          <h2>To do</h2>
+          <div
+            cdkDropList
+            #todoList="cdkDropList"
+            [cdkDropListData]="todoTasks()"
+            [cdkDropListConnectedTo]="[doneList, inProgressList]"
+            class="example-list"
+            (cdkDropListDropped)="dropTask($event)"
+          >
+            @for (item of todoTasks(); track item) {
+            <div class="example-box" cdkDrag>{{ item }}</div>
+            }
+          </div>
         </div>
       </div>
     </app-panel>
     <app-panel>
       <div appPanelBody>
-        <div>
-          <h4>In Progress</h4>
-          @for(task of tasks().inProgress; track $index){
-          <span>{{task.title}}</span><br />
-          }
+        <div class="example-container">
+          <h2>In Progress</h2>
+          <div
+            cdkDropList
+            #inProgressList="cdkDropList"
+            [cdkDropListData]="inProgressTasks()"
+            [cdkDropListConnectedTo]="[doneList, todoList]"
+            class="example-list"
+            (cdkDropListDropped)="dropTask($event)"
+          >
+            @for (item of inProgressTasks(); track item) {
+            <div class="example-box" cdkDrag>{{ item }}</div>
+            }
+          </div>
         </div>
       </div>
     </app-panel>
     <app-panel>
       <div appPanelBody>
-        <div>
-          <h4>Done</h4>
-          @for(task of tasks().completed; track $index){
-          <span>{{task.title}}</span><br />
-          }
+        <div class="example-container">
+          <h2>Done</h2>
+          <div
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="doneTasks()"
+            [cdkDropListConnectedTo]="[todoList, inProgressList]"
+            class="example-list"
+            (cdkDropListDropped)="dropTask($event)"
+          >
+            @for (item of doneTasks(); track item) {
+            <div class="example-box" cdkDrag>{{ item }}</div>
+            }
+          </div>
         </div>
       </div>
     </app-panel>
   </section>
+  <button
+    (click)="onSaveTaskListsChanges()"
+    [disabled]="!areChangesInTaskLists()"
+  >
+    Guardar cambios en tareas
+  </button>
   @if(isEditMode) {
   <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
   } @else {
@@ -63,7 +111,7 @@
   <section>
     @if(isEditMode) {
     <button type="button" (click)="onSaveChangesClicked()">
-      Guardar cambios
+      Guardar cambios en el tablero
     </button>
     <button type="button" (click)="onGoBackClicked()">Volver</button>
     } @else {

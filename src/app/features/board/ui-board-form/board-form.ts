@@ -1,3 +1,10 @@
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -21,10 +28,16 @@ import { FormMode } from '@shared/models/form-mode.model';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 import { TaskListsData } from '../domain/entities/board.model';
+import {
+  checkTaskListsChanges,
+  updateTaskLists,
+} from '../domain/util/board.util';
 
 @Component({
   selector: 'app-board-form',
   imports: [
+    CdkDrag,
+    CdkDropList,
     CommonModule,
     FormsModule,
     MatFormFieldModule,
@@ -42,12 +55,18 @@ export class BoardFormComponent {
   board = input<Board>();
   tasks = input<TaskListsData>();
 
-  FormMode = FormMode;
-  isEditTitleOn = signal(false);
-
   addTask = output<void>();
   saveBoardChanges = output<Board>();
   cancelChanges = output<void>();
+  tasksUpdated = output<TaskListsData>();
+
+  isEditTitleOn = signal(false);
+  todoTasks = signal<string[]>([]);
+  inProgressTasks = signal<string[]>([]);
+  doneTasks = signal<string[]>([]);
+  initialTaskListsState = signal<TaskListsData | null>(null);
+  areChangesInTaskLists = signal(false);
+  FormMode = FormMode;
 
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
@@ -70,6 +89,33 @@ export class BoardFormComponent {
     }
   });
 
+  syncTaskListsToSignals = effect(() => {
+    const data = this.tasks();
+    if (!data) return;
+
+    this.todoTasks.set(data.pending.map((t) => t.title));
+    this.inProgressTasks.set(data.inProgress.map((t) => t.title));
+    this.doneTasks.set(data.completed.map((t) => t.title));
+
+    if (!this.initialTaskListsState()) {
+      this.initialTaskListsState.set(data);
+    }
+  });
+
+  changesInTaskListsEffect = effect(() => {
+    const initial = this.initialTaskListsState();
+    if (!initial) return;
+
+    const areChanges = checkTaskListsChanges(
+      initial,
+      this.todoTasks(),
+      this.inProgressTasks(),
+      this.doneTasks()
+    );
+
+    this.areChangesInTaskLists.set(areChanges);
+  });
+
   get boardTitle(): string {
     if (this.mode() === FormMode.CREATE) {
       return 'Crear nuevo tablero';
@@ -81,6 +127,41 @@ export class BoardFormComponent {
 
   get isEditMode(): boolean {
     return this.mode() === FormMode.EDIT;
+  }
+
+  dropTask(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+
+    this.todoTasks.update((v) => [...v]);
+    this.inProgressTasks.update((v) => [...v]);
+    this.doneTasks.update((v) => [...v]);
+  }
+
+  onSaveTaskListsChanges() {
+    const original = this.tasks();
+    if (!original) return;
+
+    const updatedTaskLists = updateTaskLists(
+      original,
+      this.todoTasks(),
+      this.inProgressTasks(),
+      this.doneTasks()
+    );
+
+    this.tasksUpdated.emit(updatedTaskLists);
   }
 
   onEditTitleClicked(): void {
