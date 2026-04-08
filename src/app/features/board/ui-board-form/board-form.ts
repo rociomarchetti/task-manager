@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { Board, Task } from '@shared/models';
@@ -47,6 +48,8 @@ export class BoardFormComponent {
   FormMode = FormMode;
   isEditTitleOn = signal(false);
 
+  addTask = output<void>();
+
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
     description: new FormControl<string | null>(''),
@@ -86,7 +89,7 @@ export class BoardFormComponent {
   }
 
   onAddTaskClicked(): void {
-    console.log('onAddTaskClicked');
+    this.addTask.emit();
   }
 
   onAddColumnClicked(): void {

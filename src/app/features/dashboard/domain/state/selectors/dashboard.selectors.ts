@@ -15,13 +15,15 @@ export const selectDashboardState =
 export const selectDashboardViewModel = createSelector(
   selectDashboardState,
   (state): DashboardViewModel => ({
-    currentBoards: getCurrentBoards(state?.boardsData?.boards),
-    recentlyCreatedTasks: getRecentlyCreatedTasks(state?.tasksData?.tasks),
-    recentlyUpdatedTasks: getRecentlyStatusChangedTasks(
-      state?.tasksData?.tasks
+    currentBoards: getCurrentBoards(state?.boardsData?.boards ?? []),
+    recentlyCreatedTasks: getRecentlyCreatedTasks(
+      state?.tasksData?.tasks ?? []
     ),
-    userName: state?.user?.name,
-    tasksAmounts: countTasksByStatus(state?.tasksData?.tasks),
-    tasksDueSoon: getTasksDueInNext7Days(state?.tasksData?.tasks),
+    recentlyUpdatedTasks: getRecentlyStatusChangedTasks(
+      state?.tasksData?.tasks ?? []
+    ),
+    userName: state?.user?.name ?? '',
+    tasksAmounts: countTasksByStatus(state?.tasksData?.tasks ?? []),
+    tasksDueSoon: getTasksDueInNext7Days(state?.tasksData?.tasks ?? []),
   })
 );
