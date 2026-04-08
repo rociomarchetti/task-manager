@@ -1,4 +1,9 @@
 import { Routes } from '@angular/router';
+import { BoardEditFacade } from './domain/application/edit/board-edit.facade';
+import { boardEditFeatureKey } from './domain/state/state/board.state';
+import { BoardEditEffects, boardEditReducerFunction } from './domain';
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 export const BOARD_ROUTES: Routes = [
   {
@@ -18,9 +23,9 @@ export const BOARD_ROUTES: Routes = [
     loadComponent: () =>
       import('./feature-board-edit/board-edit').then((m) => m.BoardEditFeature),
     providers: [
-      //BoardFacade,
-      //provideState(boardFeatureKey, boardReducer),
-      //provideEffects([BoardEffects]),
+      BoardEditFacade,
+      provideState(boardEditFeatureKey, boardEditReducerFunction),
+      provideEffects([BoardEditEffects]),
     ],
   },
 ];
