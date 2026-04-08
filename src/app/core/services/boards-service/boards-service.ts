@@ -26,6 +26,15 @@ export class BoardsService {
     return of(board);
   }
 
+  updateBoard(updatedBoard: Board): Observable<Board> {
+    this.boards = this.boards.map((b) =>
+      b.id === updatedBoard.id ? updatedBoard : b
+    );
+
+    this.saveBoards();
+    return of(updatedBoard);
+  }
+
   createBoard(board: Board): Observable<Board> {
     this.boards = [...this.boards, board];
     this.saveBoards();
