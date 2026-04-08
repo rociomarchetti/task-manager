@@ -1,6 +1,19 @@
-<p>feature-board-edit works!</p>
+@if(viewModel$ | async; as vm) {
 <app-board-form
   [mode]="FormMode.EDIT"
-  [board]="currentBoard()"
-  [tasks]="taskLists()"
+  [board]="vm.currentBoard"
+  [tasks]="vm.taskLists"
+  (addTask)="onAddTaskClicked()"
+  (saveBoardChanges)="onSaveBoardChanges($event)"
 ></app-board-form>
+
+<app-task-modal
+  [mode]="FormMode.CREATE"
+  [isModalOpen]="isModalOpen()"
+  [currentBoards]="vm.boards"
+  [isCreatingTaskFromBoard]="true"
+  [currentBoardId]="vm.currentBoard?.id"
+  (modalClosed)="onModalClosed()"
+  (saveNewTask)="onSaveNewTask($event)"
+></app-task-modal>
+}

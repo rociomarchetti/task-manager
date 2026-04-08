@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,48 +6,47 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { BoardFormComponent } from '../ui-board-form/board-form';
 import { ActivatedRoute } from '@angular/router';
-import { Board, Task, TaskStatus } from '@shared/models';
-import { BoardsService } from 'app/core/services/boards-service/boards-service';
-import { TasksService } from 'app/core/services/tasks-service/tasks-service';
+import { Board, NewTaskData } from '@shared/models';
 import { FormMode } from '@shared/models/form-mode.model';
+import { TaskModal } from 'app/features/shared/task-modal/task-modal';
+import { BoardEditFacade } from '../domain/application/edit/board-edit.facade';
+import { BoardFormComponent } from '../ui-board-form/board-form';
 
 @Component({
   selector: 'app-board-edit',
-  imports: [BoardFormComponent],
+  imports: [AsyncPipe, BoardFormComponent, TaskModal],
   templateUrl: './board-edit.html',
   styleUrl: './board-edit.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardEditFeature implements OnInit {
+  private readonly boardEditFacade = inject(BoardEditFacade);
+  readonly viewModel$ = this.boardEditFacade.viewModel$;
+
   private route = inject(ActivatedRoute);
-  private readonly boardsService = inject(BoardsService);
-  private readonly tasksService = inject(TasksService);
 
   FormMode = FormMode;
-
-  currentBoard = signal<Board | null>(null);
-  taskLists = signal<{
-    pending: Array<Task>;
-    inProgress: Array<Task>;
-    completed: Array<Task>;
-  }>({ pending: [], inProgress: [], completed: [] });
-
-  tasksByStatus = (tasks: Task[]) => ({
-    pending: tasks?.filter((t) => t.status === TaskStatus.PENDING),
-    inProgress: tasks?.filter((t) => t.status === TaskStatus.IN_PROGRESS),
-    completed: tasks?.filter((t) => t.status === TaskStatus.DONE),
-  });
+  isModalOpen = signal(false);
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.boardsService
-      .getBoardById(id ?? '')
-      .subscribe((board) => this.currentBoard.set(board));
-    this.tasksService.getTasksByBoardId(id ?? '').subscribe((tasks) => {
-      const filteredByStatus = this.tasksByStatus(tasks);
-      this.taskLists.set(filteredByStatus);
-    });
+    const boardId = this.route.snapshot.paramMap.get('id') ?? '';
+    this.boardEditFacade.viewInitialised(boardId);
+  }
+
+  onModalClosed(): void {
+    this.isModalOpen.set(false);
+  }
+
+  onAddTaskClicked(): void {
+    this.isModalOpen.set(true);
+  }
+
+  onSaveBoardChanges(updatedBoard: Board): void {
+    this.boardEditFacade.editBoard(updatedBoard);
+  }
+
+  onSaveNewTask(newTask: NewTaskData): void {
+    this.boardEditFacade.addNewTask(newTask);
   }
 }

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +7,6 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { Board, Task } from '@shared/models';
 import {
   FormControl,
   FormGroup,
@@ -16,10 +16,11 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+import { Board } from '@shared/models';
+import { FormMode } from '@shared/models/form-mode.model';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
-import { FormMode } from '@shared/models/form-mode.model';
+import { TaskListsData } from '../domain/entities/board.model';
 
 @Component({
   selector: 'app-board-form',
@@ -38,17 +39,14 @@ import { FormMode } from '@shared/models/form-mode.model';
 })
 export class BoardFormComponent {
   mode = input<FormMode>();
-  board = input<Board | null>(null);
-  tasks = input<{
-    pending: Array<Task>;
-    inProgress: Array<Task>;
-    completed: Array<Task>;
-  }>({ pending: [], inProgress: [], completed: [] });
+  board = input<Board>();
+  tasks = input<TaskListsData>();
 
   FormMode = FormMode;
   isEditTitleOn = signal(false);
 
   addTask = output<void>();
+  saveBoardChanges = output<Board>();
 
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
@@ -92,22 +90,31 @@ export class BoardFormComponent {
     this.addTask.emit();
   }
 
+  //TODO:
   onAddColumnClicked(): void {
     console.log('onAddColumnClicked');
   }
 
   onSaveChangesClicked(): void {
-    console.log('onSaveChangesClicked');
+    const original = this.board();
+    if (!original) return;
+
+    const updatedBoard: Board = {
+      ...original,
+      title: this.boardForm.get('title')?.value ?? this.board()?.title,
+      description:
+        this.boardForm.get('description')?.value ?? this.board()?.description,
+    };
+
+    this.saveBoardChanges.emit(updatedBoard);
   }
 
-  /*   onGoBackClicked(): void {
-    console.log('onGoBackClicked');
-  } */
-
+  //TODO:
   onSaveNewBoardClicked(): void {
     console.log('onSaveNewBoardClicked');
   }
 
+  //TODO:
   onCancelClicked(): void {
     console.log('onCancelClicked');
   }
