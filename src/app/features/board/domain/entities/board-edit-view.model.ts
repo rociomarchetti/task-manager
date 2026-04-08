@@ -1,11 +1,8 @@
-import { Board, Task } from '@shared/models';
+import { Board } from '@shared/models';
+import { TaskListsData } from './board.model';
 
 export interface BoardEditViewModel {
-  boards: Array<Board>;
-  currentBoard: Board;
-  taskLists: {
-    pending: Array<Task>;
-    inProgress: Array<Task>;
-    completed: Array<Task>;
-  };
+  boards: Array<Board> | null;
+  currentBoard: Board | null;
+  taskLists: TaskListsData | null;
 }
