@@ -1,15 +1,15 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { BoardState } from '../../state/board.state';
-import * as fromActions from '../actions/board-edit.actions';
+import { BoardState } from '../state/board.state';
+import * as fromActions from '../actions/board.actions';
 
-export const boardEditInitialState: BoardState = {
+export const boardInitialState: BoardState = {
   currentBoard: null,
   boards: null,
   taskLists: null,
 };
 
-const boardEditReducer = createReducer(
-  boardEditInitialState,
+const boardReducer = createReducer(
+  boardInitialState,
   on(
     fromActions.BoardEditViewActions.viewInitialisedSucceeded,
     (state, action) => {
@@ -35,6 +35,6 @@ const boardEditReducer = createReducer(
   })
 );
 
-export function boardEditReducerFunction(state: BoardState, action: Action) {
-  return boardEditReducer(state, action);
+export function boardReducerFunction(state: BoardState, action: Action) {
+  return boardReducer(state, action);
 }

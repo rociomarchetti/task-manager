@@ -1,6 +1,6 @@
 import { Board, Task } from '@shared/models';
 
-export const boardEditFeatureKey = 'Board_Edit_State';
+export const boardFeatureKey = 'Board_State';
 export interface BoardState {
   currentBoard: Board | null;
   boards: Array<Board> | null;

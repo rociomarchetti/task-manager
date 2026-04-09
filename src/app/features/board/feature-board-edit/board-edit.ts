@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Board, NewTaskData } from '@shared/models';
 import { FormMode } from '@shared/models/form-mode.model';
 import { TaskModal } from 'app/features/shared/task-modal/task-modal';
-import { BoardEditFacade } from '../domain/application/edit/board-edit.facade';
+import { BoardFacade } from '../domain/application/board.facade';
 import { BoardFormComponent } from '../ui-board-form/board-form';
 
 @Component({
@@ -21,7 +21,7 @@ import { BoardFormComponent } from '../ui-board-form/board-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardEditFeature implements OnInit {
-  private readonly boardEditFacade = inject(BoardEditFacade);
+  private readonly boardEditFacade = inject(BoardFacade);
   readonly viewModel$ = this.boardEditFacade.viewModel$;
 
   private route = inject(ActivatedRoute);

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import * as fromActions from '../actions/board-edit.actions';
+import * as fromActions from '../actions/board.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TasksService } from 'app/core/services/tasks-service/tasks-service';
 import { BoardsService } from 'app/core/services/boards-service/boards-service';
@@ -17,7 +17,7 @@ import {
 import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
 
 @Injectable()
-export class BoardEditEffects {
+export class BoardEffects {
   private readonly actions = inject(Actions);
   private readonly tasksService = inject(TasksService);
   private readonly boardsService = inject(BoardsService);
