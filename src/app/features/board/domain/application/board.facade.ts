@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromSelectors from '../state/selectors/board.selectors';
 import * as fromActions from '../state/actions/board.actions';
-import { Board, NewTaskData } from '@shared/models';
+import { Board, NewBoardData, NewTaskData } from '@shared/models';
 import { BoardState } from '../state/state/board.state';
 import { BoardViewModel } from '../entities/board-view.model';
 
@@ -29,6 +29,12 @@ export class BoardFacade {
   editBoard(updatedBoard: Board): void {
     this.store.dispatch(
       fromActions.BoardEditActions.editBoard({ updatedBoard })
+    );
+  }
+
+  addNewBoard(newBoardData: NewBoardData): void {
+    this.store.dispatch(
+      fromActions.BoardCreateActions.addNewBoard({ newBoardData })
     );
   }
 

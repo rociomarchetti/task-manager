@@ -4,16 +4,16 @@
   <button type="button" (click)="onEditTitleClicked()">
     <span class="material-icons">edit</span>
   </button>
-
+  }
   <button type="button" class="favorite-button" (click)="toggleFavorite()">
     <span class="material-symbols-outlined">
       {{ isAFavoriteBoard ? 'heart_check' : 'heart_plus' }}
     </span>
   </button>
-  }
 </div>
 <form [formGroup]="boardForm">
-  @if(mode() === FormMode.EDIT && !!isEditTitleOn()) {
+  @if(mode() === FormMode.EDIT && !!isEditTitleOn() || mode() ===
+  FormMode.CREATE) {
   <section>
     <mat-form-field>
       <mat-label>Editar nombre del tablero</mat-label>
@@ -44,6 +44,8 @@
     #listThree="cdkDropList"
     [cdkDropListConnectedTo]="[listOne, listTwo]"
   ></div>
+
+  @if(mode() !== FormMode.CREATE) {
   <section class="panel-group">
     <app-panel>
       <div appPanelBody>
@@ -103,17 +105,18 @@
       </div>
     </app-panel>
   </section>
+  } @if(isEditMode) {
+  <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
   <button
     (click)="onSaveTaskListsChanges()"
     [disabled]="!areChangesInTaskLists()"
   >
     Guardar cambios en tareas
   </button>
-  @if(isEditMode) {
-  <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
-  } @else {
-  <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
   }
+  <!--   @else {
+  <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
+  } -->
   <section>
     @if(isEditMode) {
     <button type="button" (click)="onSaveChangesClicked()">
@@ -121,7 +124,11 @@
     </button>
     <button type="button" (click)="onGoBackClicked()">Volver</button>
     } @else {
-    <button type="button" (click)="onSaveNewBoardClicked()">
+    <button
+      type="button"
+      (click)="onSaveNewBoardClicked()"
+      [disabled]="boardForm.invalid"
+    >
       Guardar tablero
     </button>
     <button type="button" (click)="onCancelClicked()">Cancelar</button>

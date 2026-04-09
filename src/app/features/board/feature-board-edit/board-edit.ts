@@ -21,8 +21,8 @@ import { BoardFormComponent } from '../ui-board-form/board-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardEditFeature implements OnInit {
-  private readonly boardEditFacade = inject(BoardFacade);
-  readonly viewModel$ = this.boardEditFacade.viewModel$;
+  private readonly boardFacade = inject(BoardFacade);
+  readonly viewModel$ = this.boardFacade.viewModel$;
 
   private route = inject(ActivatedRoute);
 
@@ -31,7 +31,7 @@ export class BoardEditFeature implements OnInit {
 
   ngOnInit() {
     const boardId = this.route.snapshot.paramMap.get('id') ?? '';
-    this.boardEditFacade.viewInitialised(boardId);
+    this.boardFacade.viewInitialised(boardId);
   }
 
   onModalClosed(): void {
@@ -43,14 +43,14 @@ export class BoardEditFeature implements OnInit {
   }
 
   onSaveBoardChanges(updatedBoard: Board): void {
-    this.boardEditFacade.editBoard(updatedBoard);
+    this.boardFacade.editBoard(updatedBoard);
   }
 
   onSaveNewTask(newTask: NewTaskData): void {
-    this.boardEditFacade.addNewTask(newTask);
+    this.boardFacade.addNewTask(newTask);
   }
 
   onCancelChanges(): void {
-    this.boardEditFacade.cancelChanges();
+    this.boardFacade.cancelChanges();
   }
 }

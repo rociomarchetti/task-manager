@@ -1,5 +1,11 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Board, NewTaskData, Task, UserTasksSummary } from '@shared/models';
+import {
+  Board,
+  NewBoardData,
+  NewTaskData,
+  Task,
+  UserTasksSummary,
+} from '@shared/models';
 
 export const BoardEditViewActions = createActionGroup({
   source: '[Board] Board Edit View',
@@ -35,5 +41,16 @@ export const BoardEditActions = createActionGroup({
       tasksData: UserTasksSummary;
     }>(),
     'Cancel Changes': emptyProps(),
+  },
+});
+
+export const BoardCreateActions = createActionGroup({
+  source: '[Board] Board Create',
+  events: {
+    'Add New Board': props<{
+      newBoardData: NewBoardData;
+    }>(),
+    'Add New Board Succeeded': emptyProps(),
+    'Add New Board Error': emptyProps(),
   },
 });

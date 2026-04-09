@@ -23,7 +23,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Board } from '@shared/models';
+import { Board, NewBoardData } from '@shared/models';
 import { FormMode } from '@shared/models/form-mode.model';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
@@ -59,6 +59,7 @@ export class BoardFormComponent {
   saveBoardChanges = output<Board>();
   cancelChanges = output<void>();
   tasksUpdated = output<TaskListsData>();
+  saveNewBoard = output<NewBoardData>();
 
   isEditTitleOn = signal(false);
   todoTasks = signal<string[]>([]);
@@ -184,10 +185,9 @@ export class BoardFormComponent {
     this.addTask.emit();
   }
 
-  //TODO:
-  onAddColumnClicked(): void {
+  /*   onAddColumnClicked(): void {
     console.log('onAddColumnClicked');
-  }
+  } */
 
   onSaveChangesClicked(): void {
     const original = this.board();
@@ -205,9 +205,13 @@ export class BoardFormComponent {
     this.saveBoardChanges.emit(updatedBoard);
   }
 
-  //TODO:
   onSaveNewBoardClicked(): void {
-    console.log('onSaveNewBoardClicked');
+    const newBoard: NewBoardData = {
+      title: this.boardForm.get('title')?.value,
+      description: this.boardForm.get('description')?.value,
+      isFavorite: this.boardForm.get('isFavorite')?.value,
+    };
+    this.saveNewBoard.emit(newBoard);
   }
 
   onCancelClicked(): void {

@@ -13,9 +13,9 @@ export const BOARD_ROUTES: Routes = [
         (m) => m.BoardCreateFeature
       ),
     providers: [
-      //BoardFacade,
-      //provideState(boardFeatureKey, boardReducer),
-      //provideEffects([BoardEffects]),
+      BoardFacade,
+      provideState(boardFeatureKey, boardReducerFunction),
+      provideEffects([BoardEffects]),
     ],
   },
   {

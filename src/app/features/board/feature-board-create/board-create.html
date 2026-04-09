@@ -1,2 +1,5 @@
-<p>board-create works!</p>
-<app-board-form [mode]="FormMode.CREATE"></app-board-form>
+<app-board-form
+  [mode]="FormMode.CREATE"
+  (cancelChanges)="onCancelChanges()"
+  (saveNewBoard)="onSaveNewBoard($event)"
+></app-board-form>

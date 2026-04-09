@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Board, UserBoardsSummary } from '@shared/models';
+import { Board, NewBoardData, UserBoardsSummary } from '@shared/models';
 import { delay, Observable, of } from 'rxjs';
 import { mockBoards } from './__mocks__/mock-boards';
 
@@ -35,10 +35,22 @@ export class BoardsService {
     return of(updatedBoard);
   }
 
-  createBoard(board: Board): Observable<Board> {
-    this.boards = [...this.boards, board];
+  createNewBoard(data: NewBoardData, userId: number): Observable<Board> {
+    const newBoard: Board = {
+      id: this.generateId(),
+      title: data.title,
+      description: data.description ?? '',
+      isFavorite: data.isFavorite ?? false,
+      isWip: false,
+      createdAt: new Date(),
+      userId,
+      addedColumns: data.addedColumns ?? [],
+    };
+
+    this.boards = [...this.boards, newBoard];
     this.saveBoards();
-    return of(board);
+
+    return of(newBoard).pipe(delay(300));
   }
 
   deleteBoard(boardId: string): Observable<void> {
@@ -59,5 +71,9 @@ export class BoardsService {
 
     localStorage.setItem(this.boardsStorageKey, JSON.stringify(mockBoards));
     return mockBoards;
+  }
+
+  private generateId(): string {
+    return crypto.randomUUID();
   }
 }

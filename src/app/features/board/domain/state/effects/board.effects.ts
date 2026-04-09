@@ -50,7 +50,7 @@ export class BoardEffects {
     )
   );
 
-  addNewTask = createEffect(() =>
+  addNewTask$ = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.BoardEditActions.addNewTask),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
@@ -64,6 +64,25 @@ export class BoardEffects {
           })
         )
       )
+    )
+  );
+
+  addNewBoard$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(fromActions.BoardCreateActions.addNewBoard),
+      withLatestFrom(this.store.select(selectAuthenticatedUser)),
+      exhaustMap(([action, user]) => {
+        return this.boardsService
+          .createNewBoard(action?.newBoardData, user?.id)
+          .pipe(
+            map(() => {
+              return fromActions.BoardCreateActions.addNewBoardSucceeded();
+            }),
+            catchError(() => {
+              return of(fromActions.BoardCreateActions.addNewBoardError());
+            })
+          );
+      })
     )
   );
 
@@ -99,6 +118,21 @@ export class BoardEffects {
         )
       )
     )
+  );
+
+  onBoardChangesSuccess$ = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(
+          fromActions.BoardCreateActions.addNewBoardSucceeded,
+          fromActions.BoardEditActions.editBoardSucceeded
+        ),
+        tap(() => {
+          this.router.navigate(['/app/boards-list']);
+        })
+      );
+    },
+    { dispatch: false }
   );
 
   cancelChanges$ = createEffect(
