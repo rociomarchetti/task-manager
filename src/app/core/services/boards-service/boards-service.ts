@@ -74,6 +74,15 @@ export class BoardsService {
   }
 
   private generateId(): string {
-    return crypto.randomUUID();
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const usedIds = new Set(this.boards.map((b) => b.id));
+
+    for (const char of alphabet) {
+      if (!usedIds.has(char)) {
+        return char;
+      }
+    }
+
+    throw new Error('No hay letras disponibles para generar IDs');
   }
 }
