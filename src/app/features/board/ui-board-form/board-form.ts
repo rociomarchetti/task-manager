@@ -71,6 +71,7 @@ export class BoardFormComponent {
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
     description: new FormControl<string | null>(''),
+    isFavorite: new FormControl<boolean>(false),
   });
 
   syncBoardEffect = effect(() => {
@@ -80,11 +81,13 @@ export class BoardFormComponent {
       this.boardForm.patchValue({
         title: data.title,
         description: data.description,
+        isFavorite: data.isFavorite,
       });
     } else {
       this.boardForm.reset({
         title: '',
         description: '',
+        isFavorite: false,
       });
     }
   });
@@ -127,6 +130,15 @@ export class BoardFormComponent {
 
   get isEditMode(): boolean {
     return this.mode() === FormMode.EDIT;
+  }
+
+  get isAFavoriteBoard(): boolean {
+    return this.boardForm.get('isFavorite')?.value;
+  }
+
+  toggleFavorite() {
+    const current = this.boardForm.get('isFavorite')?.value;
+    this.boardForm.get('isFavorite')?.setValue(!current);
   }
 
   dropTask(event: CdkDragDrop<string[]>) {
@@ -186,6 +198,8 @@ export class BoardFormComponent {
       title: this.boardForm.get('title')?.value ?? this.board()?.title,
       description:
         this.boardForm.get('description')?.value ?? this.board()?.description,
+      isFavorite:
+        this.boardForm.get('isFavorite')?.value ?? this.board()?.isFavorite,
     };
 
     this.saveBoardChanges.emit(updatedBoard);

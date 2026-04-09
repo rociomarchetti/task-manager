@@ -4,6 +4,12 @@
   <button type="button" (click)="onEditTitleClicked()">
     <span class="material-icons">edit</span>
   </button>
+
+  <button type="button" class="favorite-button" (click)="toggleFavorite()">
+    <span class="material-symbols-outlined">
+      {{ isAFavoriteBoard ? 'heart_check' : 'heart_plus' }}
+    </span>
+  </button>
   }
 </div>
 <form [formGroup]="boardForm">

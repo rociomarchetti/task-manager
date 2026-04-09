@@ -7,6 +7,14 @@
     display: flex;
   }
 
+  .favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #272725;
+    font-size: 24px;
+  }
+
   .example-container {
     width: 400px;
     max-width: 100%;
