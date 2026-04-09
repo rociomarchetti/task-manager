@@ -15,6 +15,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  FormArray,
   FormControl,
   FormGroup,
   FormsModule,
@@ -67,12 +68,14 @@ export class BoardFormComponent {
   doneTasks = signal<string[]>([]);
   initialTaskListsState = signal<TaskListsData | null>(null);
   areChangesInTaskLists = signal(false);
+
   FormMode = FormMode;
 
   boardForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>('', [Validators.required]),
     description: new FormControl<string | null>(''),
     isFavorite: new FormControl<boolean>(false),
+    addedColumns: new FormArray<FormControl<string | null>>([]),
   });
 
   syncBoardEffect = effect(() => {
@@ -137,6 +140,17 @@ export class BoardFormComponent {
     return this.boardForm.get('isFavorite')?.value;
   }
 
+  get addedColumns(): FormArray<FormControl<string | null>> {
+    return this.boardForm.get('addedColumns') as FormArray<
+      FormControl<string | null>
+    >;
+  }
+
+  get allColumns() {
+    const defaultColumns = ['Todo', 'In Progress', 'Done'];
+    return [...defaultColumns, ...this.addedColumns.value.filter((c) => !!c)];
+  }
+
   toggleFavorite() {
     const current = this.boardForm.get('isFavorite')?.value;
     this.boardForm.get('isFavorite')?.setValue(!current);
@@ -185,9 +199,13 @@ export class BoardFormComponent {
     this.addTask.emit();
   }
 
-  /*   onAddColumnClicked(): void {
-    console.log('onAddColumnClicked');
-  } */
+  addColumnClicked() {
+    this.addedColumns.push(new FormControl<string | null>(''));
+  }
+
+  removeColumnClicked(index: number) {
+    this.addedColumns.removeAt(index);
+  }
 
   onSaveChangesClicked(): void {
     const original = this.board();
@@ -210,6 +228,7 @@ export class BoardFormComponent {
       title: this.boardForm.get('title')?.value,
       description: this.boardForm.get('description')?.value,
       isFavorite: this.boardForm.get('isFavorite')?.value,
+      addedColumns: this.boardForm.get('addedColumns')?.value,
     };
     this.saveNewBoard.emit(newBoard);
   }

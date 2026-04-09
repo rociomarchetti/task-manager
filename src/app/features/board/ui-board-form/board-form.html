@@ -105,6 +105,16 @@
       </div>
     </app-panel>
   </section>
+  } @if(mode() === FormMode.CREATE){
+  <section class="panel-group">
+    @for (item of allColumns; track item){
+    <app-panel>
+      <div appPanelBody>
+        <h2>{{item}}</h2>
+      </div>
+    </app-panel>
+    }
+  </section>
   } @if(isEditMode) {
   <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
   <button
@@ -114,9 +124,21 @@
     Guardar cambios en tareas
   </button>
   }
-  <!--   @else {
-  <button type="button" (click)="onAddColumnClicked()">Añadir columna</button>
-  } -->
+  <div formArrayName="addedColumns">
+    <div
+      *ngFor="let colControl of addedColumns.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <mat-form-field class="column-field">
+        <mat-label>Nombre de la columna</mat-label>
+        <input matInput [formControl]="colControl" />
+      </mat-form-field>
+
+      <button mat-icon-button color="warn" (click)="removeColumnClicked(i)">
+        <span class="material-icons">delete</span>
+      </button>
+    </div>
+  </div>
   <section>
     @if(isEditMode) {
     <button type="button" (click)="onSaveChangesClicked()">
@@ -124,6 +146,14 @@
     </button>
     <button type="button" (click)="onGoBackClicked()">Volver</button>
     } @else {
+    <button
+      mat-stroked-button
+      color="primary"
+      class="mt-3"
+      (click)="addColumnClicked()"
+    >
+      Agregar columna
+    </button>
     <button
       type="button"
       (click)="onSaveNewBoardClicked()"
