@@ -10,12 +10,14 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginRequest } from '../domain/entities/auth.model';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login-form',
   imports: [
     CommonModule,
     FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -35,8 +37,8 @@ export class LoginFormComponent {
 
   onLogin(): void {
     const userData: LoginRequest = {
-      email: this.loginForm.get('email').value,
-      password: this.loginForm.get('password').value,
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
     };
     this.loginRequested.emit(userData);
   }

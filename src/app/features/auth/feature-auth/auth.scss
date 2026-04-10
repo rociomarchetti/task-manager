@@ -1,0 +1,40 @@
+:host {
+  .auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .auth-tab {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: visible !important;
+  }
+
+  app-panel {
+    width: 480px;
+    min-height: 480px;
+    display: block;
+  }
+}
+
+::ng-deep .mat-mdc-tab-header {
+  overflow: hidden !important;
+}
+
+::ng-deep .mat-mdc-tab-header-pagination {
+  display: none !important;
+}
+
+::ng-deep .mat-mdc-tab-body {
+  overflow: visible !important;
+}
+
+::ng-deep .mat-mdc-tab-body-content {
+  overflow: visible !important;
+}

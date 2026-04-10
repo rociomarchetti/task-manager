@@ -10,6 +10,8 @@ import { RegisterFormComponent } from '../ui-register-form/register-form';
 import { AuthFacade } from '../domain/application/auth.facade';
 import { LoginRequest, RegisterRequest } from '../domain/entities/auth.model';
 import { AsyncPipe } from '@angular/common';
+import { Panel } from '@shared/ui/panel/panel';
+import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +20,8 @@ import { AsyncPipe } from '@angular/common';
     LoginFormComponent,
     MatTabsModule,
     RegisterFormComponent,
+    Panel,
+    PanelBodyDirective,
   ],
   templateUrl: './auth.html',
   styleUrl: './auth.scss',

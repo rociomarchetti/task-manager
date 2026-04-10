@@ -1,14 +1,21 @@
-<form [formGroup]="loginForm">
-  <section>
-    <mat-form-field>
+<div class="login-container">
+  <form [formGroup]="loginForm">
+    <mat-form-field appearance="outline">
       <mat-label>Correo electrónico</mat-label>
       <input matInput type="email" formControlName="email" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Contraseña</mat-label>
       <input matInput type="password" formControlName="password" />
     </mat-form-field>
-  </section>
-</form>
-
-<button (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
+  </form>
+  <div class="login-footer">
+    <button
+      mat-stroked-button
+      (click)="onLogin()"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+  </div>
+</div>

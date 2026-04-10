@@ -10,15 +10,18 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatAnchor, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-register-form',
   imports: [
     CommonModule,
     FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatAnchor,
   ],
   templateUrl: './register-form.html',
   styleUrl: './register-form.scss',
@@ -36,10 +39,10 @@ export class RegisterFormComponent {
 
   onRegister(): void {
     const userData: RegisterRequest = {
-      email: this.registerForm.get('email').value,
-      password: this.registerForm.get('password').value,
-      name: this.registerForm.get('name').value,
-      lastName: this.registerForm.get('lastName').value,
+      email: this.registerForm.get('email')?.value,
+      password: this.registerForm.get('password')?.value,
+      name: this.registerForm.get('name')?.value,
+      lastName: this.registerForm.get('lastName')?.value,
     };
     this.registerRequested.emit(userData);
   }
