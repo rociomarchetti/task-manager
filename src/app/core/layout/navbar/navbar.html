@@ -1,3 +1,21 @@
-<p>navbar works!</p>
+<mat-toolbar class="brutal-nav">
+  <span class="nav-logo">Task Manager</span>
 
-<button (click)="logout()">Logout</button>
+  <div class="nav-links">
+    <a mat-button routerLink="/app/boards-list" routerLinkActive="active"
+      >Lista de tableros</a
+    >
+    <a mat-button routerLink="/app/dashboard" routerLinkActive="active"
+      >Dashboard</a
+    >
+  </div>
+
+  <div class="nav-actions">
+    <button mat-stroked-button (click)="logout()">Cerrar sesión</button>
+    @if(viewModel$ | async; as vm) {
+    <button mat-stroked-button color="primary" class="avatar">
+      {{vm.userInitials}}
+    </button>
+    }
+  </div>
+</mat-toolbar>

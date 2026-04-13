@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthState, authFeatureKey } from '../state/auth.state';
 import { AuthViewModel } from '../../entities/auth-view.model';
 import { AuthTabsIndex } from '../../entities/auth.model';
+import { getUserInitials } from '../util/auth.util';
 
 export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
 
@@ -19,5 +20,6 @@ export const selectAuthViewModel = createSelector(
     defaultSelectedTab: AuthTabsIndex[state?.defaultSelectedTab],
     requestedPath: state?.requestedPath,
     user,
+    userInitials: getUserInitials(state?.user),
   })
 );

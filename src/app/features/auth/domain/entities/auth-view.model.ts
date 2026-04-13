@@ -4,4 +4,5 @@ export interface AuthViewModel {
   defaultSelectedTab: number;
   requestedPath: string;
   user: User;
+  userInitials: string;
 }
