@@ -1,13 +1,15 @@
 <app-panel>
   <div appPanelBody>
-    <a (click)="onCreateNewBoard()" href="javascript:void(0)"
-      >Crear nuevo tablero</a
-    ><br />
-    <a (click)="onCreateNewTask()" href="javascript:void(0)"
-      >Crear nueva tarea</a
-    ><br />
-    <a (click)="onGoToBoardsList()" href="javascript:void(0)"
-      >Ir a la lista de tableros</a
-    >
+    <div class="actions-group">
+      <button mat-stroked-button color="primary" (click)="onCreateNewBoard()">
+        Crear nuevo tablero
+      </button>
+      <button mat-stroked-button color="primary" (click)="onCreateNewTask()">
+        Crear nueva tarea
+      </button>
+      <button mat-stroked-button color="primary" (click)="onGoToBoardsList()">
+        Ir a la lista de tableros
+      </button>
+    </div>
   </div>
 </app-panel>

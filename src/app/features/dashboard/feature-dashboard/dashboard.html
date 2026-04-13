@@ -1,9 +1,9 @@
 @if(viewModel$ | async; as vm) {
-<p>
+<!-- <p>
   ¡¡Hola {{vm.userName}}!! Tienes {{vm.tasksAmounts.pending}} @if
   (vm.tasksAmounts.pending === 1) { tarea pendiente. } @else { tareas
   pendientes. }
-</p>
+</p> -->
 <section class="panel-group">
   <app-dashboard-task-summary
     [tasks]="vm.tasksAmounts"

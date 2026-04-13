@@ -1,25 +1,37 @@
 <app-panel>
   <div appPanelBody>
-    <p>
-      Total tareas: {{tasks().pending + tasks().inProgress + tasks().completed}}
-    </p>
+    <div class="stat-card">
+      <span class="stat-card__label">Tareas</span>
+      <span class="stat-card__value"
+        >{{tasks().pending + tasks().inProgress + tasks().completed}}</span
+      >
+    </div>
   </div>
 </app-panel>
 
 <app-panel>
   <div appPanelBody>
-    <p>Tareas pendientes: {{tasks().pending}}</p>
+    <div class="stat-card">
+      <span class="stat-card__label">Pendientes</span>
+      <span class="stat-card__value">{{tasks().pending}}</span>
+    </div>
   </div>
 </app-panel>
 
 <app-panel>
   <div appPanelBody>
-    <p>Tareas en progreso: {{tasks().inProgress}}</p>
+    <div class="stat-card">
+      <span class="stat-card__label">En progreso</span>
+      <span class="stat-card__value">{{tasks().inProgress}}</span>
+    </div>
   </div>
 </app-panel>
 
 <app-panel>
   <div appPanelBody>
-    <p>Tareas completadas: {{tasks().completed}}</p>
+    <div class="stat-card">
+      <span class="stat-card__label">Completadas</span>
+      <span class="stat-card__value">{{tasks().completed}}</span>
+    </div>
   </div>
 </app-panel>

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 
 @Component({
   selector: 'app-dashboard-quick-actions',
-  imports: [Panel, PanelBodyDirective],
+  imports: [Panel, PanelBodyDirective, MatButton],
   templateUrl: './dashboard-quick-actions.html',
   styleUrl: './dashboard-quick-actions.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
