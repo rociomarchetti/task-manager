@@ -12,10 +12,11 @@ import {
   PanelFooterDirective,
 } from '@shared/ui/panel/panel.directive';
 import { formatBoardDate } from '../domain/state/util/board-list.util';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-board-list-list',
-  imports: [Panel, PanelBodyDirective, PanelFooterDirective],
+  imports: [MatButtonModule, Panel, PanelBodyDirective, PanelFooterDirective],
   templateUrl: './board-list-list.html',
   styleUrl: './board-list-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,14 +1,17 @@
 @if(viewModel$ | async; as vm) {
-<app-board-list-top-action-bar
-  [boards]="vm.boards"
-  (createBoard)="onCreateBoard()"
-  (searchBoardUpdated)="onSearchBoardUpdated($event)"
-></app-board-list-top-action-bar>
+<section class="board-list__view">
+  <app-board-list-top-action-bar
+    [boards]="vm.boards"
+    (createBoard)="onCreateBoard()"
+    (searchBoardUpdated)="onSearchBoardUpdated($event)"
+  ></app-board-list-top-action-bar>
 
-<app-board-list-list
-  [boards]="vm.boards"
-  [filters]="filtersChanged()"
-  (goToBoardDetails)="onGoToBoardDetails($event)"
-  (removeBoard)="onRemoveBoard($event)"
-></app-board-list-list>
+  <app-board-list-list
+    [boards]="vm.boards"
+    [filters]="filtersChanged()"
+    (goToBoardDetails)="onGoToBoardDetails($event)"
+    (removeBoard)="onRemoveBoard($event)"
+  ></app-board-list-list>
+</section>
+
 }

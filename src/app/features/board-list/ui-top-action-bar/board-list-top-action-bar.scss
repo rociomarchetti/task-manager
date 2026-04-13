@@ -1,0 +1,14 @@
+:host {
+  .top-actions-group {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+::ng-deep {
+  form {
+    .mat-mdc-form-field {
+      width: 15rem;
+    }
+  }
+}

@@ -1,23 +1,27 @@
-<section class="panel-group">
+<div class="board-grid">
   @for (board of boardsToShow(); track $index) {
-  <app-panel>
-    <div appPanelBody>
-      <div class="board-header">
-        <h4>{{ board.title }}</h4>
-
-        @if (board.isFavorite) {
-        <span class="material-icons">favorite</span>
-        }
-      </div>
+  <div class="board-card">
+    <div class="board-card__header">
+      <span class="board-card__label">{{ board.title }}</span>
+      @if (board.isFavorite) {
+      <span class="material-icons">favorite</span>
+      }
+    </div>
+    <div class="board-card__content">
       @if(board.description){
+      <p>Descripción:</p>
       <p>{{ board.description }}</p>
       }
       <p>Creado: {{formatDate(board.createdAt)}}</p>
     </div>
-    <div appPanelFooter>
-      <button (click)="onGoToBoardDetails(board.id)">Ver Tablero</button>
-      <button (click)="onRemoveBoard(board.id)">Eliminar</button>
+    <div class="board-card__footer">
+      <button mat-stroked-button (click)="onGoToBoardDetails(board.id)">
+        Ver Tablero
+      </button>
+      <button mat-stroked-button (click)="onRemoveBoard(board.id)">
+        Eliminar
+      </button>
     </div>
-  </app-panel>
+  </div>
   }
-</section>
+</div>

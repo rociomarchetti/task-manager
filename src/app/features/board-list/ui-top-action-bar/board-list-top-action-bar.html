@@ -1,32 +1,35 @@
 <section>
-  <h3>Mis tableros</h3>
-  <button type="button" (click)="toggleFavorites(false)">Todos</button>
+  <div class="top-actions-group">
+    <mat-button-toggle-group>
+      <mat-button-toggle (click)="toggleFavorites(false)"
+        >Mostrar todos
+      </mat-button-toggle>
+      <mat-button-toggle (click)="toggleFavorites(true)"
+        >Mostrar solo favoritos
+      </mat-button-toggle>
+    </mat-button-toggle-group>
 
-  <button type="button" (click)="toggleFavorites(true)">
-    Favoritos
-    <span class="material-icons">favorite</span>
-  </button>
+    <form>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          [placeholder]="isFocused() ? '' : 'Escribir nombre del tablero'"
+          (focus)="isFocused.set(true)"
+          (blur)="isFocused.set(false)"
+          [formControl]="searchBoard"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of filteredTitles(); track option) {
+          <mat-option [value]="option">{{ option }}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
 
-  <button type="button" (click)="onCreateBoardClicked()">
-    + Nuevo tablero
-  </button>
-
-  <form>
-    <mat-form-field>
-      <input
-        type="text"
-        matInput
-        [placeholder]="isFocused() ? '' : 'Escribir nombre del tablero'"
-        (focus)="isFocused.set(true)"
-        (blur)="isFocused.set(false)"
-        [formControl]="searchBoard"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        @for (option of filteredTitles(); track option) {
-        <mat-option [value]="option">{{ option }}</mat-option>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+    <button mat-stroked-button color="primary" (click)="onCreateBoardClicked()">
+      + Nuevo tablero
+    </button>
+  </div>
 </section>

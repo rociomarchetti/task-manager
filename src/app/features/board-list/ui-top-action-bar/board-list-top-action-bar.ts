@@ -13,15 +13,20 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Board } from '@shared/models';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatAnchor, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-board-list-top-action-bar',
   imports: [
     FormsModule,
     MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatAnchor,
   ],
   templateUrl: './board-list-top-action-bar.html',
   styleUrl: './board-list-top-action-bar.scss',
@@ -54,7 +59,7 @@ export class BoardListTopActionBar {
     const search = this.searchTerm();
     const favorites = this.showFavorites();
 
-    this.searchBoardUpdated.emit({ search: search, favorites: favorites });
+    this.searchBoardUpdated.emit({ search: search!, favorites: favorites });
   });
 
   toggleFavorites(value: boolean) {
