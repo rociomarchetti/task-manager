@@ -8,11 +8,11 @@ import {
 import { QuickAction } from '@shared/models/quick-action.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatMiniFabButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-item',
-  imports: [MatButtonModule, MatMenuModule, MatIconModule],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, MatMiniFabButton],
   templateUrl: './list-item.html',
   styleUrl: './list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

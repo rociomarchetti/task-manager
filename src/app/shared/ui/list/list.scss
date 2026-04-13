@@ -1,14 +1,5 @@
 :host {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
-}
-
-:host(.list--one) {
-  background-color: #c7c5ec;
-}
-
-:host(.list--two) {
-  background-color: #a3e8d2;
+  gap: 5px;
 }

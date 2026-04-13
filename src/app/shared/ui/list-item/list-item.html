@@ -1,24 +1,20 @@
 <div class="content">
+  <mat-icon class="item-icon"
+    >{{ variant() === 'one' ? 'task' : 'view_kanban' }}</mat-icon
+  >
   <p>{{itemTitle()}}</p>
 </div>
 
 <section class="actions">
-  <button
-    type="button"
-    (click)="onActionClick('see')"
-    [attr.aria-label]="'Ver'"
-    [title]="'Ver'"
-  >
-    <span class="material-icons">{{ 'visibility' }}</span>
-  </button>
-  <button
-    type="button"
-    (click)="onActionClick('remove')"
-    [attr.aria-label]="'Eliminar'"
-    [title]="'Eliminar'"
-  >
-    <span class="material-icons">{{ 'delete' }}</span>
-  </button>
+  <div class="buttons-container">
+    <button mat-mini-fab (click)="onActionClick('see')">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="onActionClick('remove')">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
   <!-- more options menu -->
   @if(hasMoreOptions()) {
   <button matIconButton [matMenuTriggerFor]="menu">
