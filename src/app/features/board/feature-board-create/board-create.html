@@ -1,5 +1,7 @@
-<app-board-form
-  [mode]="FormMode.CREATE"
-  (cancelChanges)="onCancelChanges()"
-  (saveNewBoard)="onSaveNewBoard($event)"
-></app-board-form>
+<section class="board-create__view">
+  <app-board-form
+    [mode]="FormMode.CREATE"
+    (cancelChanges)="onCancelChanges()"
+    (saveNewBoard)="onSaveNewBoard($event)"
+  ></app-board-form>
+</section>

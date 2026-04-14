@@ -33,6 +33,9 @@ import {
   checkTaskListsChanges,
   updateTaskLists,
 } from '../domain/util/board.util';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-board-form',
@@ -41,8 +44,11 @@ import {
     CdkDropList,
     CommonModule,
     FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
+    MatTooltipModule,
     Panel,
     PanelBodyDirective,
     ReactiveFormsModule,

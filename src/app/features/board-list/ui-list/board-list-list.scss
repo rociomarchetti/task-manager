@@ -18,7 +18,7 @@ $color-label: #555;
   border-radius: 4px;
   box-shadow: 4px 4px 0 var(--mat-sys-primary);
   padding: 1rem 1.25rem;
-  padding-bottom: calc(1rem + 44px); // reserva espacio para el footer
+  padding-bottom: calc(1rem + 44px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -26,7 +26,7 @@ $color-label: #555;
   font-weight: 500;
   color: $color-label;
   letter-spacing: 0.05em;
-  position: relative; // necesario para el footer absoluto
+  position: relative;
 
   &__label {
     text-transform: uppercase;

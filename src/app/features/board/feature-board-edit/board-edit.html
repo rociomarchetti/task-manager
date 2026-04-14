@@ -1,12 +1,14 @@
 @if(viewModel$ | async; as vm) {
-<app-board-form
-  [mode]="FormMode.EDIT"
-  [board]="vm.currentBoard"
-  [tasks]="vm.taskLists"
-  (addTask)="onAddTaskClicked()"
-  (saveBoardChanges)="onSaveBoardChanges($event)"
-  (cancelChanges)="onCancelChanges()"
-></app-board-form>
+<section class="board-create__edit">
+  <app-board-form
+    [mode]="FormMode.EDIT"
+    [board]="vm.currentBoard"
+    [tasks]="vm.taskLists"
+    (addTask)="onAddTaskClicked()"
+    (saveBoardChanges)="onSaveBoardChanges($event)"
+    (cancelChanges)="onCancelChanges()"
+  ></app-board-form>
+</section>
 
 <app-task-modal
   [mode]="FormMode.CREATE"

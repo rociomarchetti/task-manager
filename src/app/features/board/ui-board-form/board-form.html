@@ -1,167 +1,203 @@
-<div class="board-header">
-  <h2>{{boardTitle}}</h2>
-  @if(isEditMode) {
-  <button type="button" (click)="onEditTitleClicked()">
-    <span class="material-icons">edit</span>
-  </button>
-  }
-  <button type="button" class="favorite-button" (click)="toggleFavorite()">
-    <span class="material-symbols-outlined">
-      {{ isAFavoriteBoard ? 'heart_check' : 'heart_plus' }}
-    </span>
-  </button>
-</div>
-<form [formGroup]="boardForm">
-  @if(mode() === FormMode.EDIT && !!isEditTitleOn() || mode() ===
-  FormMode.CREATE) {
-  <section>
-    <mat-form-field>
-      <mat-label>Editar nombre del tablero</mat-label>
-      <input matInput formControlName="title" />
-    </mat-form-field>
-  </section>
-  }
-  <mat-form-field>
-    <mat-label>Descripción</mat-label>
-    <textarea
-      matInput
-      formControlName="description"
-      placeholder="Agrega un contexto para tus futuras tareas"
-    ></textarea>
-  </mat-form-field>
-  <div
-    cdkDropList
-    #listOne="cdkDropList"
-    [cdkDropListConnectedTo]="[listTwo, listThree]"
-  ></div>
-  <div
-    cdkDropList
-    #listTwo="cdkDropList"
-    [cdkDropListConnectedTo]="[listOne, listThree]"
-  ></div>
-  <div
-    cdkDropList
-    #listThree="cdkDropList"
-    [cdkDropListConnectedTo]="[listOne, listTwo]"
-  ></div>
+<app-panel>
+  <div appPanelBody>
+    <div class="board-form">
+      <!-- panel header -->
+      <div class="board-form__header">
+        <h2>{{boardTitle}}</h2>
+        @if(isEditMode) {
+        <button
+          mat-icon-button
+          matTooltip="Editar título"
+          [matTooltipPosition]="'above'"
+          (click)="onEditTitleClicked()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        }
+        <button
+          mat-icon-button
+          [matTooltipPosition]="'above'"
+          matTooltip="{{ isAFavoriteBoard ? 'Quitar de favoritos' : 'Añadir a favoritos' }}"
+          (click)="toggleFavorite()"
+        >
+          <mat-icon>
+            {{ isAFavoriteBoard ? "favorite" : "favorite_outline" }}
+          </mat-icon>
+        </button>
+      </div>
 
-  @if(mode() !== FormMode.CREATE) {
-  <section class="panel-group">
-    <app-panel>
-      <div appPanelBody>
-        <div class="example-container">
-          <h2>To do</h2>
-          <div
-            cdkDropList
-            #todoList="cdkDropList"
-            [cdkDropListData]="todoTasks()"
-            [cdkDropListConnectedTo]="[doneList, inProgressList]"
-            class="example-list"
-            (cdkDropListDropped)="dropTask($event)"
-          >
-            @for (item of todoTasks(); track item) {
-            <div class="example-box" cdkDrag>{{ item }}</div>
-            }
-          </div>
-        </div>
-      </div>
-    </app-panel>
-    <app-panel>
-      <div appPanelBody>
-        <div class="example-container">
-          <h2>In Progress</h2>
-          <div
-            cdkDropList
-            #inProgressList="cdkDropList"
-            [cdkDropListData]="inProgressTasks()"
-            [cdkDropListConnectedTo]="[doneList, todoList]"
-            class="example-list"
-            (cdkDropListDropped)="dropTask($event)"
-          >
-            @for (item of inProgressTasks(); track item) {
-            <div class="example-box" cdkDrag>{{ item }}</div>
-            }
-          </div>
-        </div>
-      </div>
-    </app-panel>
-    <app-panel>
-      <div appPanelBody>
-        <div class="example-container">
-          <h2>Done</h2>
-          <div
-            cdkDropList
-            #doneList="cdkDropList"
-            [cdkDropListData]="doneTasks()"
-            [cdkDropListConnectedTo]="[todoList, inProgressList]"
-            class="example-list"
-            (cdkDropListDropped)="dropTask($event)"
-          >
-            @for (item of doneTasks(); track item) {
-            <div class="example-box" cdkDrag>{{ item }}</div>
-            }
-          </div>
-        </div>
-      </div>
-    </app-panel>
-  </section>
-  } @if(mode() === FormMode.CREATE){
-  <section class="panel-group">
-    @for (item of allColumns; track item){
-    <app-panel>
-      <div appPanelBody>
-        <h2>{{item}}</h2>
-      </div>
-    </app-panel>
-    }
-  </section>
-  } @if(isEditMode) {
-  <button type="button" (click)="onAddTaskClicked()">Añadir tarea</button>
-  <button
-    (click)="onSaveTaskListsChanges()"
-    [disabled]="!areChangesInTaskLists()"
-  >
-    Guardar cambios en tareas
-  </button>
-  }
-  <div formArrayName="addedColumns">
-    <div
-      *ngFor="let colControl of addedColumns.controls; let i = index"
-      [formGroupName]="i"
-    >
-      <mat-form-field class="column-field">
-        <mat-label>Nombre de la columna</mat-label>
-        <input matInput [formControl]="colControl" />
-      </mat-form-field>
+      <!-- panel body -->
+      <div class="board-form__body">
+        <form [formGroup]="boardForm">
+          <!-- board name -->
+          @if(mode() === FormMode.EDIT && !!isEditTitleOn() || mode() ===
+          FormMode.CREATE) {
+          <mat-form-field appearance="outline">
+            <mat-label>Editar nombre del tablero</mat-label>
+            <input matInput formControlName="title" />
+          </mat-form-field>
+          }
+          <!-- board description -->
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              placeholder="Agrega un contexto para tus futuras tareas"
+            ></textarea>
+          </mat-form-field>
 
-      <button mat-icon-button color="warn" (click)="removeColumnClicked(i)">
-        <span class="material-icons">delete</span>
-      </button>
+          <!-- drag and drop tasks status-->
+          <div
+            cdkDropList
+            #listOne="cdkDropList"
+            [cdkDropListConnectedTo]="[listTwo, listThree]"
+          ></div>
+          <div
+            cdkDropList
+            #listTwo="cdkDropList"
+            [cdkDropListConnectedTo]="[listOne, listThree]"
+          ></div>
+          <div
+            cdkDropList
+            #listThree="cdkDropList"
+            [cdkDropListConnectedTo]="[listOne, listTwo]"
+          ></div>
+
+          <div class="panel-group">
+            @if(mode() !== FormMode.CREATE) {
+            <div class="example-container">
+              <h4>To do</h4>
+              <div
+                cdkDropList
+                #todoList="cdkDropList"
+                [cdkDropListData]="todoTasks()"
+                [cdkDropListConnectedTo]="[doneList, inProgressList]"
+                class="example-list"
+                (cdkDropListDropped)="dropTask($event)"
+              >
+                @for (item of todoTasks(); track item) {
+                <div class="example-box" cdkDrag>{{ item }}</div>
+                }
+              </div>
+            </div>
+            <div class="example-container">
+              <h2>In Progress</h2>
+              <div
+                cdkDropList
+                #inProgressList="cdkDropList"
+                [cdkDropListData]="inProgressTasks()"
+                [cdkDropListConnectedTo]="[doneList, todoList]"
+                class="example-list"
+                (cdkDropListDropped)="dropTask($event)"
+              >
+                @for (item of inProgressTasks(); track item) {
+                <div class="example-box" cdkDrag>{{ item }}</div>
+                }
+              </div>
+            </div>
+            <div class="example-container">
+              <h2>Done</h2>
+              <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="doneTasks()"
+                [cdkDropListConnectedTo]="[todoList, inProgressList]"
+                class="example-list"
+                (cdkDropListDropped)="dropTask($event)"
+              >
+                @for (item of doneTasks(); track item) {
+                <div class="example-box" cdkDrag>{{ item }}</div>
+                }
+              </div>
+            </div>
+            } @if(mode() === FormMode.CREATE){ @for (item of allColumns; track
+            item){
+            <div class="example-container">
+              <h4>{{item}}</h4>
+            </div>
+            } }
+          </div>
+
+          <!-- board actions -->
+          <div class="board-form__actions">
+            @if(isEditMode) {
+            <button
+              mat-stroked-button
+              color="primary"
+              type="button"
+              (click)="onAddTaskClicked()"
+            >
+              Añadir tarea
+            </button>
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="onSaveTaskListsChanges()"
+              [disabled]="!areChangesInTaskLists()"
+            >
+              Guardar cambios en tareas
+            </button>
+            } @else {
+            <div>
+              <div formArrayName="addedColumns">
+                <div
+                  *ngFor="let colControl of addedColumns.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div class="board-form__row">
+                    <mat-form-field appearance="outline" class="column-field">
+                      <mat-label>Nombre de la columna</mat-label>
+                      <input matInput [formControl]="colControl" />
+                    </mat-form-field>
+
+                    <button mat-mini-fab (click)="removeColumnClicked(i)">
+                      <span class="material-icons">delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button
+                mat-stroked-button
+                color="primary"
+                class="mt-3"
+                (click)="addColumnClicked()"
+              >
+                Agregar columna
+              </button>
+            </div>
+            }
+          </div>
+        </form>
+      </div>
+
+      <!-- panel footer -->
+      <div class="board-form__footer">
+        @if(isEditMode) {
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="onSaveChangesClicked()"
+        >
+          Guardar cambios en el tablero
+        </button>
+        <button type="button" (click)="onGoBackClicked()">Volver</button>
+        } @else {
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="onSaveNewBoardClicked()"
+          [disabled]="boardForm.invalid"
+        >
+          Guardar tablero
+        </button>
+        <button mat-stroked-button type="button" (click)="onCancelClicked()">
+          Cancelar
+        </button>
+        }
+      </div>
     </div>
+
+    <!-- panel end -->
   </div>
-  <section>
-    @if(isEditMode) {
-    <button type="button" (click)="onSaveChangesClicked()">
-      Guardar cambios en el tablero
-    </button>
-    <button type="button" (click)="onGoBackClicked()">Volver</button>
-    } @else {
-    <button
-      mat-stroked-button
-      color="primary"
-      class="mt-3"
-      (click)="addColumnClicked()"
-    >
-      Agregar columna
-    </button>
-    <button
-      type="button"
-      (click)="onSaveNewBoardClicked()"
-      [disabled]="boardForm.invalid"
-    >
-      Guardar tablero
-    </button>
-    <button type="button" (click)="onCancelClicked()">Cancelar</button>
-    }
-  </section>
-</form>
+</app-panel>
