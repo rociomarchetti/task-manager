@@ -1,4 +1,4 @@
-export function formatBoardDate(date: Date | string): string {
+export function formatDate(date: Date | string): string {
   const realDate = date instanceof Date ? date : new Date(date);
 
   const now = new Date();

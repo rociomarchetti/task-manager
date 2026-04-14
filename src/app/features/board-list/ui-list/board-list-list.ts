@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Board } from '@shared/models';
-import { formatBoardDate } from '../domain/state/util/board-list.util';
+import { formatDate } from '@shared/features/util/formatDate.util';
 
 @Component({
   selector: 'app-board-list-list',
@@ -19,7 +19,7 @@ import { formatBoardDate } from '../domain/state/util/board-list.util';
 export class BoardListList {
   boards = input<Board[]>([]);
   filters = input<{ search: string; favorites: boolean } | null>(null);
-  formatDate = formatBoardDate;
+  formatDate = formatDate;
 
   goToBoardDetails = output<string>();
   removeBoard = output<string>();

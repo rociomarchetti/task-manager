@@ -22,7 +22,7 @@ import { Modal } from '@shared/ui/modal/modal';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { formatBoardDate } from 'app/features/board-list/domain/state';
+import { formatDate } from '@shared/features/util/formatDate.util';
 
 @Component({
   selector: 'app-task-modal',
@@ -56,7 +56,7 @@ export class TaskModal {
 
   TaskStatus = TaskStatus;
   FormMode = FormMode;
-  formatDate = formatBoardDate;
+  formatDate = formatDate;
 
   taskForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>(null, [Validators.required]),
