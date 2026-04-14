@@ -1,17 +1,20 @@
 <app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
   <ng-container ModalHeader>
-    @if(canEditFields) {
-    <h3>Editar tarea</h3>
-    } @else {
-    <h3>Crear tarea nueva</h3>
-    }</ng-container
-  >
+    <div class="data-row">
+      @if(this.mode() !== FormMode.CREATE){
+      <h3>Editar tarea</h3>
+      <p>Creada: {{formatDate(task()?.createdAt)}}</p>
+      } @else {
+      <h3>Crear tarea nueva</h3>
+      }
+    </div>
+  </ng-container>
   <ng-container ModalContent>
     <form [formGroup]="taskForm">
       <div class="data-row">
         <p>Título:</p>
         @if(canEditFields) {
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Editar nombre de la tarea</mat-label>
           <input matInput formControlName="title" />
         </mat-form-field>
@@ -22,7 +25,7 @@
       <div class="data-row">
         <p>Descripción:</p>
         @if(canEditFields) {
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Editar descripción de la tarea</mat-label>
           <textarea
             matInput
@@ -37,7 +40,7 @@
       <div class="data-row">
         <p>Estado de la tarea:</p>
         @if(canEditFields){
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Estado</mat-label>
           <select matNativeControl required formControlName="status">
             <option value="PENDING">Pendiente</option>
@@ -52,7 +55,7 @@
       <div class="data-row">
         <p>ID del tablero:</p>
         @if(canEditFields){
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>ID Tablero</mat-label>
           <select matNativeControl required formControlName="boardId">
             @for(id of boardsId; track $index) {
@@ -67,7 +70,7 @@
       <div class="data-row">
         <p>Fecha de vencimiento:</p>
         @if(canEditFields){
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Choose a date</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="dueDate" />
           <mat-hint>MM/DD/YYYY</mat-hint>
@@ -82,19 +85,20 @@
         }
       </div>
     </form>
-    <div class="data-row">
-      <p>Creada: {{task()?.createdAt}}</p>
-    </div>
   </ng-container>
 
   @if(canEditFields) {
   <ng-container ModalActions>
     @if(this.mode() === FormMode.EDIT) {
-    <button type="button" (click)="onSaveChanges()">Guardar cambios</button>
+    <button mat-stroked-button (click)="onSaveChanges()">
+      Guardar cambios
+    </button>
     }@if(this.mode() === FormMode.CREATE) {
-    <button type="button" (click)="onSaveNewTask()">Guardar nueva tarea</button>
+    <button mat-stroked-button (click)="onSaveNewTask()">
+      Guardar nueva tarea
+    </button>
     }
-    <button type="button" (click)="onCancelClicked()">Cancelar</button>
+    <button mat-stroked-button (click)="onCancelClicked()">Cancelar</button>
   </ng-container>
   }
 </app-modal>

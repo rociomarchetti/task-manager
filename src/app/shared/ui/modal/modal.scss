@@ -4,9 +4,32 @@
     height: 100%;
 
     .mat-mdc-dialog-container .mdc-dialog__surface {
-      position: static;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-      border-radius: 0px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border-radius: 8px;
+      border: 5px solid var(--mat-sys-primary);
+      color: #2f2f2f !important;
+      padding: 16px 20px;
+      height: auto !important;
+      max-height: 90vh;
+      overflow: visible !important;
+    }
+
+    .modal__header {
+      display: flex;
+    }
+
+    .modal__content {
+      flex: 1;
+      margin: 1.5rem 0;
+    }
+
+    .modal__actions {
+      display: flex;
+      margin-top: auto;
+      justify-content: flex-end;
+      gap: 1rem;
     }
 
     .modal__close {
@@ -14,7 +37,6 @@
       color: var(--app-grey-light);
       display: flex;
       justify-content: flex-end;
-      z-index: 2;
 
       button {
         border-color: transparent;
@@ -22,17 +44,9 @@
         border-radius: 0.5rem;
       }
     }
-
-    .modal__content {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    .modal__actions {
-      position: sticky;
-      bottom: 0;
-      z-index: 1;
-    }
   }
+}
+
+::ng-deep .modal__backdrop {
+  background: rgba(239, 235, 235, 0.5);
 }

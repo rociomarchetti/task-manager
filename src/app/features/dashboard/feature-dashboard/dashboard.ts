@@ -52,6 +52,7 @@ export class DashboardFeature implements OnInit {
   onEditTask(task: Task): void {
     this.selectedTask.set(task);
     this.isModalOpen.set(true);
+    this.taskModalMode.set(FormMode.EDIT);
   }
 
   onSeeTaskDetails(task: Task): void {

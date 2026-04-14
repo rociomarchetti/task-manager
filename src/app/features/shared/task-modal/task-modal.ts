@@ -21,12 +21,15 @@ import { FormMode } from '@shared/models/form-mode.model';
 import { Modal } from '@shared/ui/modal/modal';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { formatBoardDate } from 'app/features/board-list/domain/state';
 
 @Component({
   selector: 'app-task-modal',
   imports: [
     CommonModule,
     FormsModule,
+    MatButtonModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -53,6 +56,7 @@ export class TaskModal {
 
   TaskStatus = TaskStatus;
   FormMode = FormMode;
+  formatDate = formatBoardDate;
 
   taskForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>(null, [Validators.required]),
@@ -63,27 +67,28 @@ export class TaskModal {
   });
 
   syncTaskEffect = effect(() => {
-    const data = this.task();
+    const mode = this.mode();
+    const task = this.task();
+    const isFromBoard = this.isCreatingTaskFromBoard();
+    const boardId = this.currentBoardId();
 
-    if (data && this.mode() === FormMode.EDIT) {
+    if (mode === FormMode.EDIT && task) {
       this.taskForm.patchValue({
-        title: data.title,
-        description: data.description ?? undefined,
-        status: data.status,
-        boardId: data.boardId,
-        dueDate: data.dueDate ?? undefined,
+        title: task.title,
+        description: task.description ?? '',
+        status: task.status,
+        boardId: task.boardId,
+        dueDate: task.dueDate ?? null,
       });
+      return;
     }
-    if (this.isCreatingTaskFromBoard()) {
-      this.taskForm.patchValue({
-        boardId: this.currentBoardId(),
-      });
-    } else {
+
+    if (mode === FormMode.CREATE) {
       this.taskForm.reset({
         title: '',
         description: '',
         status: null,
-        boardId: '',
+        boardId: isFromBoard ? boardId : '',
         dueDate: null,
       });
     }

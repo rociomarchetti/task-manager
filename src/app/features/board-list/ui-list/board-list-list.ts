@@ -5,18 +5,13 @@ import {
   input,
   output,
 } from '@angular/core';
-import { Board } from '@shared/models';
-import { Panel } from '@shared/ui/panel/panel';
-import {
-  PanelBodyDirective,
-  PanelFooterDirective,
-} from '@shared/ui/panel/panel.directive';
-import { formatBoardDate } from '../domain/state/util/board-list.util';
 import { MatButtonModule } from '@angular/material/button';
+import { Board } from '@shared/models';
+import { formatBoardDate } from '../domain/state/util/board-list.util';
 
 @Component({
   selector: 'app-board-list-list',
-  imports: [MatButtonModule, Panel, PanelBodyDirective, PanelFooterDirective],
+  imports: [MatButtonModule],
   templateUrl: './board-list-list.html',
   styleUrl: './board-list-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -69,22 +69,22 @@ export class TaskListItem {
   }
 
   onSeeTaskClicked() {
-    this.seeTask.emit(this.task());
+    this.seeTask.emit(this.task()!);
   }
 
   onRemoveTaskClicked() {
-    this.removeTask.emit(this.task());
+    this.removeTask.emit(this.task()!);
   }
 
   onCheckTaskCompleted() {
-    this.markAsCompleted.emit(this.task());
+    this.markAsCompleted.emit(this.task()!);
   }
 
   onEditTaskClicked() {
-    this.editTask.emit(this.task());
+    this.editTask.emit(this.task()!);
   }
 
   onPostponeTaskClicked() {
-    this.postponeTask.emit(this.task());
+    this.postponeTask.emit(this.task()!);
   }
 }
