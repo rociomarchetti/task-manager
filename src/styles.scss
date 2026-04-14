@@ -1,1 +1,240 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  --mat-sys-primary: #e639b2; //Color principal
+  --mat-sys-on-primary: #9a62e3; //Texto/iconos sobre primary
+  --mat-sys-primary-container: #18f20c; //Fondo de contenedores primary
+  --mat-sys-on-primary-container: #f4830a; //Texto/iconos sobre contenedores primary
+
+  html,
+  body {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    height: 100%;
+    font-family: Roboto, sans-serif;
+  }
+
+  body {
+    background: #f1f1f1;
+    //background-color: #0145f2;
+    /*     background: #9a62e3;
+    background: linear-gradient(
+      224deg,
+      rgba(154, 98, 227, 1) 0%,
+      rgba(7, 247, 35, 1) 50%
+    ); */
+  }
+
+  .mat-mdc-tab-group .mdc-tab-indicator__content--underline {
+    border-top-width: 4px !important; /* Grosor del subrayado */
+    border-color: var(--mat-sys-primary) !important; /* Color brutalista */
+  }
+
+  .mat-mdc-mini-fab {
+    border-radius: 8px !important;
+    border: 2px solid #2f2f2f !important;
+    box-shadow: 3px 3px 0 #3a3a3a !important;
+    background-color: var(--color-surface-warm) !important;
+    color: #2f2f2f !important;
+    transition: box-shadow 0.15s ease, transform 0.15s ease !important;
+
+    &:hover {
+      box-shadow: 4px 4px 0 #3a3a3a !important;
+      transform: translate(-1px, -1px);
+    }
+
+    &:active {
+      box-shadow: 1px 1px 0 #3a3a3a !important;
+      transform: translate(2px, 2px);
+    }
+  }
+
+  .mat-mdc-outlined-button {
+    border-radius: 8px !important;
+    border: 2px solid #2f2f2f !important;
+    box-shadow: 3px 3px 0 #3a3a3a !important;
+    background-color: var(--color-surface-warm) !important;
+    color: #2f2f2f !important;
+    transition: box-shadow 0.15s ease, transform 0.15s ease !important;
+
+    &:hover {
+      box-shadow: 4px 4px 0 #3a3a3a !important;
+      transform: translate(-1px, -1px);
+    }
+
+    &:active {
+      box-shadow: 1px 1px 0 #3a3a3a !important;
+      transform: translate(2px, 2px);
+    }
+
+    &.mat-primary {
+      border-color: var(--mat-sys-primary) !important;
+      color: var(--mat-sys-primary) !important;
+      box-shadow: 3px 3px 0 var(--mat-sys-primary) !important;
+
+      &:hover {
+        box-shadow: 4px 4px 0 var(--mat-sys-primary) !important;
+      }
+
+      &:active {
+        box-shadow: 1px 1px 0 var(--mat-sys-primary) !important;
+      }
+    }
+
+    &.mat-warn {
+      border-color: var(--mat-sys-error) !important;
+      color: var(--mat-sys-error) !important;
+      box-shadow: 3px 3px 0 var(--mat-sys-error) !important;
+
+      &:hover {
+        box-shadow: 4px 4px 0 var(--mat-sys-error) !important;
+      }
+
+      &:active {
+        box-shadow: 1px 1px 0 var(--mat-sys-error) !important;
+      }
+    }
+
+    &.mat-mdc-button-disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+      transform: none !important;
+    }
+  }
+
+  .mat-mdc-form-field {
+    width: 100%;
+
+    .mdc-text-field--outlined {
+      border: 0 !important;
+      background-color: var(--color-surface-warm) !important;
+      border-radius: 8px !important;
+      box-shadow: 3px 3px 0 #2f2f2f;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+      &::before,
+      &::after {
+        display: none !important;
+      }
+    }
+
+    .mdc-notched-outline__notch {
+      border-left: 0 !important;
+    }
+
+    fieldset {
+      border: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    input.mat-mdc-input-element,
+    textarea.mat-mdc-input-element {
+      border: 0 !important;
+      outline: none !important;
+      background: transparent !important;
+      color: #2f2f2f !important;
+      caret-color: var(--color-primary) !important;
+    }
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: #2f2f2f !important;
+      border-width: 2px !important;
+    }
+
+    .mdc-notched-outline__leading {
+      border-radius: 8px 0 0 8px !important;
+    }
+
+    .mdc-notched-outline__trailing {
+      border-radius: 0 8px 8px 0 !important;
+    }
+
+    .mdc-floating-label {
+      color: #2f2f2f !important;
+    }
+
+    &.mat-focused {
+      .mdc-text-field--outlined {
+        box-shadow: 4px 4px 0 var(--color-primary) !important;
+        transform: translate(-1px, -1px);
+      }
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--color-primary) !important;
+      }
+
+      .mdc-floating-label {
+        color: var(--color-primary) !important;
+      }
+    }
+
+    &.mat-form-field-invalid {
+      .mdc-text-field--outlined {
+        box-shadow: 3px 3px 0 var(--mat-sys-error) !important;
+      }
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--mat-sys-error) !important;
+      }
+
+      .mdc-floating-label {
+        color: var(--mat-sys-error) !important;
+      }
+    }
+
+    .mat-mdc-form-field-error {
+      color: var(--mat-sys-error) !important;
+      font-weight: 500;
+    }
+  }
+
+  mat-button-toggle-group {
+    border: 2px solid var(--mat-sys-primary) !important;
+    border-radius: 8px !important;
+    box-shadow: 3px 3px 0 var(--mat-sys-primary) !important;
+    overflow: hidden;
+    height: 3rem;
+
+    .mat-button-toggle {
+      color: #2f2f2f !important;
+      border: none !important;
+
+      &:not(:first-child) {
+        border-left: 2px solid var(--mat-sys-primary) !important;
+      }
+
+      .mat-button-toggle-label-content {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1 !important;
+        padding: 16px !important;
+      }
+
+      .fav-icon {
+        font-size: 16px;
+        line-height: 1;
+        color: inherit !important;
+      }
+    }
+  }
+}
