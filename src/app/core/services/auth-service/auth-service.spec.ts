@@ -73,7 +73,7 @@ describe('GIVEN: AuthService', () => {
       );
 
       expect(result).not.toBeNull();
-      expect(result.user).toEqual(
+      expect(result?.user).toEqual(
         expect.objectContaining(authResponseMock.user)
       );
     });
@@ -115,7 +115,7 @@ describe('GIVEN: AuthService', () => {
       const result = await firstValueFrom(service.login(loginRequestMock));
 
       expect(result).not.toBeNull();
-      expect(result.user).toEqual(
+      expect(result?.user).toEqual(
         expect.objectContaining({ email: 'test@example.com' })
       );
     });
@@ -167,6 +167,99 @@ describe('GIVEN: AuthService', () => {
       service.logout();
 
       expect(routerNavigate).toHaveBeenCalledWith([url]);
+    });
+  });
+
+  describe('WHEN: getCurrentUser', () => {
+    const currentUserMock: User = {
+      id: 1,
+      email: 'test@example.com',
+      password: '123456',
+      name: 'John',
+      lastName: 'Doe',
+    };
+
+    it('THEN: should retrieve the current user if token is valid', async () => {
+      localStorage.setItem(
+        'fake_current_user',
+        JSON.stringify(currentUserMock)
+      );
+      jest.spyOn(service, 'isLoggedInSync').mockReturnValue(true);
+
+      const result = await firstValueFrom(service.getCurrentUser());
+
+      expect(result).toEqual(currentUserMock);
+    });
+
+    it('THEN: should retrieve null if there is no user in local storage', async () => {
+      jest.spyOn(service, 'isLoggedInSync').mockReturnValue(true);
+
+      const result = await firstValueFrom(service.getCurrentUser());
+
+      expect(result).toBeNull();
+    });
+
+    it('THEN: should retrieve null if token is invalid', async () => {
+      localStorage.setItem(
+        'fake_current_user',
+        JSON.stringify(currentUserMock)
+      );
+
+      jest.spyOn(service, 'isLoggedInSync').mockReturnValue(false);
+
+      const result = await firstValueFrom(service.getCurrentUser());
+
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('WHEN: isLoggedInSync', () => {
+    it('THEN: should return false if token does not exist', () => {
+      const result = service.isLoggedInSync();
+
+      expect(result).toBe(false);
+    });
+
+    it('THEN: should return true if token is valid', () => {
+      const validToken = btoa(
+        JSON.stringify({
+          userId: 1,
+          email: 'test@example.com',
+          exp: Date.now() + 10000,
+        })
+      );
+
+      localStorage.setItem('fake_token', validToken);
+
+      const result = service.isLoggedInSync();
+
+      expect(result).toBe(true);
+    });
+
+    it('THEN: should return false and call logout if token is expired', () => {
+      const expiredToken = btoa(
+        JSON.stringify({
+          userId: 1,
+          email: 'test@example.com',
+          exp: Date.now() - 10000,
+        })
+      );
+
+      localStorage.setItem('fake_token', expiredToken);
+      const logoutSpy = jest.spyOn(service, 'logout');
+
+      const result = service.isLoggedInSync();
+
+      expect(result).toBe(false);
+      expect(logoutSpy).toHaveBeenCalled();
+    });
+
+    it('THEN: should return false if token is invalid', () => {
+      localStorage.setItem('fake_token', 'invalid-token');
+
+      const result = service.isLoggedInSync();
+
+      expect(result).toBe(false);
     });
   });
 });
