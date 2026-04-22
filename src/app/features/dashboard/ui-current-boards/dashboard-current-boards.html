@@ -1,7 +1,10 @@
 <app-panel>
   <div appPanelBody>
     <h4>Tableros con actividades en curso:</h4>
-    <app-list [listItems]="mockBoards" [variant]="'two'">
+    <app-list
+      [listItems]="mockBoards"
+      [emptyStateMssg]="'No hay tableros aún.'"
+    >
       @for(item of mockBoards; track $index; let i = $index ) {
       <app-board-list-item
         [board]="item"

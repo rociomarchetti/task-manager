@@ -1,5 +1,8 @@
-@if(listItems().length > 0) {
+@if(listItems().length) {
 <ng-content></ng-content>
 } @else {
-<p class="empty">{{emptyStateMssg()}}</p>
+<div class="empy-state">
+  <span class="material-symbols-outlined"> search </span>
+  <p>{{emptyStateMssg()}}</p>
+</div>
 }
