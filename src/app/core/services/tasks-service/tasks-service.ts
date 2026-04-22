@@ -38,6 +38,7 @@ export class TasksService {
       ...newTask,
       id,
       userId,
+      status: newTask?.status ?? TaskStatus.PENDING,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

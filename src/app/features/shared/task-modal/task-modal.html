@@ -17,6 +17,10 @@
         <mat-form-field appearance="outline">
           <mat-label>Editar nombre de la tarea</mat-label>
           <input matInput formControlName="title" />
+          @if (taskForm.get('title')?.hasError('required') &&
+          taskForm.get('title')?.touched) {
+          <mat-error>El nombre es requerido</mat-error>
+          }
         </mat-form-field>
         } @else {
         <p>{{task()?.title}}</p>
@@ -42,7 +46,7 @@
         @if(canEditFields){
         <mat-form-field appearance="outline">
           <mat-label>Estado</mat-label>
-          <select matNativeControl required formControlName="status">
+          <select matNativeControl formControlName="status">
             <option value="PENDING">Pendiente</option>
             <option value="IN_PROGRESS">En proceso</option>
             <option value="DONE">Completada</option>
@@ -57,7 +61,7 @@
         @if(canEditFields){
         <mat-form-field appearance="outline">
           <mat-label>ID Tablero</mat-label>
-          <select matNativeControl required formControlName="boardId">
+          <select matNativeControl formControlName="boardId">
             @for(id of boardsId; track $index) {
             <option [value]="id">{{ id }}</option>
             }

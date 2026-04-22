@@ -61,8 +61,8 @@ export class TaskModal {
   taskForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>(null, [Validators.required]),
     description: new FormControl<string | null>(null),
-    status: new FormControl<TaskStatus | null>(null, [Validators.required]),
-    boardId: new FormControl<string | null>(null, [Validators.required]),
+    status: new FormControl<TaskStatus | null>(null),
+    boardId: new FormControl<string | null>(null),
     dueDate: new FormControl<Date | null>(null),
   });
 
