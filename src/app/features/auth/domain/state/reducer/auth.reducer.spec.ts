@@ -1,4 +1,4 @@
-import { User } from '@shared/user.model';
+import { User } from '@shared/models';
 import { AuthTab } from '../../entities/auth.model';
 import * as fromActions from '../actions/auth.actions';
 import * as fromReducer from '../reducer/auth.reducer';
