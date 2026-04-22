@@ -30,8 +30,8 @@ export class BoardEffects {
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([action, user]) => {
         const currentBoard = this.boardsService.getBoardById(action?.boardId);
-        const userTasksSummary = this.tasksService.getTasksForUser(user?.id);
-        const userBoardsSummary = this.boardsService.getBoardsForUser(user?.id);
+        const userTasksSummary = this.tasksService.getTasksForUser(user!.id);
+        const userBoardsSummary = this.boardsService.getBoardsForUser(user!.id);
 
         return forkJoin([
           currentBoard,
@@ -55,7 +55,7 @@ export class BoardEffects {
       ofType(fromActions.BoardEditActions.addNewTask),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([action, user]) =>
-        this.tasksService.addTask(action?.newTaskData, user?.id).pipe(
+        this.tasksService.addTask(action?.newTaskData, user!.id).pipe(
           map(() => {
             return fromActions.BoardEditActions.addNewTaskSucceeded();
           }),
@@ -73,7 +73,7 @@ export class BoardEffects {
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([action, user]) => {
         return this.boardsService
-          .createNewBoard(action?.newBoardData, user?.id)
+          .createNewBoard(action?.newBoardData, user!.id)
           .pipe(
             map(() => {
               return fromActions.BoardCreateActions.addNewBoardSucceeded();
@@ -91,10 +91,10 @@ export class BoardEffects {
       ofType(fromActions.BoardEditActions.addNewTaskSucceeded),
       withLatestFrom(this.store.select(selectAuthenticatedUser)),
       exhaustMap(([_, user]) =>
-        this.tasksService.getTasksForUser(user?.id).pipe(
+        this.tasksService.getTasksForUser(user!.id).pipe(
           map((userTasksSummary) => {
             return fromActions.BoardEditActions.updatedTasksSucceeded({
-              tasksData: userTasksSummary,
+              tasksData: userTasksSummary!,
             });
           })
         )

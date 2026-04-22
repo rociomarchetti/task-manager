@@ -24,7 +24,7 @@ const boardReducer = createReducer(
   on(fromActions.BoardEditActions.updatedTasksSucceeded, (state, action) => {
     return {
       ...state,
-      tasksData: action.tasksData,
+      taskLists: action.tasksData.tasks,
     };
   }),
   on(fromActions.BoardEditActions.editBoardSucceeded, (state, action) => {
