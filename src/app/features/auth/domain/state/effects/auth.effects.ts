@@ -47,6 +47,9 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authenticationService.login(action.loginRequest).pipe(
           map((authResponse) => {
+            if (!authResponse) {
+              throw new Error('Invalid credentials');
+            }
             return fromActions.LoginViewActions.loginSuccess({
               authenticationUser: authResponse.user,
             });
@@ -69,6 +72,9 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authenticationService.register(action.registerRequest).pipe(
           map((authResponse) => {
+            if (!authResponse) {
+              throw new Error('Invalid credentials');
+            }
             return fromActions.RegisterViewActions.registerSuccess({
               authenticationUser: authResponse.user,
             });
