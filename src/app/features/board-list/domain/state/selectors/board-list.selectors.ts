@@ -8,6 +8,6 @@ export const selectBoardListState =
 export const selectBoardListViewModel = createSelector(
   selectBoardListState,
   (state): BoardListViewModel => ({
-    boards: state?.boards,
+    boards: state?.boards ?? [],
   })
 );
