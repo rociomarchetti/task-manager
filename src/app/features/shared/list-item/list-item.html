@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" [matTooltip]="tooltipMssg" [matTooltipPosition]="'above'">
   <mat-icon class="item-icon"
-    >{{ variant() === 'one' ? 'task' : 'view_kanban' }}</mat-icon
+    >{{ variant() === 'task' ? 'task' : 'view_kanban' }}</mat-icon
   >
   <p>{{itemTitle()}}</p>
 </div>

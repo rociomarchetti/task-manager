@@ -9,16 +9,23 @@ import { QuickAction } from '@shared/models/quick-action.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule, MatMiniFabButton } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-list-item',
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, MatMiniFabButton],
+  imports: [
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatMiniFabButton,
+    MatTooltipModule,
+  ],
   templateUrl: './list-item.html',
   styleUrl: './list-item.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItem {
-  variant = input<'one' | 'two'>();
+  variant = input<'task' | 'board'>();
   itemTitle = input<string>();
   actions = input<Array<QuickAction>>([]);
   hasMoreOptions = input<boolean>(false);
@@ -27,6 +34,10 @@ export class ListItem {
 
   onActionClick(actionId: string) {
     this.actionClicked.emit(actionId);
+  }
+
+  get tooltipMssg(): string {
+    return this.variant() === 'task' ? 'Tarea' : 'Tablero';
   }
 
   @HostBinding('class')

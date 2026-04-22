@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Board } from '@shared/models';
 import { QuickAction } from '@shared/models/quick-action.model';
-import { ListItem } from '@shared/ui/list-item/list-item';
+import { ListItem } from '@shared/features/list-item/list-item';
 
 @Component({
   selector: 'app-board-list-item',
