@@ -31,8 +31,14 @@ export class RegisterFormComponent {
   registerRequested = output<RegisterRequest>();
 
   registerForm: FormGroup = new FormGroup({
-    email: new FormControl<string | null>(null, [Validators.required]),
-    password: new FormControl<string | null>(null, [Validators.required]),
+    email: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
     name: new FormControl<string | null>(null, [Validators.required]),
     lastName: new FormControl<string | null>(null, [Validators.required]),
   });

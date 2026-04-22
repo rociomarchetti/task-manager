@@ -49,10 +49,10 @@ export class BoardListItem {
   }
 
   onSeeBoardClicked() {
-    this.seeBoard.emit(this.board());
+    this.seeBoard.emit(this.board()!);
   }
 
   onRemoveBoardClicked() {
-    this.removeBoard.emit(this.board());
+    this.removeBoard.emit(this.board()!);
   }
 }

@@ -3,10 +3,18 @@
     <mat-form-field appearance="outline">
       <mat-label>Correo electrónico</mat-label>
       <input matInput type="email" formControlName="email" />
+      @if (loginForm.get('email')?.hasError('email') &&
+      loginForm.get('email')?.touched) {
+      <mat-error>Formato de correo inválido</mat-error>
+      }
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Contraseña</mat-label>
       <input matInput type="password" formControlName="password" />
+      @if (loginForm.get('password')?.hasError('minlength') &&
+      loginForm.get('password')?.touched) {
+      <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+      }
     </mat-form-field>
   </form>
   <div class="login-footer">
