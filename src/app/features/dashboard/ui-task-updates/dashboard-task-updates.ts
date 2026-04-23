@@ -10,10 +10,18 @@ import { List } from '@shared/ui/list/list';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 import { TaskListItem } from 'app/features/shared/task-list-item/task-list-item';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-dashboard-task-updates',
-  imports: [TaskListItem, List, MatCheckboxModule, Panel, PanelBodyDirective],
+  imports: [
+    List,
+    MatBadgeModule,
+    MatCheckboxModule,
+    Panel,
+    PanelBodyDirective,
+    TaskListItem,
+  ],
   templateUrl: './dashboard-task-updates.html',
   styleUrl: './dashboard-task-updates.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +39,10 @@ export class DashboardTaskUpdates {
 
   sections = [
     {
+      title: 'Tareas próximas a vencerse:',
+      tasks: () => this.tasksDueSoon(),
+    },
+    {
       title: 'Tareas creadas recientemente:',
       tasks: () => this.recentlyCreatedTasks(),
     },
@@ -38,11 +50,17 @@ export class DashboardTaskUpdates {
       title: 'Tareas actualizadas recientemente:',
       tasks: () => this.recentlyUpdatedTasks(),
     },
-    {
-      title: 'Tareas próximas a vencerse:',
-      tasks: () => this.tasksDueSoon(),
-    },
   ];
+
+  get visibleSections() {
+    return this.tasksDueSoon()?.length
+      ? this.sections.slice(0, 2)
+      : this.sections.slice(1, 3);
+  }
+
+  getBadge(section: { title: string; tasks: () => Task[] }): string | null {
+    return section.title === 'Tareas próximas a vencerse:' ? '!' : null;
+  }
 
   onSeeTask(task: Task): void {
     this.seeTaskClicked.emit(task);

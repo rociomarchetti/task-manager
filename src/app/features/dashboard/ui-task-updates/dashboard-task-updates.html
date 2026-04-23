@@ -1,9 +1,14 @@
 <app-panel>
   <div appPanelBody>
-    @for (section of sections; track $index) { @if (section.tasks()?.length > 0)
-    {
-
-    <h4>{{ section.title }}</h4>
+    @for (section of visibleSections; track $index) { @if
+    (section.tasks()?.length > 0) {
+    <h4
+      class="section-title"
+      [matBadge]="getBadge(section)"
+      matBadgeOverlap="false"
+    >
+      {{ section.title }}
+    </h4>
 
     <app-list
       [listItems]="section.tasks()"
