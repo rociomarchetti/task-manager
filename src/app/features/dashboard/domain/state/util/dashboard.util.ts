@@ -1,4 +1,4 @@
-import { Board, Task, TaskStatus } from '@shared/models';
+import { Board, Task, TaskAmounts, TaskStatus } from '@shared/models';
 
 export const countTasksByStatus = (tasks: Task[]) => ({
   pending: tasks?.filter((t) => t.status === TaskStatus.PENDING).length,
@@ -62,4 +62,30 @@ export function getCurrentBoards(boards: Board[]): Board[] {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
     .slice(0, 3);
+}
+
+export function getStrokeDasharray(tasks: TaskAmounts | undefined): string {
+  const totalAmount = getTotalTasks(tasks);
+  const completed = tasks?.completed ?? 0;
+  const circumference = 2 * Math.PI * 36;
+
+  const progress =
+    totalAmount > 0 ? (completed / totalAmount) * circumference : 0;
+
+  return `${progress} ${circumference}`;
+}
+
+export function getPorcentajeAvance(tasks: TaskAmounts | undefined): number {
+  const totalAmount = getTotalTasks(tasks);
+  const completed = tasks?.completed ?? 0;
+  if (totalAmount === 0) return 0;
+  return Math.round((completed / totalAmount) * 100);
+}
+
+function getTotalTasks(tasks: TaskAmounts | undefined): number {
+  const completed = tasks?.completed ?? 0;
+  const inProgress = tasks?.inProgress ?? 0;
+  const pending = tasks?.pending ?? 0;
+
+  return completed + inProgress + pending;
 }
