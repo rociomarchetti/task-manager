@@ -8,10 +8,11 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { Board } from '@shared/models';
 import { formatDate } from '@shared/features/util/formatDate.util';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-board-list-list',
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './board-list-list.html',
   styleUrl: './board-list-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

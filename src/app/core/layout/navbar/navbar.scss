@@ -37,6 +37,7 @@
         font-size: 13px !important;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        border-bottom: 3px solid transparent !important;
 
         &:hover {
           border-bottom: 3px solid var(--mat-sys-primary) !important;

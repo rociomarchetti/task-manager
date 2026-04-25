@@ -1,8 +1,28 @@
-:host {
-  .top-actions-group {
-    display: flex;
-    justify-content: space-between;
-  }
+section {
+  border-bottom: 2px solid #111;
+}
+
+.top-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end; /* clave */
+  justify-content: space-between;
+  gap: 12px;
+  max-width: calc(4 * 250px + 3 * 1rem);
+  margin: 1rem auto;
+}
+
+.top-actions-group form {
+  margin: 0;
+}
+
+.top-actions-group mat-form-field {
+  display: block;
+}
+
+::ng-deep .top-actions-group .mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }
 
 ::ng-deep {
