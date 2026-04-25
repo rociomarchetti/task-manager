@@ -1,78 +1,64 @@
 :host {
   .avatar {
-    pointer-events: none;
     cursor: default;
   }
 }
 ::ng-deep {
   mat-toolbar.brutal-nav {
-    background-color: var(--color-surface-warm) !important;
-    border: 2px solid #2f2f2f !important;
-    border-radius: 8px !important;
-    box-shadow: 3px 3px 0 #2f2f2f !important;
     height: 56px !important;
     padding: 0 1.5rem !important;
     display: flex;
     align-items: center;
-    gap: 0;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: #111;
+    color: #fff;
 
     .nav-logo {
-      font-size: 16px;
+      margin-right: auto;
+      font-size: 13px;
       font-weight: 500;
-      color: #2f2f2f;
-      letter-spacing: -0.02em;
-      margin-right: auto; // empuja links al centro
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 0.5rem;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
 
-      a.mat-mdc-button {
-        color: #2f2f2f !important;
-        font-size: 14px !important;
-        border-radius: 6px !important;
-        transition: background 0.1s;
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 13px !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
 
         &:hover {
-          background: rgba(47, 47, 47, 0.07) !important;
+          border-bottom: 3px solid var(--mat-sys-primary) !important;
+          font-weight: 500 !important;
         }
 
         &.active {
           font-weight: 500 !important;
-          background: rgba(47, 47, 47, 0.1) !important;
-          box-shadow: inset 0 -2px 0 #2f2f2f !important;
+          border-bottom: 3px solid var(--mat-sys-primary) !important;
         }
       }
     }
 
     .nav-actions {
+      margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-left: auto;
-    }
-  }
+      gap: 10px;
 
-  mat-toolbar.brutal-nav .mat-mdc-unelevated-button {
-    background-color: #2f2f2f !important;
-    color: var(--color-surface-warm) !important;
-    border: 2px solid #2f2f2f !important;
-    border-radius: 6px !important;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4) !important;
-    transition: box-shadow 0.12s ease, transform 0.12s ease !important;
-
-    &:hover {
-      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4) !important;
-      transform: translate(-1px, -1px);
-    }
-    &:active {
-      box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4) !important;
-      transform: translate(1px, 1px);
+      .logout-btn {
+        background-color: #fff !important;
+      }
     }
   }
 }

@@ -2,18 +2,23 @@
   <span class="nav-logo">Task Manager</span>
 
   <div class="nav-links">
-    <a mat-button routerLink="/app/boards-list" routerLinkActive="active"
-      >Mis tableros</a
-    >
-    <a mat-button routerLink="/app/dashboard" routerLinkActive="active"
-      >Dashboard</a
-    >
+    <a routerLink="/app/boards-list" routerLinkActive="active">Mis tableros</a>
+    <span>|</span>
+    <a routerLink="/app/dashboard" routerLinkActive="active">Dashboard</a>
   </div>
 
   <div class="nav-actions">
-    <button mat-stroked-button (click)="logout()">Cerrar sesión</button>
+    <button class="logout-btn" mat-stroked-button (click)="logout()">
+      Cerrar sesión
+    </button>
     @if(viewModel$ | async; as vm) {
-    <button mat-stroked-button color="primary" class="avatar">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="avatar"
+      [matTooltip]="getUserName(vm.user)"
+      [matTooltipPosition]="'above'"
+    >
       {{vm.userInitials}}
     </button>
     }
