@@ -55,7 +55,7 @@ export class TaskListItem {
         break;
 
       case 'check':
-        this.onRemoveTaskClicked();
+        this.onCheckTaskCompleted();
         break;
 
       case 'edit':

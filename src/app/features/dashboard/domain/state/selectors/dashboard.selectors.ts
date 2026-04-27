@@ -12,7 +12,7 @@ import {
 export const selectDashboardState =
   createFeatureSelector<DashboardState>(dashboardFeatureKey);
 
-export const selectDashboardViewModel = createSelector(
+/* export const selectDashboardViewModel = createSelector(
   selectDashboardState,
   (state): DashboardViewModel => ({
     currentBoards: getCurrentBoards(state?.boardsData?.boards ?? []),
@@ -26,4 +26,31 @@ export const selectDashboardViewModel = createSelector(
     tasksAmounts: countTasksByStatus(state?.tasksData?.tasks ?? []),
     tasksDueSoon: getTasksDueInNext7Days(state?.tasksData?.tasks ?? []),
   })
+); */
+
+export const selectDashboardViewModel = createSelector(
+  selectDashboardState,
+  (state): DashboardViewModel => {
+    const tasks = state?.tasksData?.tasks ?? [];
+    const tasksDueSoon = getTasksDueInNext7Days(tasks);
+    const usedIds = new Set(tasksDueSoon.map((t) => t.id));
+    const recentlyUpdatedTasks = getRecentlyStatusChangedTasks(
+      tasks.filter((t) => !usedIds.has(t.id))
+    );
+
+    recentlyUpdatedTasks.forEach((t) => usedIds.add(t.id));
+
+    const recentlyCreatedTasks = getRecentlyCreatedTasks(
+      tasks.filter((t) => !usedIds.has(t.id))
+    );
+
+    return {
+      currentBoards: getCurrentBoards(state?.boardsData?.boards ?? []),
+      recentlyCreatedTasks,
+      recentlyUpdatedTasks,
+      userName: state?.user?.name ?? '',
+      tasksAmounts: countTasksByStatus(tasks),
+      tasksDueSoon,
+    };
+  }
 );

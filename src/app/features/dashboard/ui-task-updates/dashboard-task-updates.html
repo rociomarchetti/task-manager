@@ -1,7 +1,6 @@
 <app-panel>
   <div appPanelBody>
-    @for (section of visibleSections; track $index) { @if
-    (section.tasks()?.length > 0) {
+    @for (section of visibleSections; track $index) {
     <h4
       class="section-title"
       [matBadge]="getBadge(section)"
@@ -13,6 +12,7 @@
     <app-list
       [listItems]="section.tasks()"
       [emptyStateMssg]="'No hay tareas aún'"
+      class="section-list"
     >
       @for (task of section.tasks(); track $index) {
       <app-task-list-item
@@ -25,6 +25,6 @@
       />
       }
     </app-list>
-    } }
+    }
   </div>
 </app-panel>
