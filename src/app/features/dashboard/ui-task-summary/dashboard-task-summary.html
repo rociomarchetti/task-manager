@@ -1,74 +1,76 @@
-<app-panel>
-  <div appPanelBody>
-    <div class="stat-card">
-      <svg width="80" height="80" viewBox="0 0 80 80">
-        <circle
-          cx="40"
-          cy="40"
-          r="36"
-          fill="none"
-          stroke="#eee"
-          stroke-width="8"
-        />
-        <circle
-          cx="40"
-          cy="40"
-          r="36"
-          fill="none"
-          stroke="#e91e8c"
-          stroke-width="8"
-          stroke-linecap="round"
-          [attr.stroke-dasharray]="strokeDasharray()"
-          transform="rotate(-90 40 40)"
-        />
-        <text
-          x="40"
-          y="45"
-          text-anchor="middle"
-          font-size="14"
-          font-weight="bold"
+<div class="summary-panel-group">
+  <app-panel>
+    <div appPanelBody>
+      <div class="stat-card">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle
+            cx="40"
+            cy="40"
+            r="36"
+            fill="none"
+            stroke="#eee"
+            stroke-width="8"
+          />
+          <circle
+            cx="40"
+            cy="40"
+            r="36"
+            fill="none"
+            stroke="#e91e8c"
+            stroke-width="8"
+            stroke-linecap="round"
+            [attr.stroke-dasharray]="strokeDasharray()"
+            transform="rotate(-90 40 40)"
+          />
+          <text
+            x="40"
+            y="45"
+            text-anchor="middle"
+            font-size="14"
+            font-weight="bold"
+          >
+            {{ progressPercentage() }}%
+          </text>
+        </svg>
+      </div>
+    </div>
+  </app-panel>
+
+  <app-panel>
+    <div appPanelBody>
+      <div class="stat-card">
+        <span class="stat-card__label">Tareas</span>
+        <span class="stat-card__value"
+          >{{tasks().pending + tasks().inProgress + tasks().completed}}</span
         >
-          {{ progressPercentage() }}%
-        </text>
-      </svg>
+      </div>
     </div>
-  </div>
-</app-panel>
+  </app-panel>
 
-<app-panel>
-  <div appPanelBody>
-    <div class="stat-card">
-      <span class="stat-card__label">Tareas</span>
-      <span class="stat-card__value"
-        >{{tasks().pending + tasks().inProgress + tasks().completed}}</span
-      >
+  <app-panel>
+    <div appPanelBody>
+      <div class="stat-card">
+        <span class="stat-card__label">Pendientes</span>
+        <span class="stat-card__value">{{tasks().pending}}</span>
+      </div>
     </div>
-  </div>
-</app-panel>
+  </app-panel>
 
-<app-panel>
-  <div appPanelBody>
-    <div class="stat-card">
-      <span class="stat-card__label">Pendientes</span>
-      <span class="stat-card__value">{{tasks().pending}}</span>
+  <app-panel>
+    <div appPanelBody>
+      <div class="stat-card">
+        <span class="stat-card__label">En progreso</span>
+        <span class="stat-card__value">{{tasks().inProgress}}</span>
+      </div>
     </div>
-  </div>
-</app-panel>
+  </app-panel>
 
-<app-panel>
-  <div appPanelBody>
-    <div class="stat-card">
-      <span class="stat-card__label">En progreso</span>
-      <span class="stat-card__value">{{tasks().inProgress}}</span>
+  <app-panel>
+    <div appPanelBody>
+      <div class="stat-card">
+        <span class="stat-card__label">Completadas</span>
+        <span class="stat-card__value">{{tasks().completed}}</span>
+      </div>
     </div>
-  </div>
-</app-panel>
-
-<app-panel>
-  <div appPanelBody>
-    <div class="stat-card">
-      <span class="stat-card__label">Completadas</span>
-      <span class="stat-card__value">{{tasks().completed}}</span>
-    </div>
-  </div>
-</app-panel>
+  </app-panel>
+</div>

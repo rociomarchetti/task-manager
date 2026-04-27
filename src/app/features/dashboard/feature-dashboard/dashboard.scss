@@ -2,9 +2,25 @@
   .panel-group {
     display: grid;
     grid-template-columns: 1fr 3fr 3fr;
+    align-items: stretch;
     gap: 1rem;
     max-width: calc(4 * 250px + 3 * 1rem);
     margin: 1rem auto;
+  }
+
+  .panel-group-right {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    app-dashboard-current-boards {
+      min-height: 0;
+      margin-bottom: 1rem;
+    }
+
+    app-dashboard-quick-actions {
+      flex-shrink: 0;
+    }
   }
 
   @media (max-width: 768px) {
