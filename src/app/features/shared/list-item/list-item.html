@@ -7,17 +7,25 @@
 
 <section class="actions">
   <div class="buttons-container">
-    <button mat-mini-fab (click)="onActionClick('see')">
+    <button mat-mini-fab [matTooltip]="'Ver'" (click)="onActionClick('see')">
       <mat-icon>visibility</mat-icon>
     </button>
-    <button mat-mini-fab (click)="onActionClick('remove')">
+    <button
+      mat-mini-fab
+      [matTooltip]="'Eliminar'"
+      (click)="onActionClick('remove')"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
 
   <!-- more options menu -->
   @if(hasMoreOptions()) {
-  <button matIconButton [matMenuTriggerFor]="menu">
+  <button
+    matIconButton
+    [matTooltip]="'Más opciones'"
+    [matMenuTriggerFor]="menu"
+  >
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -29,8 +37,10 @@
       [attr.aria-label]="action.label"
       [title]="action.label"
     >
-      <span class="material-icons">{{ action.icon }}</span>
-      <span>{{action.label}}</span>
+      <div class="mat-menu-option">
+        <span class="material-icons">{{ action.icon }}</span>
+        <span>{{action.label}}</span>
+      </div>
     </button>
     }
   </mat-menu>
