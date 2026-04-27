@@ -22,5 +22,29 @@
       {{vm.userInitials}}
     </button>
     }
+    <button
+      mat-icon-button
+      class="hamburger-btn"
+      [matMenuTriggerFor]="mobileMenu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
 </mat-toolbar>
+
+<!-- Menú mobile -->
+<mat-menu #mobileMenu="matMenu" class="brutal-mobile-menu">
+  <a mat-menu-item routerLink="/app/dashboard" routerLinkActive="active">
+    <mat-icon>dashboard</mat-icon>
+    Dashboard
+  </a>
+  <a mat-menu-item routerLink="/app/boards-list" routerLinkActive="active">
+    <mat-icon>view_kanban</mat-icon>
+    Mis tableros
+  </a>
+  <mat-divider />
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Cerrar sesión
+  </button>
+</mat-menu>

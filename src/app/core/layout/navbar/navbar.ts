@@ -6,11 +6,18 @@ import { AuthFacade } from 'app/features/auth/domain/application/auth.facade';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { User } from '@shared/models';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+
 @Component({
   selector: 'app-navbar',
   imports: [
     AsyncPipe,
     MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
     MatToolbarModule,
     MatTooltipModule,
     RouterModule,
@@ -27,7 +34,7 @@ export class Navbar {
   }
 
   getUserName(user: User): string {
-    const message = `Hola ${user.name} ${user.lastName}`;
+    const message = `Hola ${user?.name} ${user?.lastName}`;
     return message;
   }
 }

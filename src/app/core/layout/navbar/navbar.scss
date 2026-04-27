@@ -49,6 +49,10 @@
           border-bottom: 3px solid var(--mat-sys-primary) !important;
         }
       }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
     .nav-actions {
@@ -59,6 +63,53 @@
 
       .logout-btn {
         background-color: #fff !important;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      .hamburger-btn {
+        color: #fff;
+        display: none;
+
+        @media (max-width: 768px) {
+          display: flex;
+        }
+      }
+    }
+
+    .brutal-mobile-menu {
+      .mat-mdc-menu-content {
+        background: #111;
+        padding: 8px 0;
+      }
+
+      .mat-mdc-menu-item {
+        color: #fff;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        .mat-icon {
+          color: #fff;
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        &.active {
+          color: var(--mat-sys-primary);
+          .mat-icon {
+            color: var(--mat-sys-primary);
+          }
+        }
+      }
+
+      .mat-divider {
+        border-color: rgba(255, 255, 255, 0.15);
       }
     }
   }
