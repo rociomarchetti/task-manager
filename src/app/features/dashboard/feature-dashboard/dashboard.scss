@@ -1,11 +1,19 @@
 :host {
   .panel-group {
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr;
+    grid-template-columns: 1fr;
     align-items: stretch;
     gap: 1rem;
-    max-width: calc(4 * 250px + 3 * 1rem);
-    margin: 1rem auto;
+    padding: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 3fr 3fr;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: calc(4 * 250px + 3 * 1rem);
+    }
   }
 
   .panel-group-right {
@@ -20,12 +28,6 @@
 
     app-dashboard-quick-actions {
       flex-shrink: 0;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .panel-group {
-      grid-template-columns: 1fr;
     }
   }
 }
