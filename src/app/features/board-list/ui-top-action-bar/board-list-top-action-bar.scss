@@ -1,12 +1,14 @@
 section {
   border-bottom: 2px solid #111;
+  background: #eddddd;
+  padding: 0.5rem;
 }
 
 .top-actions-group {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  align-items: flex-end; /* clave */
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   max-width: calc(4 * 250px + 3 * 1rem);
@@ -19,6 +21,15 @@ section {
 
 .top-actions-group mat-form-field {
   display: block;
+  border: 2px solid #888;
+}
+
+::ng-deep .top-actions-group button {
+  background: #fdfbf5;
+}
+
+::ng-deep .top-actions-group .mat-mdc-outlined-button .mdc-button__ripple {
+  background: #fdfbf5;
 }
 
 ::ng-deep .top-actions-group .mat-mdc-form-field-subscript-wrapper {

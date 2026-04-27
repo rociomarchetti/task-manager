@@ -18,10 +18,23 @@
       <button mat-stroked-button (click)="onGoToBoardDetails(board.id)">
         Ver Tablero
       </button>
-      <button mat-mini-fab (click)="onRemoveBoard(board.id)">
+      <button
+        [matTooltip]="'Eliminar'"
+        [matTooltipPosition]="'above'"
+        mat-mini-fab
+        (click)="onRemoveBoard(board)"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>
   </div>
   }
 </div>
+
+<app-confirmation-modal
+  [isModalOpen]="isModalOpen()"
+  [elementTitle]="selectedBoard()?.title"
+  [elementType]="'board'"
+  (actionConfirmed)="onModalConfirmDeletion()"
+  (modalClosed)="onModalClosed()"
+></app-confirmation-modal>
