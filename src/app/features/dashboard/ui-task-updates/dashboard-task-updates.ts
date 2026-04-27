@@ -3,6 +3,7 @@ import {
   Component,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Task } from '@shared/models';
@@ -11,10 +12,12 @@ import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
 import { TaskListItem } from 'app/features/shared/task-list-item/task-list-item';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ConfirmationModal } from '@shared/features/confirmation-modal/confirmation-modal';
 
 @Component({
   selector: 'app-dashboard-task-updates',
   imports: [
+    ConfirmationModal,
     List,
     MatBadgeModule,
     MatCheckboxModule,
@@ -36,6 +39,9 @@ export class DashboardTaskUpdates {
   markTaskAsDone = output<Task>();
   editTaskClicked = output<Task>();
   postponeTaskClicked = output<Task>();
+
+  isModalOpen = signal(false);
+  selectedTask = signal<Task | null>(null);
 
   sections = [
     {
@@ -66,8 +72,18 @@ export class DashboardTaskUpdates {
     this.seeTaskClicked.emit(task);
   }
 
+  onModalClosed(): void {
+    this.isModalOpen.set(false);
+  }
+
+  onModalConfirmDeletion(): void {
+    this.removeTaskClicked.emit(this.selectedTask()!);
+    this.isModalOpen.set(false);
+  }
+
   onRemoveTask(task: Task): void {
-    this.removeTaskClicked.emit(task);
+    this.selectedTask.set(task);
+    this.isModalOpen.set(true);
   }
 
   onMarkTaskAsCompleted(task: Task): void {

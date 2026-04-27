@@ -28,3 +28,11 @@
     }
   </div>
 </app-panel>
+
+<app-confirmation-modal
+  [isModalOpen]="isModalOpen()"
+  [elementTitle]="selectedTask()?.title"
+  [elementType]="'task'"
+  (actionConfirmed)="onModalConfirmDeletion()"
+  (modalClosed)="onModalClosed()"
+></app-confirmation-modal>

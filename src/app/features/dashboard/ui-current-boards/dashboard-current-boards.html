@@ -15,3 +15,11 @@
     </app-list>
   </div>
 </app-panel>
+
+<app-confirmation-modal
+  [isModalOpen]="isModalOpen()"
+  [elementTitle]="selectedBoard()?.title"
+  [elementType]="'board'"
+  (actionConfirmed)="onModalConfirmDeletion()"
+  (modalClosed)="onModalClosed()"
+></app-confirmation-modal>

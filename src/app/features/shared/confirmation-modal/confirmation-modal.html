@@ -1,1 +1,11 @@
-<p>confirmation-modal works!</p>
+<app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
+  <ng-container ModalContent>
+    <h4>{{modalMessage}}</h4>
+  </ng-container>
+  <ng-container ModalActions>
+    <button mat-stroked-button color="primary" (click)="onConfirmAction()">
+      Confirmar
+    </button>
+    <button mat-stroked-button (click)="onCancelAction()">Cancelar</button>
+  </ng-container>
+</app-modal>
