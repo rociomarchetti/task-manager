@@ -71,7 +71,7 @@
           <div class="panel-group">
             @if(mode() !== FormMode.CREATE) {
             <div class="example-container">
-              <h4>To do</h4>
+              <h3>To do</h3>
               <div
                 cdkDropList
                 #todoList="cdkDropList"
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div class="example-container">
-              <h2>In Progress</h2>
+              <h3>In Progress</h3>
               <div
                 cdkDropList
                 #inProgressList="cdkDropList"
@@ -101,7 +101,7 @@
               </div>
             </div>
             <div class="example-container">
-              <h2>Done</h2>
+              <h3>Done</h3>
               <div
                 cdkDropList
                 #doneList="cdkDropList"
@@ -185,7 +185,9 @@
         >
           Guardar cambios en el tablero
         </button>
-        <button type="button" (click)="onGoBackClicked()">Volver</button>
+        <button mat-stroked-button type="button" (click)="onGoBackClicked()">
+          Volver
+        </button>
         } @else {
         <button
           mat-stroked-button
