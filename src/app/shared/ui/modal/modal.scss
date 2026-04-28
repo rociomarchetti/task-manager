@@ -4,6 +4,7 @@
     height: 100%;
 
     .mat-mdc-dialog-container .mdc-dialog__surface {
+      background-color: var(--bg-panel);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -16,10 +17,12 @@
     }
 
     .modal__header {
+      color: var(--text-primary);
       display: flex;
     }
 
     .modal__content {
+      color: var(--text-primary);
       flex: 1;
       margin: 1.5rem 0;
     }
@@ -29,6 +32,7 @@
       margin-top: auto;
       justify-content: flex-end;
       gap: 1rem;
+      color: var(--text-primary);
     }
 
     .modal__close {
