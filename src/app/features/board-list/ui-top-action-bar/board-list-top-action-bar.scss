@@ -1,6 +1,6 @@
 section {
   border-bottom: 2px solid #111;
-  background: #eddddd;
+  background: var(--bg-section);
   padding: 0.5rem;
 }
 
@@ -29,7 +29,7 @@ section {
 }
 
 ::ng-deep .top-actions-group button {
-  background: #fdfbf5;
+  color: var(--text-primary);
 }
 
 ::ng-deep .top-actions-group .mat-mdc-outlined-button .mdc-button__ripple {

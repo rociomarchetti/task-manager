@@ -70,54 +70,54 @@
 
           <div class="panel-group">
             @if(mode() !== FormMode.CREATE) {
-            <div class="example-container">
+            <div class="status-container">
               <h3>To do</h3>
               <div
                 cdkDropList
                 #todoList="cdkDropList"
                 [cdkDropListData]="todoTasks()"
                 [cdkDropListConnectedTo]="[doneList, inProgressList]"
-                class="example-list"
+                class="status-list"
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of todoTasks(); track item) {
-                <div class="example-box" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>{{ item }}</div>
                 }
               </div>
             </div>
-            <div class="example-container">
+            <div class="status-container">
               <h3>In Progress</h3>
               <div
                 cdkDropList
                 #inProgressList="cdkDropList"
                 [cdkDropListData]="inProgressTasks()"
                 [cdkDropListConnectedTo]="[doneList, todoList]"
-                class="example-list"
+                class="status-list"
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of inProgressTasks(); track item) {
-                <div class="example-box" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>{{ item }}</div>
                 }
               </div>
             </div>
-            <div class="example-container">
+            <div class="status-container">
               <h3>Done</h3>
               <div
                 cdkDropList
                 #doneList="cdkDropList"
                 [cdkDropListData]="doneTasks()"
                 [cdkDropListConnectedTo]="[todoList, inProgressList]"
-                class="example-list"
+                class="status-list"
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of doneTasks(); track item) {
-                <div class="example-box" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>{{ item }}</div>
                 }
               </div>
             </div>
             } @if(mode() === FormMode.CREATE){ @for (item of allColumns; track
             item){
-            <div class="example-container">
+            <div class="status-container">
               <h4>{{item}}</h4>
             </div>
             } }

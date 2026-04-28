@@ -1,5 +1,6 @@
 :host {
   .board-form {
+    color: var(--text-primary);
     padding: 1rem 1.25rem;
     padding-bottom: calc(1rem + 44px);
     display: flex;
@@ -51,7 +52,7 @@
     font-size: 24px;
   }
 
-  .example-container {
+  .status-container {
     width: 400px;
     border: 2px solid var(--mat-sys-primary);
     border-radius: 4px;
@@ -60,30 +61,26 @@
     display: flex;
     flex-direction: column;
     letter-spacing: 0.05em;
-    color: #555;
+    color: var(--text-secondary);
   }
 
-  .example-list {
-    border: solid 1px #ccc;
+  .status-list {
     min-height: 60px;
-    background: white;
     border-radius: 4px;
     overflow: hidden;
     display: block;
     font-family: sans-serif;
   }
 
-  .example-box {
+  .status-item {
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
+    border: solid 1px #ccc;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    background: white;
     font-size: 14px;
     font-family: sans-serif;
   }
