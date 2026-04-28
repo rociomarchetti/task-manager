@@ -34,11 +34,11 @@
       &__label {
         font-size: 14px;
         font-weight: 500;
-        color: #555;
+        color: var(--text-primary);
       }
 
       &__value {
-        background: var(--mat-sys-primary);
+        background: var(--color-primary);
         color: #fdfbf5;
         font-size: 32px;
         font-weight: 700;

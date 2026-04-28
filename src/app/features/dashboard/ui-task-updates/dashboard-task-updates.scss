@@ -6,6 +6,9 @@
   .section-title {
     display: inline-block;
     width: fit-content;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
   }
 
   .section-list {
