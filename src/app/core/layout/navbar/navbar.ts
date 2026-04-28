@@ -9,6 +9,8 @@ import { User } from '@shared/models';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { ThemeService } from 'app/core/services/theme-service/theme-service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     MatIconModule,
     MatMenuModule,
+    MatSlideToggleModule,
     MatToolbarModule,
     MatTooltipModule,
     RouterModule,
@@ -28,6 +31,8 @@ import { MatDividerModule } from '@angular/material/divider';
 export class Navbar {
   private readonly authFacade = inject(AuthFacade);
   readonly viewModel$ = this.authFacade.viewModel$;
+
+  theme = inject(ThemeService);
 
   logout() {
     this.authFacade.logout();

@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111;
+    background: var(--bg-navbar);
     color: #fff;
 
     .nav-logo {
@@ -60,9 +60,20 @@
       align-items: center;
       gap: 10px;
 
-      .logout-btn {
-        background-color: #fff !important;
+      mat-slide-toggle {
+        display: flex;
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
 
+      .theme-label {
+        font-weight: 600;
+        font-size: 14px;
+        color: #fff;
+      }
+
+      .logout-btn {
         @media (max-width: 768px) {
           display: none;
         }

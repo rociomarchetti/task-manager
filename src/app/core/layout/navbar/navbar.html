@@ -8,6 +8,15 @@
   </div>
 
   <div class="nav-actions">
+    <mat-slide-toggle
+      [checked]="theme.isDark()"
+      labelPosition="before"
+      (change)="theme.toggle()"
+    >
+      <span class="theme-label">
+        {{ theme.isDark() ? '🌙 Dark Mode' : '☀️ Light Mode' }}
+      </span>
+    </mat-slide-toggle>
     <button class="logout-btn" mat-stroked-button (click)="logout()">
       Cerrar sesión
     </button>
