@@ -18,13 +18,13 @@ export const selectDashboardViewModel = createSelector(
     const tasks = state?.tasksData?.tasks ?? [];
     const tasksDueSoon = getTasksDueInNext7Days(tasks);
     const usedIds = new Set(tasksDueSoon.map((t) => t.id));
-    const recentlyUpdatedTasks = getRecentlyStatusChangedTasks(
+    const recentlyCreatedTasks = getRecentlyCreatedTasks(
       tasks.filter((t) => !usedIds.has(t.id))
     );
 
-    recentlyUpdatedTasks.forEach((t) => usedIds.add(t.id));
+    recentlyCreatedTasks.forEach((t) => usedIds.add(t.id));
 
-    const recentlyCreatedTasks = getRecentlyCreatedTasks(
+    const recentlyUpdatedTasks = getRecentlyStatusChangedTasks(
       tasks.filter((t) => !usedIds.has(t.id))
     );
 

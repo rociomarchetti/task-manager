@@ -86,6 +86,7 @@ export class DashboardFeature implements OnInit {
   }
 
   onSaveNewTask(createdTask: NewTaskData): void {
+    this.isModalOpen.set(false);
     this.dashboardFacade.createNewTask(createdTask);
   }
 

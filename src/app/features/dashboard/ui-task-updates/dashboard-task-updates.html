@@ -1,6 +1,6 @@
 <app-panel>
   <div appPanelBody>
-    @for (section of visibleSections; track $index) {
+    @for (section of visibleSections(); track $index) {
     <h4
       class="section-title"
       [matBadge]="getBadge(section)"

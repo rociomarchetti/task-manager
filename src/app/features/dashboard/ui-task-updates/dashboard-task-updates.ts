@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   output,
   signal,
@@ -43,7 +44,7 @@ export class DashboardTaskUpdates {
   isModalOpen = signal(false);
   selectedTask = signal<Task | null>(null);
 
-  sections = [
+  sections = computed(() => [
     {
       title: 'Tareas próximas a vencerse',
       tasks: () => this.tasksDueSoon(),
@@ -56,13 +57,15 @@ export class DashboardTaskUpdates {
       title: 'Tareas actualizadas recientemente',
       tasks: () => this.recentlyUpdatedTasks(),
     },
-  ];
+  ]);
 
-  get visibleSections() {
+  visibleSections = computed(() => {
+    const sections = this.sections();
+
     return this.tasksDueSoon()?.length
-      ? this.sections.slice(0, 2)
-      : this.sections.slice(1, 3);
-  }
+      ? sections.slice(0, 2)
+      : sections.slice(1, 3);
+  });
 
   getBadge(section: { title: string; tasks: () => Task[] }): string | null {
     return section.title === 'Tareas próximas a vencerse' ? '!' : null;

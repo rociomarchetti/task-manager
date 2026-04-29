@@ -110,27 +110,6 @@ export class DashboardEffects {
     )
   );
 
-  onEditedTaskList$ = createEffect(() =>
-    this.actions.pipe(
-      ofType(
-        fromActions.DashboardTaskActions.completedTaskSucceeded,
-        fromActions.DashboardTaskActions.postponedTaskSucceeded,
-        fromActions.DashboardTaskActions.editTaskSucceeded,
-        fromActions.DashboardTaskActions.createNewTaskSucceeded
-      ),
-      withLatestFrom(this.store.select(selectAuthenticatedUser)),
-      exhaustMap(([_, user]) =>
-        this.tasksService.getTasksForUser(user?.id).pipe(
-          map((userTasksSummary) => {
-            return fromActions.DashboardTaskActions.updatedTasksSucceeded({
-              tasksData: userTasksSummary,
-            });
-          })
-        )
-      )
-    )
-  );
-
   onRemoveBoard$ = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.DashboardBoardActions.removeBoardClicked),
@@ -157,6 +136,28 @@ export class DashboardEffects {
           }),
           catchError(() => {
             return of(fromActions.DashboardTaskActions.removeTaskError());
+          })
+        )
+      )
+    )
+  );
+
+  onEditedTaskList$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(
+        fromActions.DashboardTaskActions.completedTaskSucceeded,
+        fromActions.DashboardTaskActions.postponedTaskSucceeded,
+        fromActions.DashboardTaskActions.editTaskSucceeded,
+        fromActions.DashboardTaskActions.createNewTaskSucceeded,
+        fromActions.DashboardTaskActions.removeTaskSucceeded
+      ),
+      withLatestFrom(this.store.select(selectAuthenticatedUser)),
+      exhaustMap(([_, user]) =>
+        this.tasksService.getTasksForUser(user?.id).pipe(
+          map((userTasksSummary) => {
+            return fromActions.DashboardTaskActions.updatedTasksSucceeded({
+              tasksData: userTasksSummary,
+            });
           })
         )
       )
