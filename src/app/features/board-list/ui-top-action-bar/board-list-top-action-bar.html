@@ -2,10 +2,10 @@
   <div class="top-actions-group">
     <mat-button-toggle-group>
       <mat-button-toggle (click)="toggleFavorites(false)"
-        >Mostrar todos
+        >All boards
       </mat-button-toggle>
       <mat-button-toggle (click)="toggleFavorites(true)"
-        >Mostrar solo favoritos
+        >Favorites only
       </mat-button-toggle>
     </mat-button-toggle-group>
 
@@ -14,7 +14,7 @@
         <input
           type="text"
           matInput
-          [placeholder]="isFocused() ? '' : 'Escribir nombre del tablero'"
+          [placeholder]="isFocused() ? '' : 'Enter board name'"
           (focus)="isFocused.set(true)"
           (blur)="isFocused.set(false)"
           [formControl]="searchBoard"
@@ -29,7 +29,7 @@
     </form>
 
     <button mat-stroked-button color="primary" (click)="onCreateBoardClicked()">
-      + Nuevo tablero
+      + New Board
     </button>
   </div>
 </section>

@@ -2,24 +2,24 @@
   <ng-container ModalHeader>
     <div class="data-row">
       @if(this.mode() !== FormMode.CREATE){
-      <h3>Editar tarea</h3>
-      <p>Creada: {{formatDate(task()?.createdAt)}}</p>
+      <h3>Edit task</h3>
+      <p>Created: {{formatDate(task()?.createdAt)}}</p>
       } @else {
-      <h3>Crear tarea nueva</h3>
+      <h3>Create new task</h3>
       }
     </div>
   </ng-container>
   <ng-container ModalContent>
     <form [formGroup]="taskForm">
       <div class="data-row">
-        <p>Título:</p>
+        <p>Title:</p>
         @if(canEditFields) {
         <mat-form-field appearance="outline">
-          <mat-label>Editar nombre de la tarea</mat-label>
+          <mat-label>Edit task title</mat-label>
           <input matInput formControlName="title" />
           @if (taskForm.get('title')?.hasError('required') &&
           taskForm.get('title')?.touched) {
-          <mat-error>El nombre es requerido</mat-error>
+          <mat-error>A name is required</mat-error>
           }
         </mat-form-field>
         } @else {
@@ -27,14 +27,14 @@
         }
       </div>
       <div class="data-row">
-        <p>Descripción:</p>
+        <p>Description:</p>
         @if(canEditFields) {
         <mat-form-field appearance="outline">
-          <mat-label>Editar descripción de la tarea</mat-label>
+          <mat-label>Edit task description</mat-label>
           <textarea
             matInput
             formControlName="description"
-            placeholder="Agrega un resumen de la tarea"
+            placeholder="Add a task summary"
           ></textarea>
         </mat-form-field>
         } @else {
@@ -42,14 +42,14 @@
         }
       </div>
       <div class="data-row">
-        <p>Estado de la tarea:</p>
+        <p>Task status:</p>
         @if(canEditFields){
         <mat-form-field appearance="outline">
-          <mat-label>Estado</mat-label>
+          <mat-label>Status</mat-label>
           <select matNativeControl formControlName="status">
-            <option value="PENDING">Pendiente</option>
-            <option value="IN_PROGRESS">En proceso</option>
-            <option value="DONE">Completada</option>
+            <option value="PENDING">Pending</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
           </select>
         </mat-form-field>
         }@else {
@@ -60,7 +60,7 @@
         <p>ID del tablero:</p>
         @if(canEditFields){
         <mat-form-field appearance="outline">
-          <mat-label>ID Tablero</mat-label>
+          <mat-label>Board ID</mat-label>
           <select matNativeControl formControlName="boardId">
             @for(id of boardsId; track $index) {
             <option [value]="id">{{ id }}</option>
@@ -72,7 +72,7 @@
         }
       </div>
       <div class="data-row">
-        <p>Fecha de vencimiento:</p>
+        <p>Due date:</p>
         @if(canEditFields){
         <mat-form-field appearance="outline">
           <mat-label>Choose a date</mat-label>
@@ -94,13 +94,9 @@
   @if(canEditFields) {
   <ng-container ModalActions>
     @if(this.mode() === FormMode.EDIT) {
-    <button mat-stroked-button (click)="onSaveChanges()">
-      Guardar cambios
-    </button>
+    <button mat-stroked-button (click)="onSaveChanges()">Save changes</button>
     }@if(this.mode() === FormMode.CREATE) {
-    <button mat-stroked-button (click)="onSaveNewTask()">
-      Guardar nueva tarea
-    </button>
+    <button mat-stroked-button (click)="onSaveNewTask()">Save new task</button>
     }
     <button mat-stroked-button (click)="onCancelClicked()">Cancelar</button>
   </ng-container>

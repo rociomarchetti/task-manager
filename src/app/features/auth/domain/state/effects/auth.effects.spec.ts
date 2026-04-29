@@ -56,8 +56,8 @@ describe('GIVEN: Auth Effects', () => {
     user: {
       id: 123,
       email: 'test@example.com',
-      name: 'Juan',
-      lastName: 'Perez',
+      name: 'Jhon',
+      lastName: 'Doe',
       password: '1234abcd',
     },
   };
@@ -141,8 +141,8 @@ describe('GIVEN: Auth Effects', () => {
   describe('WHEN: register', () => {
     const registerRequestMock: RegisterRequest = {
       email: 'test@example.com',
-      name: 'Juan',
-      lastName: 'Perez',
+      name: 'Jhon',
+      lastName: 'Doe',
       password: '1234abcd',
     };
     it('THEN: should call the service', () => {

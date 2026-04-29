@@ -7,7 +7,7 @@
         @if(isEditMode) {
         <button
           mat-icon-button
-          matTooltip="Editar título"
+          matTooltip="Edit title"
           [matTooltipPosition]="'above'"
           (click)="onEditTitleClicked()"
         >
@@ -17,7 +17,7 @@
         <button
           mat-icon-button
           [matTooltipPosition]="'above'"
-          matTooltip="{{ isAFavoriteBoard ? 'Quitar de favoritos' : 'Añadir a favoritos' }}"
+          matTooltip="{{ isAFavoriteBoard ? 'Remove from favorites' : 'Add to favorites' }}"
           (click)="toggleFavorite()"
         >
           <mat-icon>
@@ -33,21 +33,21 @@
           @if(mode() === FormMode.EDIT && !!isEditTitleOn() || mode() ===
           FormMode.CREATE) {
           <mat-form-field appearance="outline">
-            <mat-label>Editar nombre del tablero</mat-label>
+            <mat-label>Enter board title</mat-label>
             <input matInput formControlName="title" />
             @if (boardForm.get('title')?.hasError('required') &&
             boardForm.get('title')?.touched) {
-            <mat-error>El nombre es requerido</mat-error>
+            <mat-error>A name is required</mat-error>
             }
           </mat-form-field>
           }
           <!-- board description -->
           <mat-form-field appearance="outline">
-            <mat-label>Descripción</mat-label>
+            <mat-label>Description</mat-label>
             <textarea
               matInput
               formControlName="description"
-              placeholder="Agrega un contexto para tus futuras tareas"
+              placeholder="Add a context for this board tasks"
             ></textarea>
           </mat-form-field>
 
@@ -132,7 +132,7 @@
               type="button"
               (click)="onAddTaskClicked()"
             >
-              Añadir tarea
+              Add Task
             </button>
             <button
               mat-stroked-button
@@ -140,7 +140,7 @@
               (click)="onSaveTaskListsChanges()"
               [disabled]="!areChangesInTaskLists()"
             >
-              Guardar cambios en tareas
+              Save tasks changes
             </button>
             } @else {
             <div>
@@ -151,7 +151,7 @@
                 >
                   <div class="board-form__row">
                     <mat-form-field appearance="outline" class="column-field">
-                      <mat-label>Nombre de la columna</mat-label>
+                      <mat-label>New status name</mat-label>
                       <input matInput [formControl]="colControl" />
                     </mat-form-field>
 
@@ -167,7 +167,7 @@
                 class="mt-3"
                 (click)="addColumnClicked()"
               >
-                Agregar columna
+                Add new status column
               </button>
             </div>
             }
@@ -183,10 +183,10 @@
           type="button"
           (click)="onSaveChangesClicked()"
         >
-          Guardar cambios en el tablero
+          Save board changes
         </button>
         <button mat-stroked-button type="button" (click)="onGoBackClicked()">
-          Volver
+          Back to boards
         </button>
         } @else {
         <button
@@ -195,10 +195,10 @@
           (click)="onSaveNewBoardClicked()"
           [disabled]="boardForm.invalid"
         >
-          Guardar tablero
+          Save Board
         </button>
         <button mat-stroked-button type="button" (click)="onCancelClicked()">
-          Cancelar
+          Cancel
         </button>
         }
       </div>

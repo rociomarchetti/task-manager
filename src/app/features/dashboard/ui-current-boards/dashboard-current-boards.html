@@ -1,9 +1,9 @@
 <app-panel>
   <div appPanelBody>
-    <h4>Tableros con actividades en curso:</h4>
+    <h4>Boards with ongoing activities:</h4>
     <app-list
       [listItems]="currentBoards()"
-      [emptyStateMssg]="'No hay tableros aún.'"
+      [emptyStateMssg]="'There are no boards yet.'"
     >
       @for(item of currentBoards(); track $index; let i = $index ) {
       <app-board-list-item

@@ -5,9 +5,9 @@ export function formatDate(date: Date | string): string {
   const diffMs = now.getTime() - realDate.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) return 'Hoy';
-  if (diffDays === 1) return 'Ayer';
-  if (diffDays < 7) return `Hace ${diffDays} días`;
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
 
   return realDate.toLocaleDateString('es-ES', {
     day: '2-digit',

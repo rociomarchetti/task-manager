@@ -46,15 +46,15 @@ export class DashboardTaskUpdates {
 
   sections = computed(() => [
     {
-      title: 'Tareas próximas a vencerse',
+      title: 'Tasks due soon',
       tasks: () => this.tasksDueSoon(),
     },
     {
-      title: 'Tareas creadas recientemente',
+      title: 'Recently created tasks',
       tasks: () => this.recentlyCreatedTasks(),
     },
     {
-      title: 'Tareas actualizadas recientemente',
+      title: 'Recently updated tasks',
       tasks: () => this.recentlyUpdatedTasks(),
     },
   ]);
@@ -68,7 +68,7 @@ export class DashboardTaskUpdates {
   });
 
   getBadge(section: { title: string; tasks: () => Task[] }): string | null {
-    return section.title === 'Tareas próximas a vencerse' ? '!' : null;
+    return section.title === 'Tasks due soon' ? '!' : null;
   }
 
   onSeeTask(task: Task): void {

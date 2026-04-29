@@ -9,17 +9,17 @@
     </div>
     <div class="board-card__content">
       @if(board.description){
-      <p>Descripción:</p>
+      <p>Description:</p>
       <p>{{ board.description }}</p>
       }
-      <p>Creado: {{formatDate(board.createdAt)}}</p>
+      <p>Created: {{formatDate(board.createdAt)}}</p>
     </div>
     <div class="board-card__footer">
       <button mat-stroked-button (click)="onGoToBoardDetails(board.id)">
-        Ver Tablero
+        View Board
       </button>
       <button
-        [matTooltip]="'Eliminar'"
+        [matTooltip]="'Delete'"
         [matTooltipPosition]="'above'"
         mat-mini-fab
         (click)="onRemoveBoard(board)"

@@ -11,7 +11,7 @@
 
     <app-list
       [listItems]="section.tasks()"
-      [emptyStateMssg]="'No hay tareas aún'"
+      [emptyStateMssg]="'There are no tasks yet'"
       class="section-list"
     >
       @for (task of section.tasks(); track $index) {

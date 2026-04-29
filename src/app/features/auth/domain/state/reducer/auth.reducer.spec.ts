@@ -8,8 +8,8 @@ describe('GIVEN: Auth Reducer', () => {
   const mockUserResponse: User = {
     id: 123,
     email: 'test@example.com',
-    name: 'Juan',
-    lastName: 'Perez',
+    name: 'Jhon',
+    lastName: 'Doe',
     password: '1234abcd',
   };
 

@@ -103,6 +103,7 @@ export class TaskModal {
   }
 
   onCloseModal(): void {
+    this.taskForm.reset();
     this.modalClosed.emit();
   }
 
@@ -137,6 +138,7 @@ export class TaskModal {
   }
 
   onCancelClicked(): void {
+    this.taskForm.reset();
     this.modalClosed.emit();
   }
 

@@ -39,7 +39,7 @@ export class Navbar {
   }
 
   getUserName(user: User): string {
-    const message = `Hola ${user?.name} ${user?.lastName}`;
+    const message = `Hello ${user?.name} ${user?.lastName}`;
     return message;
   }
 }

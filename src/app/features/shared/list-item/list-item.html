@@ -7,12 +7,12 @@
 
 <section class="actions">
   <div class="buttons-container">
-    <button mat-mini-fab [matTooltip]="'Ver'" (click)="onActionClick('see')">
+    <button mat-mini-fab [matTooltip]="'See'" (click)="onActionClick('see')">
       <mat-icon>visibility</mat-icon>
     </button>
     <button
       mat-mini-fab
-      [matTooltip]="'Eliminar'"
+      [matTooltip]="'Delete'"
       (click)="onActionClick('remove')"
     >
       <mat-icon>delete</mat-icon>
@@ -23,7 +23,7 @@
   @if(hasMoreOptions()) {
   <button
     matIconButton
-    [matTooltip]="'Más opciones'"
+    [matTooltip]="'More options'"
     [matMenuTriggerFor]="menu"
   >
     <mat-icon>more_vert</mat-icon>

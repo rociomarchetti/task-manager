@@ -131,7 +131,7 @@ export class BoardFormComponent {
 
   get boardTitle(): string {
     if (this.mode() === FormMode.CREATE) {
-      return 'Crear nuevo tablero';
+      return 'Create new Board';
     }
 
     const board = this.board();

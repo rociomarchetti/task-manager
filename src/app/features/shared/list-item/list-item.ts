@@ -37,7 +37,7 @@ export class ListItem {
   }
 
   get tooltipMssg(): string {
-    return this.variant() === 'task' ? 'Tarea' : 'Tablero';
+    return this.variant() === 'task' ? 'Task' : 'Board';
   }
 
   @HostBinding('class')

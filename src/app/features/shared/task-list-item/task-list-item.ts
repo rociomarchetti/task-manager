@@ -29,17 +29,17 @@ export class TaskListItem {
       {
         id: 'edit',
         icon: 'edit',
-        label: 'Editar',
+        label: 'Edit',
       },
       {
         id: 'check',
         icon: 'check',
-        label: 'Marcar como completada',
+        label: 'Mark as completed',
       },
       {
         id: 'postpone',
         icon: 'more_time',
-        label: 'Retrasar vencimiento',
+        label: 'Postpone due date',
       },
     ];
   }
