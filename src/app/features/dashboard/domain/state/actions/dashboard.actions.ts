@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {
+  Board,
   NewTaskData,
   Task,
   User,
@@ -64,7 +65,9 @@ export const DashboardBoardActions = createActionGroup({
     'Remove Board Clicked': props<{
       boardId: string;
     }>(),
-    'Remove Board Succeeded': emptyProps(),
+    'Remove Board Succeeded': props<{
+      boardsUpdatedList: Board[];
+    }>(),
     'Remove Board Error': emptyProps(),
     'Go To Boards List Clicked': emptyProps(),
   },

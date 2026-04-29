@@ -115,8 +115,10 @@ export class DashboardEffects {
       ofType(fromActions.DashboardBoardActions.removeBoardClicked),
       exhaustMap((action) =>
         this.boardsService.deleteBoard(action?.boardId).pipe(
-          map(() => {
-            return fromActions.DashboardBoardActions.removeBoardSucceeded();
+          map((boards) => {
+            return fromActions.DashboardBoardActions.removeBoardSucceeded({
+              boardsUpdatedList: boards,
+            });
           }),
           catchError(() => {
             return of(fromActions.DashboardBoardActions.removeBoardError());

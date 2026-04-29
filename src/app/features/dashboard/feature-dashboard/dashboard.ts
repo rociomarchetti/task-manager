@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   OnInit,
   signal,
@@ -14,6 +15,8 @@ import { Board, NewTaskData, Task } from '@shared/models';
 import { DashboardCurrentBoards } from '../ui-current-boards/dashboard-current-boards';
 import { DashboardQuickActions } from '../ui-quick-actions/dashboard-quick-actions';
 import { FormMode } from '@shared/models/form-mode.model';
+import { NotificationService } from 'app/core/services/notification-service/notification-service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,6 +34,8 @@ import { FormMode } from '@shared/models/form-mode.model';
 })
 export class DashboardFeature implements OnInit {
   private readonly dashboardFacade = inject(DashboardFacade);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly notification = inject(NotificationService);
   readonly viewModel$ = this.dashboardFacade.viewModel$;
 
   isModalOpen = signal(false);
@@ -39,6 +44,7 @@ export class DashboardFeature implements OnInit {
 
   ngOnInit(): void {
     this.dashboardFacade.viewInitialised();
+    this.initNotifications();
   }
 
   onModalClosed(): void {
@@ -96,5 +102,19 @@ export class DashboardFeature implements OnInit {
 
   onGoToBoardsListClicked(): void {
     this.dashboardFacade.goToBoardsList();
+  }
+
+  private initNotifications(): void {
+    this.dashboardFacade.taskCreatedSuccess$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.notification.show('Tarea creada ✓'));
+
+    this.dashboardFacade.taskRemovedSuccess$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.notification.show('Tarea eliminada'));
+
+    this.dashboardFacade.boardRemovedSuccess$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.notification.show('Tablero eliminado'));
   }
 }

@@ -10,7 +10,6 @@ import { Board } from '@shared/models';
 import { List } from '@shared/ui/list/list';
 import { Panel } from '@shared/ui/panel/panel';
 import { PanelBodyDirective } from '@shared/ui/panel/panel.directive';
-import { mockBoards } from 'app/core/services/boards-service/__mocks__/mock-boards';
 import { BoardListItem } from 'app/features/shared/board-list-item/board-list-item';
 
 @Component({
@@ -21,7 +20,6 @@ import { BoardListItem } from 'app/features/shared/board-list-item/board-list-it
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardCurrentBoards {
-  mockBoards = mockBoards;
   currentBoards = input<Array<Board>>();
 
   goToBoardClicked = output<Board>();

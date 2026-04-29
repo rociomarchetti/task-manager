@@ -2,10 +2,10 @@
   <div appPanelBody>
     <h4>Tableros con actividades en curso:</h4>
     <app-list
-      [listItems]="mockBoards"
+      [listItems]="currentBoards()"
       [emptyStateMssg]="'No hay tableros aún.'"
     >
-      @for(item of mockBoards; track $index; let i = $index ) {
+      @for(item of currentBoards(); track $index; let i = $index ) {
       <app-board-list-item
         [board]="item"
         (seeBoard)="onGoToBoard($event)"

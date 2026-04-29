@@ -29,6 +29,18 @@ const dashboardReducer = createReducer(
         tasksData: action.tasksData,
       };
     }
+  ),
+  on(
+    fromActions.DashboardBoardActions.removeBoardSucceeded,
+    (state, { boardsUpdatedList }) => ({
+      ...state,
+      boardsData: state.boardsData
+        ? {
+            ...state.boardsData,
+            boards: boardsUpdatedList,
+          }
+        : null,
+    })
   )
 );
 

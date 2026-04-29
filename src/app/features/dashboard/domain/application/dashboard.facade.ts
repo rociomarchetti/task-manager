@@ -6,12 +6,25 @@ import { DashboardViewModel } from '../entities/dashboard-view.model';
 import * as fromSelectors from '../state/selectors/dashboard.selectors';
 import * as fromActions from '../state/actions/dashboard.actions';
 import { NewTaskData, Task } from '@shared/models';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardFacade {
   private readonly store = inject(Store<DashboardState>);
+  private readonly actions$ = inject(Actions);
+
   viewModel$: Observable<DashboardViewModel> = this.store.select(
     fromSelectors.selectDashboardViewModel
+  );
+
+  readonly taskCreatedSuccess$ = this.actions$.pipe(
+    ofType(fromActions.DashboardTaskActions.createNewTaskSucceeded)
+  );
+  readonly taskRemovedSuccess$ = this.actions$.pipe(
+    ofType(fromActions.DashboardTaskActions.removeTaskSucceeded)
+  );
+  readonly boardRemovedSuccess$ = this.actions$.pipe(
+    ofType(fromActions.DashboardBoardActions.removeBoardSucceeded)
   );
 
   viewInitialised(): void {
