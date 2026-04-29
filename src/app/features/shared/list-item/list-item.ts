@@ -36,10 +36,6 @@ export class ListItem {
     this.actionClicked.emit(actionId);
   }
 
-  get tooltipMssg(): string {
-    return this.variant() === 'task' ? 'Task' : 'Board';
-  }
-
   @HostBinding('class')
   get hostClasses(): string {
     return `list-item list-item--${this.variant()}`;
