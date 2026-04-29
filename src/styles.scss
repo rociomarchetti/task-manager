@@ -13,6 +13,7 @@ html {
   );
   --mat-sys-primary: #e639b2;
   --mat-app-background-color: transparent;
+  --mat-badge-background-color: var(--color-primary);
 }
 
 html,
@@ -38,7 +39,6 @@ body {
   --bg-section: #eddddd;
   --text-primary: #1a1a1a;
   --text-secondary: #555555;
-  //--text-muted: #888888;
   --btn-text: #2f2f2f;
   --border-color: #3a3a3a7c;
   --shadow-panel: 6px 6px 0 #3a3a3a, 6px 10px 14px rgba(58, 58, 58, 0.25);
@@ -53,10 +53,10 @@ body.dark-mode {
   --bg-section: #5a5959;
   --text-primary: #f0f0f0;
   --text-secondary: #bbbbbb;
-  //--text-muted: #777777;
+  --btn-text: #d1cccc;
   --border-color: #6160607c;
   --shadow-panel: 6px 6px 0 #3a3a3a, 6px 10px 14px rgba(89, 86, 86, 0.25);
-  --color-primary: #e91e8c;
+  --color-primary: #ff3da6;
   --color-primary-hover: #ff3da6;
 }
 
@@ -150,6 +150,10 @@ body.dark-mode {
     border-radius: 8px !important;
     box-shadow: var(--shadow-panel);
     transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+  .mdc-text-field__input {
+    color: var(--text-secondary) !important;
   }
 
   .mdc-floating-label {
