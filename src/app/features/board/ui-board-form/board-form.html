@@ -81,7 +81,17 @@
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of todoTasks(); track item) {
-                <div class="status-item" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>
+                  {{ item }}
+
+                  <ng-template cdkDragPreview>
+                    <div class="preview">{{ item }}</div>
+                  </ng-template>
+
+                  <ng-template cdkDragPlaceholder>
+                    <div class="placeholder"></div>
+                  </ng-template>
+                </div>
                 }
               </div>
             </div>
@@ -96,7 +106,16 @@
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of inProgressTasks(); track item) {
-                <div class="status-item" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>
+                  {{ item }}
+                  <ng-template cdkDragPreview>
+                    <div class="preview">{{ item }}</div>
+                  </ng-template>
+
+                  <ng-template cdkDragPlaceholder>
+                    <div class="placeholder"></div>
+                  </ng-template>
+                </div>
                 }
               </div>
             </div>
@@ -111,7 +130,17 @@
                 (cdkDropListDropped)="dropTask($event)"
               >
                 @for (item of doneTasks(); track item) {
-                <div class="status-item" cdkDrag>{{ item }}</div>
+                <div class="status-item" cdkDrag>
+                  {{ item }}
+
+                  <ng-template cdkDragPreview>
+                    <div class="preview">{{ item }}</div>
+                  </ng-template>
+
+                  <ng-template cdkDragPlaceholder>
+                    <div class="placeholder"></div>
+                  </ng-template>
+                </div>
                 }
               </div>
             </div>

@@ -29,7 +29,8 @@ section {
 }
 
 ::ng-deep .top-actions-group button {
-  color: var(--text-primary);
+  background: #fdfbf5;
+  color: var(--color-primary);
 }
 
 ::ng-deep .top-actions-group .mat-mdc-outlined-button .mdc-button__ripple {
