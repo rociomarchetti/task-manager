@@ -53,10 +53,11 @@ export class BoardsService {
     return of(newBoard).pipe(delay(300));
   }
 
-  deleteBoard(boardId: string): Observable<void> {
+  deleteBoard(boardId: string): Observable<Board[]> {
     this.boards = this.boards.filter((b) => b.id !== boardId);
     this.saveBoards();
-    return of(void 0);
+
+    return of([...this.boards]);
   }
 
   private saveBoards(): void {
