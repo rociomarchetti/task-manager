@@ -12,6 +12,7 @@ html {
     )
   );
   --mat-sys-primary: #e639b2;
+  --mat-app-background-color: transparent;
 }
 
 html,
@@ -23,23 +24,23 @@ body {
 }
 
 body {
-  background: var(--bg-app);
+  background: var(--bg-app) !important;
 }
 
 // Light theme
 :root {
   --color-primary: #e91e8c;
   --color-primary-hover: #c4166f;
-  --bg-app: #f1f1f1;
-  --bg-panel: #f2efec7e;
+  --bg-app: #f0eeeb;
+  --bg-panel: #faf9f7;
   --bg-card-hover: #f9f9f9;
   --bg-navbar: #1a1a1a;
   --bg-section: #eddddd;
   --text-primary: #1a1a1a;
   --text-secondary: #555555;
   //--text-muted: #888888;
-  --btn-text: #2f2f2f
-  --border-color: #5a5959;
+  --btn-text: #2f2f2f;
+  --border-color: #3a3a3a7c;
   --shadow-panel: 6px 6px 0 #3a3a3a, 6px 10px 14px rgba(58, 58, 58, 0.25);
 }
 
@@ -53,6 +54,7 @@ body.dark-mode {
   --text-primary: #f0f0f0;
   --text-secondary: #bbbbbb;
   //--text-muted: #777777;
+  --border-color: #6160607c;
   --shadow-panel: 6px 6px 0 #3a3a3a, 6px 10px 14px rgba(89, 86, 86, 0.25);
   --color-primary: #e91e8c;
   --color-primary-hover: #ff3da6;
@@ -66,8 +68,8 @@ body.dark-mode {
 }
 
 .mat-mdc-tab-group .mdc-tab-indicator__content--underline {
-  border-top-width: 4px !important; 
-  border-color: var(--mat-sys-primary) !important; 
+  border-top-width: 4px !important;
+  border-color: var(--mat-sys-primary) !important;
 }
 
 .mat-mdc-mini-fab {

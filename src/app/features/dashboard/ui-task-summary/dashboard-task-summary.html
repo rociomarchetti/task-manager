@@ -1,9 +1,10 @@
 <div class="summary-panel-group">
   <app-panel>
     <div appPanelBody>
-      <div class="stat-card">
-        <svg width="80" height="80" viewBox="0 0 80 80">
+      <div class="progress-ring__wrapper">
+        <svg class="progress-ring" width="80" height="80" viewBox="0 0 80 80">
           <circle
+            class="progress-ring__track"
             cx="40"
             cy="40"
             r="36"
@@ -12,6 +13,7 @@
             stroke-width="8"
           />
           <circle
+            class="progress-ring__fill"
             cx="40"
             cy="40"
             r="36"
@@ -23,6 +25,7 @@
             transform="rotate(-90 40 40)"
           />
           <text
+            class="progress-ring__text"
             x="40"
             y="45"
             text-anchor="middle"

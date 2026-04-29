@@ -51,3 +51,40 @@
     }
   }
 }
+
+.progress-ring__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 4px 0;
+}
+
+.progress-ring__track {
+  stroke: #d0ccc8;
+}
+
+body.dark-mode .progress-ring__track {
+  stroke: #2e2e2e;
+}
+
+.progress-ring__fill {
+  stroke: var(--color-primary);
+
+  stroke-dashoffset: 226.2;
+  animation: ring-fill 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.progress-ring__text {
+  fill: var(--text-primary);
+}
+
+@keyframes ring-fill {
+  from {
+    stroke-dashoffset: 226.2;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
