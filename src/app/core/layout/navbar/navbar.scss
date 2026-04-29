@@ -5,7 +5,7 @@
 }
 ::ng-deep {
   mat-toolbar.brutal-nav {
-    height: 56px !important;
+    height: 4.5rem !important;
     padding: 0 1.5rem !important;
     display: flex;
     align-items: center;
@@ -74,6 +74,27 @@
       }
 
       .logout-btn {
+        cursor: pointer;
+        height: 2.5rem;
+        border-radius: 8px !important;
+        border: 2px solid #c2bcbc !important;
+        box-shadow: 3px 3px 0 #645f5f !important;
+        color: #d1cccc;
+        background: transparent !important;
+        padding: 0.5rem;
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+
+        &:hover {
+          box-shadow: 4px 4px 0 #3a3a3a !important;
+          transform: translate(-1px, -1px);
+        }
+
+        &:active {
+          box-shadow: 1px 1px 0 #3a3a3a !important;
+          transform: translate(2px, 2px);
+        }
+
         @media (max-width: 768px) {
           display: none;
         }

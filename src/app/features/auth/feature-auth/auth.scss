@@ -38,3 +38,9 @@
 ::ng-deep .mat-mdc-tab-body-content {
   overflow: visible !important;
 }
+
+::ng-deep {
+  .mat-mdc-tab .mdc-tab__text-label {
+    color: var(--text-secondary) !important;
+  }
+}

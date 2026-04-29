@@ -90,7 +90,7 @@ export class BoardFormComponent {
     if (data && this.mode() === FormMode.EDIT) {
       this.boardForm.patchValue({
         title: data.title,
-        description: data.description,
+        description: data.description ?? 'No has ingresado una descripción aún',
         isFavorite: data.isFavorite,
       });
     } else {

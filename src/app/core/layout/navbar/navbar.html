@@ -17,9 +17,7 @@
         {{ theme.isDark() ? '🌙 Dark Mode' : '☀️ Light Mode' }}
       </span>
     </mat-slide-toggle>
-    <button class="logout-btn" mat-stroked-button (click)="logout()">
-      Cerrar sesión
-    </button>
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
     @if(viewModel$ | async; as vm) {
     <button
       mat-stroked-button

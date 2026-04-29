@@ -12,22 +12,6 @@ import {
 export const selectDashboardState =
   createFeatureSelector<DashboardState>(dashboardFeatureKey);
 
-/* export const selectDashboardViewModel = createSelector(
-  selectDashboardState,
-  (state): DashboardViewModel => ({
-    currentBoards: getCurrentBoards(state?.boardsData?.boards ?? []),
-    recentlyCreatedTasks: getRecentlyCreatedTasks(
-      state?.tasksData?.tasks ?? []
-    ),
-    recentlyUpdatedTasks: getRecentlyStatusChangedTasks(
-      state?.tasksData?.tasks ?? []
-    ),
-    userName: state?.user?.name ?? '',
-    tasksAmounts: countTasksByStatus(state?.tasksData?.tasks ?? []),
-    tasksDueSoon: getTasksDueInNext7Days(state?.tasksData?.tasks ?? []),
-  })
-); */
-
 export const selectDashboardViewModel = createSelector(
   selectDashboardState,
   (state): DashboardViewModel => {

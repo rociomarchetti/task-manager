@@ -4,7 +4,15 @@
   align-items: center;
   margin-bottom: 0.5rem;
 
+  h3 {
+    letter-spacing: 1px;
+  }
+
   p {
     flex: 0 0 auto;
   }
+}
+
+mat-hint {
+  margin-top: 0.5rem;
 }
