@@ -61,7 +61,7 @@ export function getCurrentBoards(boards: Board[]): Board[] {
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
-    .slice(0, 3);
+    .slice(0, 4);
 }
 
 export function getStrokeDasharray(tasks: TaskAmounts | undefined): string {
