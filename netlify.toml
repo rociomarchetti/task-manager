@@ -1,9 +1,16 @@
 [build]
-  command = "nx build <nombre-de-tu-app> --configuration=production"
-  publish = "dist/apps/<nombre-de-tu-app>/browser"
+  command = "npm ci && nx build task-manager --configuration=production"
+  publish = "dist/apps/task-manager/browser"
+
+[[plugins]]
+  package = "@netlify/plugin-angular"
+
+  [plugins.inputs]
+    packagePath = "apps/task-manager"
 
 [build.environment]
   NODE_VERSION = "20.19.0"
+  NX_DAEMON = "false"
 
 [[redirects]]
   from = "/*"
