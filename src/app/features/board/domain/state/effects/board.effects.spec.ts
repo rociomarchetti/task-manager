@@ -3,8 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, ActionsSubject } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
-import { Board, NewBoardData, NewTaskData, Task } from '@shared/models';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import {
+  Board,
+  NewBoardData,
+  NewTaskData,
+  Task,
+  User,
+  UserBoardsSummary,
+  UserTasksSummary,
+} from '@shared/models';
 import { BoardsServiceMock } from 'app/core/services/boards-service/__mocks__/boards-service.mock';
 import { BoardsService } from 'app/core/services/boards-service/boards-service';
 import { TasksServiceMock } from 'app/core/services/tasks-service/__mocks__/tasks-service.mock';
@@ -12,6 +20,7 @@ import { TasksService } from 'app/core/services/tasks-service/tasks-service';
 import { of, throwError } from 'rxjs';
 import * as fromActions from '../actions/board.actions';
 import { BoardEffects } from './board.effects';
+import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
 
 describe('GIVEN: Board Effects', () => {
   let effects: BoardEffects;
@@ -47,10 +56,15 @@ describe('GIVEN: Board Effects', () => {
 
   describe('WHEN: viewInitialised', () => {
     it('THEN: should dispatch on success', () => {
+      const store = TestBed.inject<MockStore>(MockStore);
+      const mockUser = {} as User;
+      const mockBoard = {} as Board;
+      const mockTasks = {} as UserTasksSummary;
+      const mockBoards = {} as UserBoardsSummary;
       const mockSuccessResponse = {
-        currentBoard: {} as Board,
-        boards: [{} as Board],
-        taskLists: [{} as Task],
+        currentBoard: mockBoard,
+        boards: mockBoards.boards,
+        taskLists: mockTasks.tasks,
       };
       const result: Action[] = [];
       const mockBoardId = 'A';
@@ -62,6 +76,13 @@ describe('GIVEN: Board Effects', () => {
           mockSuccessResponse
         );
 
+      store.overrideSelector(selectAuthenticatedUser, mockUser);
+      store.refreshState();
+      jest.spyOn(boardsService, 'getBoardById').mockReturnValue(of(mockBoard));
+      jest.spyOn(taskService, 'getTasksForUser').mockReturnValue(of(mockTasks));
+      jest
+        .spyOn(boardsService, 'getBoardsForUser')
+        .mockReturnValue(of(mockBoards));
       effects.viewInitialised$.subscribe((res) => {
         result.push(res);
       });
@@ -72,14 +93,17 @@ describe('GIVEN: Board Effects', () => {
   });
 
   describe('WHEN: addNewTask', () => {
+    const mockUser = {} as User;
     const mockNewTaskData = {} as NewTaskData;
     const action = fromActions.BoardEditActions.addNewTask({
       newTaskData: mockNewTaskData,
     });
     it('THEN: should call the service', () => {
+      const store = TestBed.inject<MockStore>(MockStore);
       const result: Action[] = [];
       const spy = jest.spyOn(taskService, 'addTask');
 
+      store.overrideSelector(selectAuthenticatedUser, mockUser);
       effects.addNewTask$.subscribe((res) => {
         result.push(res);
       });

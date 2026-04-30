@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, ActionsSubject } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { Board, User } from '@shared/models';
+import { Board, User, UserBoardsSummary } from '@shared/models';
 import { BoardsServiceMock } from 'app/core/services/boards-service/__mocks__/boards-service.mock';
 import { BoardsService } from 'app/core/services/boards-service/boards-service';
 import { selectAuthenticatedUser } from 'app/features/auth/domain/state';
@@ -47,6 +47,10 @@ describe('GIVEN: Board List Effects', () => {
       const mockBoards = [{} as Board];
       const mockUser = {} as User;
       const store = TestBed.inject<MockStore>(MockStore);
+      const boardSummaryMock: UserBoardsSummary = {
+        userId: 123,
+        boards: mockBoards,
+      };
       const action = fromActions.BoardListViewActions.viewInitialised();
       const expected =
         fromActions.BoardListViewActions.viewInitialisedSucceeded({
@@ -55,6 +59,9 @@ describe('GIVEN: Board List Effects', () => {
 
       store.overrideSelector(selectAuthenticatedUser, mockUser);
       store.refreshState();
+      jest
+        .spyOn(service, 'getBoardsForUser')
+        .mockReturnValue(of(boardSummaryMock));
       effects.viewInitialised$.subscribe((res) => {
         result.push(res);
       });

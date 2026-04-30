@@ -20,7 +20,7 @@ describe('GIVEN: Board Selectors', () => {
       const expected: BoardViewModel = {
         boards: mockState.boards,
         currentBoard: mockState.currentBoard,
-        taskLists: tasksByStatus(mockState.taskLists ?? []),
+        taskLists: tasksByStatus(mockState.taskLists ?? [], 'boardId'),
       };
       const result = fromSelectors.selectBoardViewModel.projector(mockState);
 
