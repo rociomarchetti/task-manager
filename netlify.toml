@@ -1,0 +1,11 @@
+[build]
+  command = "nx build <nombre-de-tu-app> --configuration=production"
+  publish = "dist/apps/<nombre-de-tu-app>/browser"
+
+[build.environment]
+  NODE_VERSION = "20.19.0"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
