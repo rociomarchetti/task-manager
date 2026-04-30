@@ -4,16 +4,21 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideZoneChangeDetection } from '@angular/core';
 import * as fromActions from '../state/actions/dashboard.actions';
 import { NewTaskData, Task } from '@shared/models';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { Observable } from 'rxjs';
+import { ActionsSubject } from '@ngrx/store';
 
 describe('GIVEN: Dashboard Facade', () => {
   let store: MockStore;
   let facade: DashboardFacade;
+  let actions$: Observable<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         DashboardFacade,
         provideMockStore(),
+        provideMockActions(() => actions$),
         provideZoneChangeDetection({ ignoreChangesOutsideZone: true }),
       ],
     });
@@ -22,6 +27,7 @@ describe('GIVEN: Dashboard Facade', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     facade = TestBed.inject(DashboardFacade);
+    actions$ = new ActionsSubject();
   });
 
   describe('WHEN: viewInitialised', () => {

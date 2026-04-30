@@ -11,6 +11,7 @@ import { TasksServiceMock } from 'app/core/services/tasks-service/__mocks__/task
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import {
+  Board,
   Task,
   User,
   UserBoardsSummary,
@@ -229,11 +230,15 @@ describe('GIVEN: Dashboard Effects', () => {
     const mockBoard = 'board-123';
 
     it('THEN: should dispatch removeBoardSucceeded on success', (done) => {
+      const mockBoards = [{} as Board];
       const action = fromActions.DashboardBoardActions.removeBoardClicked({
         boardId: mockBoard,
       });
-      const expected = fromActions.DashboardBoardActions.removeBoardSucceeded();
+      const expected = fromActions.DashboardBoardActions.removeBoardSucceeded({
+        boardsUpdatedList: mockBoards,
+      });
 
+      jest.spyOn(boardsService, 'deleteBoard').mockReturnValue(of(mockBoards));
       effects.onRemoveBoard$.subscribe((res) => {
         expect(res).toEqual(expected);
         done();
