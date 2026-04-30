@@ -1,6 +1,6 @@
 [build]
   command = "npm ci && nx build task-manager --configuration=production"
-  publish = "dist/apps/task-manager/browser"
+  publish = "dist/task-manager"
 
 [build.environment]
   NODE_VERSION = "20.19.0"
@@ -9,6 +9,9 @@
 
 [[plugins]]
   package = "@netlify/angular-runtime"
+
+  [plugins.inputs]
+    packagePath = "apps/task-manager"
 
 [[redirects]]
   from = "/*"
