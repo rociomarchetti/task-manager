@@ -13,6 +13,11 @@ describe('GIVEN: TasksService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
+    Object.defineProperty(global, 'crypto', {
+      value: {
+        randomUUID: jest.fn(() => 'mock-uuid'),
+      },
+    });
 
     jest.spyOn(localStorage.__proto__, 'getItem');
     jest.spyOn(localStorage.__proto__, 'setItem');
