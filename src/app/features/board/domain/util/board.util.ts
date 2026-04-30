@@ -1,11 +1,15 @@
 import { Task, TaskStatus } from '@shared/models';
 import { TaskListsData } from '../entities/board.model';
 
-export const tasksByStatus = (tasks: Task[]) => ({
-  pending: tasks?.filter((t) => t.status === TaskStatus.PENDING),
-  inProgress: tasks?.filter((t) => t.status === TaskStatus.IN_PROGRESS),
-  completed: tasks?.filter((t) => t.status === TaskStatus.DONE),
-});
+export const tasksByStatus = (tasks: Task[], boardId: string) => {
+  const boardTasks = tasks?.filter((t) => t.boardId === boardId);
+
+  return {
+    pending: boardTasks?.filter((t) => t.status === TaskStatus.PENDING),
+    inProgress: boardTasks?.filter((t) => t.status === TaskStatus.IN_PROGRESS),
+    completed: boardTasks?.filter((t) => t.status === TaskStatus.DONE),
+  };
+};
 
 export function checkTaskListsChanges(
   initial: TaskListsData,

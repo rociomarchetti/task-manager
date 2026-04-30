@@ -8,9 +8,15 @@ export const selectBoardState =
 
 export const selectBoardViewModel = createSelector(
   selectBoardState,
-  (state): BoardViewModel => ({
-    boards: state?.boards ?? null,
-    currentBoard: state?.currentBoard ?? null,
-    taskLists: tasksByStatus(state?.taskLists ?? []) ?? null,
-  })
+  (state): BoardViewModel => {
+    const currentBoard = state?.currentBoard;
+
+    return {
+      boards: state?.boards ?? null,
+      currentBoard,
+      taskLists: currentBoard
+        ? tasksByStatus(state?.taskLists ?? [], currentBoard.id)
+        : null,
+    };
+  }
 );
