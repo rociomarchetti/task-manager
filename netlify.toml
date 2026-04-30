@@ -10,9 +10,6 @@
 [[plugins]]
   package = "@netlify/angular-runtime"
 
-  [plugins.inputs]
-    packagePath = "apps/task-manager"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
