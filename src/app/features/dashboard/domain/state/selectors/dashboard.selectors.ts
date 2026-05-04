@@ -8,6 +8,7 @@ import {
   getTasksDueInNext7Days,
   getCurrentBoards,
 } from '../util/dashboard.util';
+import { TaskStatus } from '@shared/models';
 
 export const selectDashboardState =
   createFeatureSelector<DashboardState>(dashboardFeatureKey);
@@ -16,16 +17,17 @@ export const selectDashboardViewModel = createSelector(
   selectDashboardState,
   (state): DashboardViewModel => {
     const tasks = state?.tasksData?.tasks ?? [];
-    const tasksDueSoon = getTasksDueInNext7Days(tasks);
+    const activeTasks = tasks.filter((t) => t.status !== TaskStatus.DONE);
+    const tasksDueSoon = getTasksDueInNext7Days(activeTasks);
     const usedIds = new Set(tasksDueSoon.map((t) => t.id));
     const recentlyCreatedTasks = getRecentlyCreatedTasks(
-      tasks.filter((t) => !usedIds.has(t.id))
+      activeTasks.filter((t) => !usedIds.has(t.id))
     );
 
     recentlyCreatedTasks.forEach((t) => usedIds.add(t.id));
 
     const recentlyUpdatedTasks = getRecentlyStatusChangedTasks(
-      tasks.filter((t) => !usedIds.has(t.id))
+      activeTasks.filter((t) => !usedIds.has(t.id))
     );
 
     return {
