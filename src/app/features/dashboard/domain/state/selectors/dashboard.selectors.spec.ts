@@ -1,14 +1,7 @@
-import {
-  Board,
-  Task,
-  TaskAmounts,
-  User,
-  UserBoardsSummary,
-  UserTasksSummary,
-} from '@shared/models';
+import { User, UserBoardsSummary, UserTasksSummary } from '@shared/models';
+import { DashboardViewModel } from '../../entities/dashboard-view.model';
 import { DashboardState } from '../state/dashboard.state';
 import * as fromSelectors from './dashboard.selectors';
-import { DashboardViewModel } from '../../entities/dashboard-view.model';
 
 describe('GIVEN: Dashboard Selectors', () => {
   let mockState: DashboardState;
@@ -18,6 +11,7 @@ describe('GIVEN: Dashboard Selectors', () => {
       user: {} as User,
       tasksData: {} as UserTasksSummary,
       boardsData: {} as UserBoardsSummary,
+      loading: true,
     };
   });
 
@@ -25,6 +19,7 @@ describe('GIVEN: Dashboard Selectors', () => {
     it('THEN: should return the view model', () => {
       const expected: DashboardViewModel = {
         currentBoards: [],
+        loading: mockState.loading,
         recentlyCreatedTasks: [],
         recentlyUpdatedTasks: [],
         userName: '',
