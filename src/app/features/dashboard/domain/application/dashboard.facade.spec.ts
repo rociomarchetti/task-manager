@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { DashboardFacade } from './dashboard.facade';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideZoneChangeDetection } from '@angular/core';
-import * as fromActions from '../state/actions/dashboard.actions';
-import { NewTaskData, Task } from '@shared/models';
+import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
 import { ActionsSubject } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Board, NewTaskData, Task } from '@shared/models';
+import { take } from 'rxjs';
+import * as fromActions from '../state/actions/dashboard.actions';
+import { DashboardFacade } from './dashboard.facade';
 
 describe('GIVEN: Dashboard Facade', () => {
   let store: MockStore;
   let facade: DashboardFacade;
-  let actions$: Observable<any>;
+  let actions$: ActionsSubject;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,6 +28,66 @@ describe('GIVEN: Dashboard Facade', () => {
     store = TestBed.inject(MockStore);
     facade = TestBed.inject(DashboardFacade);
     actions$ = new ActionsSubject();
+  });
+
+  describe('WHEN: taskCreatedSuccess$', () => {
+    it('THEN: should emit when createNewTaskSucceeded is dispatched', (done) => {
+      const action = fromActions.DashboardTaskActions.createNewTaskSucceeded();
+
+      facade.taskCreatedSuccess$.pipe(take(1)).subscribe((result) => {
+        expect(result).toEqual(action);
+        done();
+      });
+
+      actions$.next(action);
+    });
+
+    it('THEN: should not emit for other actions', (done) => {
+      const otherAction =
+        fromActions.DashboardTaskActions.removeTaskSucceeded();
+
+      let emitted = false;
+
+      facade.taskCreatedSuccess$.subscribe(() => {
+        emitted = true;
+      });
+
+      actions$.next(otherAction);
+
+      setTimeout(() => {
+        expect(emitted).toBe(false);
+        done();
+      }, 0);
+    });
+  });
+
+  describe('WHEN: taskRemovedSuccess$', () => {
+    it('THEN: should emit when removeTaskSucceeded is dispatched', (done) => {
+      const action = fromActions.DashboardTaskActions.removeTaskSucceeded();
+
+      facade.taskRemovedSuccess$.pipe(take(1)).subscribe((result) => {
+        expect(result).toEqual(action);
+        done();
+      });
+
+      actions$.next(action);
+    });
+  });
+
+  describe('WHEN: boardRemovedSuccess$', () => {
+    it('THEN: should emit when removeBoardSucceeded is dispatched', (done) => {
+      const mockBoards = [{} as Board];
+      const action = fromActions.DashboardBoardActions.removeBoardSucceeded({
+        boardsUpdatedList: mockBoards,
+      });
+
+      facade.boardRemovedSuccess$.pipe(take(1)).subscribe((result) => {
+        expect(result).toEqual(action);
+        done();
+      });
+
+      actions$.next(action);
+    });
   });
 
   describe('WHEN: viewInitialised', () => {
