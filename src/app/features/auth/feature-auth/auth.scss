@@ -22,25 +22,3 @@
     display: block;
   }
 }
-
-::ng-deep .mat-mdc-tab-header {
-  overflow: hidden !important;
-}
-
-::ng-deep .mat-mdc-tab-header-pagination {
-  display: none !important;
-}
-
-::ng-deep .mat-mdc-tab-body {
-  overflow: visible !important;
-}
-
-::ng-deep .mat-mdc-tab-body-content {
-  overflow: visible !important;
-}
-
-::ng-deep {
-  .mat-mdc-tab .mdc-tab__text-label {
-    color: var(--text-secondary) !important;
-  }
-}
