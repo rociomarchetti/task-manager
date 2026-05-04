@@ -16,7 +16,13 @@ const boardListReducer = createReducer(
         boards: action.boards,
       };
     }
-  )
+  ),
+  on(fromActions.BoardListViewActions.removeBoardSucceeded, (state, action) => {
+    return {
+      ...state,
+      boards: action.boardsUpdatedList,
+    };
+  })
 );
 
 export function boardListReducerFunction(

@@ -47,8 +47,10 @@ export class BoardListEffects {
       ofType(fromActions.BoardListViewActions.removeBoardClicked),
       exhaustMap((action) =>
         this.boardsService.deleteBoard(action?.boardId).pipe(
-          map(() => {
-            return fromActions.BoardListViewActions.removeBoardSucceeded();
+          map((boards) => {
+            return fromActions.BoardListViewActions.removeBoardSucceeded({
+              boardsUpdatedList: boards,
+            });
           }),
           catchError(() => {
             return of(fromActions.BoardListViewActions.removeBoardError());

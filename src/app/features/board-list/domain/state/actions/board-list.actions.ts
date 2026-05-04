@@ -13,7 +13,9 @@ export const BoardListViewActions = createActionGroup({
     'Remove Board Clicked': props<{
       boardId: string;
     }>(),
-    'Remove Board Succeeded': emptyProps(),
+    'Remove Board Succeeded': props<{
+      boardsUpdatedList: Board[];
+    }>(),
     'Remove Board Error': emptyProps(),
     'Go To Board Details Clicked': props<{ boardId: string }>(),
   },
