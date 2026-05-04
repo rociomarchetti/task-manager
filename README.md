@@ -135,11 +135,9 @@ shared/
 npm install
 
 # Serve the app
-npx nx serve task-manager
+npx nx serve
 
 # Run tests
-npx nx test <library-name>
+npx nx test
 
-# Run all tests
-npx nx run-many --target=test --all
 ```
