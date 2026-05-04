@@ -77,8 +77,12 @@ describe('GIVEN: Board List Effects', () => {
       const action = fromActions.BoardListViewActions.removeBoardClicked({
         boardId: 'board-123',
       });
-      const expected = fromActions.BoardListViewActions.removeBoardSucceeded();
+      const mockBoards = [{} as Board];
+      const expected = fromActions.BoardListViewActions.removeBoardSucceeded({
+        boardsUpdatedList: mockBoards,
+      });
 
+      jest.spyOn(service, 'deleteBoard').mockReturnValue(of(mockBoards));
       effects.onRemoveBoard$.subscribe((res) => {
         result.push(res);
       });
