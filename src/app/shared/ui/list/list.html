@@ -1,8 +1,10 @@
-@if(listItems().length) {
-<ng-content></ng-content>
-} @else {
-<div class="empy-state">
-  <span class="material-symbols-outlined"> search </span>
-  <p>{{emptyStateMssg()}}</p>
+@if (loading()) {
+<mat-progress-spinner class="list-spinner" [mode]="mode" />
+} @else if (!listItems().length) {
+<div class="empty-state">
+  <div class="empty-image"></div>
+  <p>{{ emptyStateMssg() }}</p>
 </div>
+} @else {
+<ng-content></ng-content>
 }
