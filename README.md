@@ -92,6 +92,8 @@ Domain logic is tested with **Jest**, following a TDD approach. The covered file
 - **Reducers** — state transitions given specific actions
 - **Selectors** — derived state and view model composition
 
+Coverage: **91% statements · 61.91% branches · 84.23% functions · 91.41% lines**
+
 Feature components are not tested directly. Since they contain no logic — only delegation to the facade and rendering of the view model — testing the facade gives full confidence in the domain's behavior.
 
 ---
