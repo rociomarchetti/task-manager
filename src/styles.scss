@@ -1,32 +1,8 @@
 @use '@angular/material' as mat;
 
-html {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: light,
-        primary: mat.$azure-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
-  --mat-sys-primary: #e639b2;
-  --mat-app-background-color: transparent;
-  --mat-badge-background-color: var(--color-primary);
-}
-
-html,
-body {
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-  height: 100%;
-  font-family: Roboto, sans-serif;
-}
-
-body {
-  background: var(--bg-app) !important;
-}
+// ─────────────────────────────────────────────
+// 1. DESIGN TOKENS
+// ─────────────────────────────────────────────
 
 // Light theme
 :root {
@@ -60,6 +36,42 @@ body.dark-mode {
   --color-primary-hover: #ff3da6;
 }
 
+// ─────────────────────────────────────────────
+// 2. ANGULAR MATERIAL THEME
+// ─────────────────────────────────────────────
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+  --mat-sys-primary: #e639b2;
+  --mat-app-background-color: transparent;
+  --mat-badge-background-color: var(--color-primary);
+}
+
+// ─────────────────────────────────────────────
+// 3. BASE
+// ─────────────────────────────────────────────
+
+html,
+body {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 100%;
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  background: var(--bg-app) !important;
+}
+
 *,
 *::before,
 *::after {
@@ -67,10 +79,11 @@ body.dark-mode {
     border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.mat-mdc-tab-group .mdc-tab-indicator__content--underline {
-  border-top-width: 4px !important;
-  border-color: var(--mat-sys-primary) !important;
-}
+// ─────────────────────────────────────────────
+// 5. ANGULAR MATERIAL COMPONENTS COSTUMIZATION
+// ─────────────────────────────────────────────
+
+//Buttons
 
 .mat-mdc-mini-fab {
   border-radius: 8px !important;
@@ -84,10 +97,6 @@ body.dark-mode {
     transform: translate(-1px, -1px);
     background: var(--bg-card-hover);
   }
-}
-
-.mat-icon {
-  color: var(--text-secondary);
 }
 
 .mat-mdc-outlined-button {
@@ -143,6 +152,72 @@ body.dark-mode {
   }
 }
 
+mat-button-toggle-group {
+  border: 2px solid var(--mat-sys-primary) !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 0 var(--mat-sys-primary) !important;
+  overflow: hidden;
+  height: 100%;
+
+  .mat-button-toggle {
+    color: #2f2f2f !important;
+    border: none !important;
+
+    &:not(:first-child) {
+      border-left: 2px solid var(--mat-sys-primary) !important;
+    }
+
+    .mat-button-toggle-label-content {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1 !important;
+      padding: 16px !important;
+    }
+
+    .fav-icon {
+      font-size: 16px;
+      line-height: 1;
+      color: inherit !important;
+    }
+  }
+}
+
+//Tabs
+
+.mat-mdc-tab-group .mdc-tab-indicator__content--underline {
+  border-top-width: 4px !important;
+  border-color: var(--mat-sys-primary) !important;
+}
+
+.mat-mdc-tab-header {
+  overflow: hidden !important;
+}
+
+.mat-mdc-tab-header-pagination {
+  display: none !important;
+}
+
+.mat-mdc-tab-body {
+  overflow: visible !important;
+}
+
+.mat-mdc-tab-body-content {
+  overflow: visible !important;
+}
+
+.mat-mdc-tab .mdc-tab__text-label {
+  color: var(--text-secondary) !important;
+}
+
+//Icon
+
+.mat-icon {
+  color: var(--text-secondary);
+}
+
+//Form field
+
 .mat-mdc-form-field {
   width: 100%;
 
@@ -178,33 +253,18 @@ body.dark-mode {
   }
 }
 
-mat-button-toggle-group {
-  border: 2px solid var(--mat-sys-primary) !important;
-  border-radius: 8px !important;
-  box-shadow: 3px 3px 0 var(--mat-sys-primary) !important;
-  overflow: hidden;
-  height: 100%;
+// Drag and drop
 
-  .mat-button-toggle {
-    color: #2f2f2f !important;
-    border: none !important;
+.cdk-drag-preview {
+  box-shadow: 0 12px 24px rgba(9, 30, 66, 0.25);
+  transform: rotate(2deg);
+  border-radius: 10px;
+  background: white;
+  display: block;
+  padding: 12px;
+  box-sizing: border-box;
+}
 
-    &:not(:first-child) {
-      border-left: 2px solid var(--mat-sys-primary) !important;
-    }
-
-    .mat-button-toggle-label-content {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      line-height: 1 !important;
-      padding: 16px !important;
-    }
-
-    .fav-icon {
-      font-size: 16px;
-      line-height: 1;
-      color: inherit !important;
-    }
-  }
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
