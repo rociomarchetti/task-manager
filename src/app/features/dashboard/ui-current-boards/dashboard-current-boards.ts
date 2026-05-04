@@ -21,6 +21,7 @@ import { BoardListItem } from 'app/features/shared/board-list-item/board-list-it
 })
 export class DashboardCurrentBoards {
   currentBoards = input<Array<Board>>();
+  loading = input<boolean | null>(null);
 
   goToBoardClicked = output<Board>();
   removeBoardClicked = output<Board>();

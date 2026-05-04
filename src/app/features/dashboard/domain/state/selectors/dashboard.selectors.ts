@@ -32,6 +32,7 @@ export const selectDashboardViewModel = createSelector(
 
     return {
       currentBoards: getCurrentBoards(state?.boardsData?.boards ?? []),
+      loading: state?.loading,
       recentlyCreatedTasks,
       recentlyUpdatedTasks,
       userName: state?.user?.name ?? '',

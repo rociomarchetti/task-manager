@@ -6,10 +6,17 @@ export const dashboardInitialState: DashboardState = {
   user: null,
   tasksData: null,
   boardsData: null,
+  loading: null,
 };
 
 const dashboardReducer = createReducer(
   dashboardInitialState,
+  on(fromActions.DashboardViewActions.viewInitialised, (state, action) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
   on(
     fromActions.DashboardViewActions.viewInitialisedSucceeded,
     (state, action) => {
@@ -18,6 +25,7 @@ const dashboardReducer = createReducer(
         user: action.currentUser,
         tasksData: action.tasksData,
         boardsData: action.boardsData,
+        loading: false,
       };
     }
   ),

@@ -6,4 +6,5 @@ export interface DashboardState {
   user: User | null;
   tasksData: UserTasksSummary | null;
   boardsData: UserBoardsSummary | null;
+  loading: boolean | null;
 }

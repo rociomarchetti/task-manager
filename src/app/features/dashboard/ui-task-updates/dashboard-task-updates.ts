@@ -34,6 +34,7 @@ export class DashboardTaskUpdates {
   recentlyCreatedTasks = input<Array<Task>>();
   recentlyUpdatedTasks = input<Array<Task>>();
   tasksDueSoon = input<Array<Task>>();
+  loading = input<boolean | null>(null);
 
   seeTaskClicked = output<Task>();
   removeTaskClicked = output<Task>();

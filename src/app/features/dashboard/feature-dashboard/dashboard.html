@@ -7,6 +7,7 @@
     [recentlyCreatedTasks]="vm.recentlyCreatedTasks"
     [recentlyUpdatedTasks]="vm.recentlyUpdatedTasks"
     [tasksDueSoon]="vm.tasksDueSoon"
+    [loading]="vm.loading"
     (seeTaskClicked)="onSeeTaskDetails($event)"
     (removeTaskClicked)="onRemoveTask($event)"
     (markTaskAsDone)="onMarkTaskAsDone($event)"
@@ -16,6 +17,7 @@
   <div class="panel-group-right">
     <app-dashboard-current-boards
       [currentBoards]="vm.currentBoards"
+      [loading]="vm.loading"
       (goToBoardClicked)="onGoToBoard($event)"
       (removeBoardClicked)="onRemoveBoard($event)"
     ></app-dashboard-current-boards>

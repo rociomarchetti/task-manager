@@ -4,6 +4,7 @@
     <app-list
       [listItems]="currentBoards()"
       [emptyStateMssg]="'There are no boards yet.'"
+      [loading]="loading()"
     >
       @for(item of currentBoards(); track $index; let i = $index ) {
       <app-board-list-item

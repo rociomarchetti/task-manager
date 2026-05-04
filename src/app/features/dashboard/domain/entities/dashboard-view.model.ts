@@ -2,6 +2,7 @@ import { Task, TaskAmounts, Board } from '@shared/models';
 
 export interface DashboardViewModel {
   currentBoards: Array<Board>;
+  loading: boolean | null;
   recentlyCreatedTasks: Array<Task>;
   recentlyUpdatedTasks: Array<Task>;
   tasksAmounts: TaskAmounts;
