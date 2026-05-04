@@ -9,6 +9,7 @@ describe('GIVEN: Board List Selectors', () => {
   beforeEach(() => {
     mockState = {
       boards: [{} as Board],
+      loading: true,
     };
   });
 
@@ -16,6 +17,7 @@ describe('GIVEN: Board List Selectors', () => {
     it('THEN: should return the view model', () => {
       const expected: BoardListViewModel = {
         boards: mockState.boards ?? [],
+        loading: true,
       };
       const result =
         fromSelectors.selectBoardListViewModel.projector(mockState);

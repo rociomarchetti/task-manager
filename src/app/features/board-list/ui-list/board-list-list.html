@@ -1,5 +1,14 @@
 <div class="board-grid">
-  @for (board of boardsToShow(); track $index) {
+  @if(loading()) {
+  <div class="board-loading">
+    <mat-progress-spinner class="board-list-spinner" [mode]="'indeterminate'" />
+  </div>
+  } @else if (!boardsToShow().length) {
+  <div class="board-list-empty-state">
+    <div class="board-list-empty-image"></div>
+    <p>There are no boards.</p>
+  </div>
+  } @else { @for (board of boardsToShow(); track $index) {
   <div class="board-card">
     <div class="board-card__header">
       <span class="board-card__label">{{ board.title }}</span>
@@ -28,7 +37,7 @@
       </button>
     </div>
   </div>
-  }
+  } }
 </div>
 
 <app-confirmation-modal

@@ -9,6 +9,7 @@
   <app-board-list-list
     [boards]="vm.boards"
     [filters]="filtersChanged()"
+    [loading]="vm.loading"
     (goToBoardDetails)="onGoToBoardDetails($event)"
     (removeBoard)="onRemoveBoard($event)"
   ></app-board-list-list>

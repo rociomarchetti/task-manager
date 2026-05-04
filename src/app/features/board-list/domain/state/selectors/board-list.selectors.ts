@@ -9,5 +9,6 @@ export const selectBoardListViewModel = createSelector(
   selectBoardListState,
   (state): BoardListViewModel => ({
     boards: state?.boards ?? [],
+    loading: state?.loading,
   })
 );

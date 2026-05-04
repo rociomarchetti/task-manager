@@ -4,16 +4,24 @@ import { BoardListState } from '../state/board-list.state';
 
 export const boardListInitialState: BoardListState = {
   boards: null,
+  loading: null,
 };
 
 const boardListReducer = createReducer(
   boardListInitialState,
+  on(fromActions.BoardListViewActions.viewInitialised, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
   on(
     fromActions.BoardListViewActions.viewInitialisedSucceeded,
     (state, action) => {
       return {
         ...state,
         boards: action.boards,
+        loading: false,
       };
     }
   ),

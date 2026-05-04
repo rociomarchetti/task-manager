@@ -12,6 +12,7 @@ import { Board } from '@shared/models';
 import { formatDate } from '@shared/features/util/formatDate.util';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-board-list-list',
@@ -19,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ConfirmationModal,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatTooltipModule,
   ],
   templateUrl: './board-list-list.html',
@@ -28,6 +30,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class BoardListList {
   boards = input<Board[]>([]);
   filters = input<{ search: string; favorites: boolean } | null>(null);
+  loading = input<boolean | null>(null);
+
   formatDate = formatDate;
 
   goToBoardDetails = output<string>();

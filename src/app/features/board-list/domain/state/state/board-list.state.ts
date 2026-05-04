@@ -4,4 +4,5 @@ export const boardListFeatureKey = 'BoardList_State';
 
 export interface BoardListState {
   boards: Array<Board> | null;
+  loading: boolean | null;
 }
