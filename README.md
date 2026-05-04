@@ -1,82 +1,143 @@
-# TaskManager
+# Task Manager
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A task and board management SPA built with Angular 20, NgRx, and Nx — designed with production-level architecture in mind.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+> The backend is mocked with localStorage, but the entire data layer is built around observables and async patterns so that replacing it with a real API requires no changes to the domain or state logic.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
 
-## Finish your CI setup
+## Table of contents
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Xby8jok9Rw)
+- [Overview](#overview)
+- [Architecture decisions](#architecture-decisions)
+  - [Domain-Driven Design with Nx](#domain-driven-design-with-nx)
+  - [Facade pattern](#facade-pattern)
+  - [View models](#view-models)
+  - [State management with NgRx](#state-management-with-ngrx)
+  - [Mocked async backend](#mocked-async-backend)
+- [Testing strategy](#testing-strategy)
+- [Project structure](#project-structure)
+- [Features](#features)
+- [Getting started](#getting-started)
 
+---
 
-## Run tasks
+## Overview
 
-To run the dev server for your app, use:
+This project is a kanban-style task manager with board and task CRUD, drag and drop, filtering, search, and authentication. It was built as a self-contained project to demonstrate architecture decisions that reflect real production team dynamics — not just Angular feature knowledge.
 
-```sh
-npx nx serve task-manager
+---
+
+## Architecture decisions
+
+### Domain-Driven Design with Nx
+
+The workspace is organized around domains, not technical layers. Each domain (e.g. `boards`, `tasks`, `auth`) is a self-contained Nx library with its own `domain`, `feature`, and `ui` folders.
+
+This means related code lives together. Adding or modifying a domain doesn't require touching unrelated parts of the codebase, and Nx enforces boundaries between libraries to prevent unwanted coupling.
+
+### Facade pattern
+
+Each domain exposes a **facade** — a single injectable service that acts as the interface between the feature layer and the NgRx store.
+
+The feature component's only responsibilities are:
+- Rendering UI components
+- Forwarding user events to the facade
+- Injecting the view model
+
+It dispatches no actions directly and contains no business logic. This keeps features readable at a glance: you can see exactly what data flows in and what events flow out, without needing to understand the state layer underneath.
+
+```
+Feature component
+  ├── injects: ViewModel (from selectors via facade)
+  └── calls: facade methods → dispatch actions → effects / reducers
 ```
 
-To create a production bundle:
+The facade also defines the **testable boundary** of the domain. Since the feature delegates entirely to the facade, testing the facade covers the domain's behavior without needing to test the feature itself.
 
-```sh
-npx nx build task-manager
+### View models
+
+Each domain defines its own view model — a typed interface that represents exactly what the feature needs to render, nothing more.
+
+The view model is composed in **selectors**, not in the component. This means:
+
+- Filtering, mapping, and combining state happens in the selector layer, where it's testable and reusable
+- The reducer stays clean — it stores raw data, not derived or display-specific shapes
+- The feature component receives ready-to-use data with no transformation logic of its own
+
+When what the UI needs diverges from what the store holds, the selector handles that gap. The component never does.
+
+### State management with NgRx
+
+NgRx manages state for all dynamic domain data: tasks, boards, and authentication status. Effects handle async operations (data fetching, persistence), keeping reducers pure and synchronous.
+
+**What does not go into the store:**
+
+Static or purely local data stays out of NgRx. If a piece of data doesn't change in response to user actions or async events — for example, the list of actions available to a button — it lives in the UI component itself. Putting static data in global state adds overhead with no benefit.
+
+### Mocked async backend
+
+The data layer uses localStorage for persistence, but all operations are wrapped in observables and simulate network latency. This was a deliberate decision: it forces the rest of the architecture (effects, loading states, error handling) to behave exactly as it would against a real API.
+
+Swapping in a real backend only requires replacing the data service implementations. The domain logic, state management, and UI layers are completely unaffected.
+
+---
+
+## Testing strategy
+
+Domain logic is tested with **Jest**, following a TDD approach. The covered files are:
+
+- **Facades** — the primary behavioral contracts of each domain
+- **Effects** — async flows and side effect handling
+- **Reducers** — state transitions given specific actions
+- **Selectors** — derived state and view model composition
+
+Feature components are not tested directly. Since they contain no logic — only delegation to the facade and rendering of the view model — testing the facade gives full confidence in the domain's behavior.
+
+---
+
+## Project structure
+
+```
+core/
+    guards/
+    layout/
+    services/
+features/
+  board/
+    domain/         # facade, store (actions, effects, reducers, selectors), models
+    feature/        # smart component — composes UI, connects facade and view model
+    ui/             # presentational components (board card, board list...)
+shared/
+    models/
+    ui/
 ```
 
-To see all available targets to run for a project, run:
+---
 
-```sh
-npx nx show project task-manager
+## Features
+
+- Board and task CRUD
+- Drag and drop to reorder tasks and update their status within a board
+- Search and filter (tasks and boards)
+- Lazy loading per section — Dashboard and Board list load independently
+- Dynamic routing with board ID for board detail view
+- Route guards based on authentication state
+- Reactive forms with validation
+- Responsive, mobile-first UI
+
+---
+
+## Getting started
+
+```bash
+# Install dependencies
+npm install
+
+# Serve the app
+npx nx serve
+
+# Run tests
+npx nx test
+
 ```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
